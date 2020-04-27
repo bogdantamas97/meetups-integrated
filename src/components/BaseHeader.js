@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import AppBar from "@material-ui/core/AppBar/AppBar";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { Toolbar } from "@material-ui/core";
@@ -11,10 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const styles = () => ({
-    appBarStyle: {
-        position: "fix",
-        backgroundColor: theme.palette.primary.dark
-    },
+
     topBar: {
         flexGrow: 1,
     },
@@ -54,7 +50,7 @@ class BaseHeader extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.topBar}>
-                <AppBar className={classes.appBarStyle}>
+            
                     <Toolbar>
                         <TemporaryDrawer />
                         <Typography variant="h6" color="inherit" className={classes.topBar}>
@@ -68,7 +64,7 @@ class BaseHeader extends Component {
                             </Avatar>
                         </Link>
                     </Toolbar>
-                </AppBar>
+
             </div>
         );
     }

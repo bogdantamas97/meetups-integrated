@@ -1,5 +1,4 @@
   import React, { useState} from 'react'; 
-  import AppBar from 'material-ui/AppBar';
   import RaisedButton from 'material-ui/RaisedButton';
   import Button from '@material-ui/core/Button';
   import TextField from 'material-ui/TextField';
@@ -71,13 +70,11 @@
   
     //     return (
     //         <div>
-    //          <AppBar
-    //           title="Register"
-    //          >
+    //      
     //            <Route render={({history}) => <Button style={{color:"white"}} onClick={() => history.push("/")}>
     //              Login
     //           </Button>}/>
-    //           </AppBar>
+    //           
 
     //             <form
     //               onSubmit={()=> handleSubmit()}
