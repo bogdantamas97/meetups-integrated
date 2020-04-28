@@ -1,14 +1,14 @@
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
+import MainLayout from "../../layouts/MainLayout.jsx";
 import { withStyles, ListItem, List } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
-import FutureEventItem from "./FutureEventItem";
+import FutureEventItem from "./FutureEventItem.jsx";
 import Cookies from "universal-cookie";
-import { EventsMessage, CloseMessageButton } from "../EventsMessage";
-import { eventType } from "../Enumerations";
+import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
+import { eventType } from "../../constants/index";
 import moment from "moment";
-import EventDialog from "./EventDialog";
+import EventDialog from "./EventDialog.jsx";
 
 const styles = {
   root: {

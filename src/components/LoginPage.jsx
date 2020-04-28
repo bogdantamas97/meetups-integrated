@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import LayoutLogin from "../layouts/LayoutLogin";
+import LayoutLogin from "../layouts/LayoutLogin.jsx";
 import { theme, Background } from "../GlobalTheme/globalTheme";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { Typography, withStyles } from "@material-ui/core";
-import Button from "@material-ui/core/Button/index";
+import {
+  Button,
+  Typography,
+  TextField,
+  Snackbar,
+  FormControl,
+  withStyles,
+} from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
-import Cookie from 'js-cookie';
+import MuiAlert from "@material-ui/lab/Alert";
+import Cookie from "js-cookie";
 import axios from "axios/index";
 import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
 
-const apiBaseUrl = "http://localhost:9000";
-const inOneHour = 1/24;
+const apiBaseUrl = "http://localhost:8000";
+const inOneHour = 1 / 24;
 
 const styles = {
   loginButton: {
@@ -24,8 +30,8 @@ const styles = {
     margin: "12px 0px",
     backgroundColor: green[500],
     "&:hover": {
-      backgroundColor: green[700]
-    }
+      backgroundColor: green[900],
+    },
   },
   formStyle: {
     display: "flex",
@@ -33,147 +39,210 @@ const styles = {
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     height: 250,
-    width: "70%",
-    marginTop: "30%"
+    width: "50%",
+    marginTop: "30%",
   },
   input: {
     color: "white",
-    height: "50%"
+    height: "50%",
   },
   emailInput: {
     display: "flex",
     flexWrap: "wrap",
-    color: "white"
+    color: "white",
   },
   cssLabel: {
     color: "white",
     "&$cssFocused": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
   cssFocused: {
-    color: "white"
+    color: "white",
   },
   cssUnderline: {
     "&:after": {
-      borderBottomColor: "white"
-    }
+      borderBottomColor: "white",
+    },
   },
   notchedOutline: {
     borderWidth: "2px",
-    borderColor: "white !important"
-  }
+    borderColor: "white !important",
+  },
+  signUp: {
+    color: "white",
+    "&:hover": {
+      backgroundColor: "gray",
+    },
+  },
 };
 
-const LoginPage = (props) => {
+const Alert = (props) => <MuiAlert elevation={5} variant="filled" {...props} />;
 
+const LoginPage = (props) => {
+  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const classes = props.classes;
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
-  const [isLoggedIn, setLoggedIn] = useState(Cookie.get("token") !== undefined);
-    
-  const handleSubmit = () => {
-    axios.get(apiBaseUrl)
-   .then((response)=> {
-    if(response.data.filter((user)=> user.email === email)[0])
-      if(response.data.filter((user)=> user.password === password)[0]){
-        Cookie.set("token", response.data.filter((user)=> user.password === password)[0].id);
-        setLoggedIn(true);
-      } 
-      else alert("Wrong password!");
-    else alert("Username doesn't exist!");
-   })
-   .catch(() => {
-     console.log('Unknown error');
-   });
-  }
+  // fields
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    if (isLoggedIn) {
-      return <Redirect to="/" />;
-    } else
-      return (
-        <LayoutLogin backgroundStyle={Background}>
-          <ValidatorForm
-            className={classes.formStyle}
-            onSubmit={handleSubmit}
+  // form reaction
+  const [snackbarTitle, setSnackbarTitle] = useState("");
+  const [snackbarType, setSnackbarType] = useState("error");
+  const [isOpen, setOpen] = useState(false);
+
+  // handling errors
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const invalidEmail = (email) => {
+    if (email === "" || !regex.test(email)) return true;
+    return false;
+  };
+
+  const invalidPassword = (password) => {
+    if (password === "" || password.length < 8) return true;
+    return false;
+  };
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    if (invalidEmail(email)) setEmailError(true);
+    if (invalidPassword(password)) setPasswordError(true);
+
+    setOpen(true);
+    if (email.length !== 0 && password.length !== 0) {
+      if (!invalidEmail(email) && !invalidPassword(password)) {
+        axios.get(apiBaseUrl).then((response) => {
+          if (response.data.filter((user) => user.email === email)[0])
+            if (response.data.filter((user) => user.password === password)[0]) {
+              setOpen(false);
+              Cookie.set(
+                "token",
+                response.data.filter((user) => user.password === password)[0]
+                  .id,
+                { expires: inOneHour }
+              );
+              setLoggedIn(true);
+              setSnackbarTitle("Login succesfully!");
+              setSnackbarType("success");
+            } else {
+              setSnackbarTitle("Wrong password!");
+              setSnackbarType("error");
+            }
+          else {
+            setSnackbarTitle("Email is not registered!");
+            setSnackbarType("error");
+          }
+        });
+      } else {
+        setSnackbarTitle("Invalid data");
+        setSnackbarType("error");
+      }
+    } else {
+      setSnackbarTitle("All fields are required!");
+      setSnackbarType("error");
+    }
+  };
+
+  if (isLoggedIn) {
+    return <Redirect to="/profile" />;
+  } else
+    return (
+      <LayoutLogin backgroundStyle={Background}>
+        <FormControl className={classes.formStyle} onSubmit={handleSubmit}>
+          <TextField
+            className={classes.emailInput}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              if (!invalidEmail(event.target.value)) {
+                setEmailError(false);
+              }
+            }}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+                input: classes.input,
+              },
+            }}
+            label="Email"
+            variant="outlined"
+            error={emailError}
+          />
+          <TextField
+            className={classes.passwordInput}
+            onChange={(event) => {
+              setPassword(event.target.value);
+              if (!invalidPassword(event.target.value)) {
+                setPasswordError(false);
+              }
+            }}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+                input: classes.input,
+              },
+            }}
+            type="Password"
+            label="Password"
+            variant="outlined"
+            error={passwordError}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.loginButton}
+            onClick={handleSubmit}
           >
-            <TextValidator
-              className={classes.emailInput}
-              onChange = {(event) => setEmail(event.target.value)}
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
+            <Typography
+              style={{
+                color: theme.palette.primary.contrastText,
+                fontSize: theme.typography.subheading.fontSize,
               }}
-              InputProps={{
-                classes: {
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
-              }}
-              label="Email"
-              variant="outlined"
-              validators={["required", "isEmail"]}
-              errorMessages={["This field is required", "Email is not valid"]}
-            />
-            <TextValidator
-              className={classes.passwordInput}
-              onChange={(event) => setPassword(event.target.value)}
-              InputLabelProps={{
-                classes: {
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused
-                }
-              }}
-              InputProps={{
-                classes: {
-                  root: classes.cssOutlinedInput,
-                  focused: classes.cssFocused,
-                  notchedOutline: classes.notchedOutline,
-                  input: classes.input
-                }
-              }}
-              type="Password"
-              label="Password"
-              variant="outlined"
-              validators={["required"]}
-              errorMessages={["This field is required"]}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.loginButton}
             >
-              <Typography
-                style={{
-                  color: theme.palette.primary.contrastText,
-                  fontSize: theme.typography.subheading.fontSize
-                }}
-              >
-                Login
-              </Typography>
-            </Button>
-            <Route render={({history}) => {
-              isLoggedIn && history.push("/main") 
+              Login
+            </Typography>
+          </Button>
+          <Route
+            render={({ history }) => {
+              isLoggedIn && history.push("/profile");
               return (
                 <Button onClick={() => history.push("/register")}>
-                   <Typography
-                    style={{
-                      color: theme.palette.primary.contrastText,
-                      fontSize: theme.typography.subheading.fontSize
-                    }}
-                   >
-                      Don't have an account? Sign up.
-                   </Typography>
-                 
+                  <Typography className={classes.signUp}>
+                    Don't have an account? Sign up.
+                  </Typography>
                 </Button>
-            )}}/>
-          </ValidatorForm>
-        </LayoutLogin>
-      );
-  }
+              );
+            }}
+          />
+          <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={5000}>
+            <Alert onClose={handleClose} severity={snackbarType}>
+              {snackbarTitle}
+            </Alert>
+          </Snackbar>
+        </FormControl>
+      </LayoutLogin>
+    );
+};
 
 export default withStyles(styles)(LoginPage);

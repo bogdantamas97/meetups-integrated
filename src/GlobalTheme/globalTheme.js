@@ -125,7 +125,7 @@ const typography = {
   }
 };
 
-export const background="https://image.freepik.com/free-vector/abstract-background-futuristic-design_23-2148503795.jpg";
+export const background="https://images.pexels.com/photos/355887/pexels-photo-355887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
 export const button = {
   color: "#fff",
