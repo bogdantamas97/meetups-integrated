@@ -89,7 +89,7 @@ class Header extends Component {
               <Grid
                 container
                 justify="space-evenly"
-                style={{ width: "64%", marginLeft: "40%", marginTop: "10px" }}
+                style={{ width: "100%", marginTop: "10px" }}
               >
                 <Link style={{ textDecoration: "none" }} to={"/leaderboard"}>
                   <Typography style={styles.achiv} align="right">

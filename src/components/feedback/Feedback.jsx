@@ -29,7 +29,7 @@ const styles = {
 
 const Feedback = props => {
 
-  const { classes, eventName } = props;
+  const { classes, eventName, userId, closeFeedbackDialog } = props;
   
   // feedback characteristics
   const [clarity, setClarity] = useState("3");
@@ -38,33 +38,36 @@ const Feedback = props => {
   const [engagement, setEngagement] = useState("3");
   const [cursive, setCursive] = useState("3");
 
-  const [feedbackList, setFeedbackList] = useState([]);
 
   const handleClickSend = () => {
+  
     const feedback = {};
     feedback.clarity = clarity;
     feedback.originality = originality;
     feedback.complexity = complexity;
     feedback.engagement = engagement;
     feedback.cursive = cursive;
-    feedback.usersId = props.userId;
+    feedback.userId = userId;
 
     axios
-      .get(`http://localhost:3001/events/${this.props.eventId}`)
+      .get(`http://localhost:3001/events/${props.eventId}`)
       .then(result => {
-        let feedbackList = result.data.feedback;
+        const feedbackList = result.data.feedback;
         feedbackList.push(feedback);
-        setFeedbackList(feedbackList);
+        handleSendFeedback(feedbackList);
       })
-      .then(() => {
-        axios.patch(
-          `http://localhost:3001/events/${this.props.eventId}`,
-          { feedback: feedbackList },
-          { headers: { "Content-Type": "application/json" } }
-        );
-      });
-    props.closeFeedbackDialog();
+
+    closeFeedbackDialog();
   };
+
+  const handleSendFeedback = (feedbackList) => {
+    console.log(feedbackList);
+    axios.patch(
+      `http://localhost:3001/events/${props.eventId}`,
+      { feedback: feedbackList },
+      { headers: { "Content-Type": "application/json" } }
+    );
+  } 
 
     return (
       <Dialog maxWidth="xs" fullWidth={true} open={props.isOpen}>

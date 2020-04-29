@@ -67,7 +67,7 @@ const EventDialog = props => {
           aria-labelledby="customized-dialog-title"
           open={props.isOpen}
         >
-          <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+          <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
             {titleMessage}
             <span className={classes.highlightedWord}>
               {coloredWord}

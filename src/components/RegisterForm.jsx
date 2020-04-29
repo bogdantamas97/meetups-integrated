@@ -47,7 +47,7 @@ const styles = {
     fontWeight: "normal",
     height: 35,
     width: "80%",
-    maxWidth: 300,
+    maxWidth: 350,
     margin: "12px 0px",
     backgroundColor: red[500],
     "&:hover": {
@@ -82,8 +82,8 @@ const styles = {
   },
   arrowBackIcon: {
     color: "white",
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 70,
     display: "absolute",
     "&:hover": {
       backgroundColor: "gray",
@@ -91,14 +91,15 @@ const styles = {
   },
 };
 button.width = "80%";
-button.marginTop = 30;
-button.maxWidth = 300;
+button.marginTop = 60;
+button.maxWidth = 350;
 // const clearButton = button;
 // clearButton.backgroundColor="red";
 
 const Alert = (props) => <MuiAlert elevation={10} variant="filled" {...props} />;
 
 const RegisterForm = (props) => {
+  
   const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   // fields

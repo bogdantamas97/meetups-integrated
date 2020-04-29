@@ -11,10 +11,6 @@ const styles = () => ({
   topBar: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
 });
 
 const getInitials = (fullName) => {
@@ -26,7 +22,7 @@ const getInitials = (fullName) => {
   };
 
 const BaseHeader = (props) => {
-  const { classes, userFullName } = props;
+  const { classes, fullName } = props;
 
   return (
     <div className={classes.topBar}>
@@ -38,7 +34,7 @@ const BaseHeader = (props) => {
         <Link to="/profile" style={{ textDecoration: "none" }}>
           <Avatar>
             <Typography variant="h6" color="inherit">
-              {getInitials(userFullName)}
+              {getInitials(fullName)}
             </Typography>
           </Avatar>
         </Link>

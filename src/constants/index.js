@@ -6,6 +6,8 @@ import {
     LOGIN_SUCCESFULLY,
     LOGIN_FAILED
 } from "./sigingConstants";
+import { TOPIC_TITLE_LIMIT, TOPIC_DESCRIPTION_LIMIT } from "./charLimitConstants";
+
 
 export {
     eventType,
@@ -14,4 +16,6 @@ export {
     REGISTRATION_FAILED,
     LOGIN_SUCCESFULLY,
     LOGIN_FAILED,
+    TOPIC_TITLE_LIMIT, 
+    TOPIC_DESCRIPTION_LIMIT
 }

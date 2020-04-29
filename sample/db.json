@@ -1,41 +1,16 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "Calin",
-      "usersId": 3
-    },
-    {
-      "id": 2,
-      "title": "hello-world",
-      "author": "Calin",
-      "usersId": 3
-    },
-    {
-      "id": 3,
-      "title": "trial",
-      "author": "Alex",
-      "usersId": 2
-    }
-  ],
   "events": [
     {
       "id": 1,
       "name": "ECMAScript 6® - noutati si directii",
       "type": "Presentation",
       "lang": "JS",
-      "usersId": 9,
+      "userId": 9,
       "duration": "1.5h",
       "difficulty": "A",
       "date": "12 Jun '19",
       "time": "16:00",
-      "attendanceIds": [
-        2,
-        11,
-        1,
-        4
-      ],
+      "attendanceIds": [],
       "maxPeople": 10,
       "waitingListIds": [],
       "timestamp": 1560355200,
@@ -43,328 +18,42 @@
         {
           "clarity": "3",
           "originality": "3",
-          "complexity": "3",
-          "engagement": "3",
-          "cursive": "3",
-          "usersId": 3
-        }
-      ]
-    },
-    {
-      "name": "New features in PHP 8",
-      "type": "Presentation",
-      "lang": "PHP",
-      "usersId": 10,
-      "duration": "30m",
-      "difficulty": "I",
-      "date": "29 Jun '19",
-      "time": "15:45",
-      "attendanceIds": [
-        2,
-        3,
-        1,
-        4
-      ],
-      "maxPeople": 10,
-      "waitingListIds": [
-        8
-      ],
-      "id": 2,
-      "timestamp": 1564415100,
-      "feedback": [
-        {
-          "usersId": 1,
-          "clarity": "2",
-          "originality": "3",
-          "complexity": "3",
-          "engagement": "2",
-          "cursive": "5"
-        },
-        {
-          "usersId": 2,
-          "clarity": "4",
-          "originality": "1",
-          "complexity": "5",
-          "engagement": "2",
-          "cursive": "4"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Tips for concurency",
-      "type": "Presentation",
-      "lang": "C++",
-      "usersId": 11,
-      "duration": "2h",
-      "difficulty": "E",
-      "date": "17 Jul '17",
-      "time": "13:00",
-      "attendanceIds": [
-        2,
-        3
-      ],
-      "maxPeople": 10,
-      "waitingListIds": [],
-      "timestamp": 1563368400,
-      "feedback": [
-        {
-          "usersId": 1,
-          "clarity": "2",
-          "originality": "3",
-          "complexity": "5",
-          "engagement": "2",
-          "cursive": "5"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Machine Learning Libraries in Python",
-      "type": "Presentation",
-      "lang": "Python",
-      "usersId": 11,
-      "duration": "2h",
-      "difficulty": "E",
-      "date": "17 Jul '19",
-      "time": "13:00",
-      "attendanceIds": [
-        2,
-        3
-      ],
-      "maxPeople": 10,
-      "waitingListIds": [
-        6
-      ],
-      "timestamp": 1563368400,
-      "feedback": [
-        {
-          "usersId": 1,
-          "clarity": "2",
-          "originality": "3",
-          "complexity": "5",
-          "engagement": "2",
-          "cursive": "5"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Go! This way",
-      "type": "Presentation",
-      "lang": "Go",
-      "usersId": 12,
-      "duration": "1h",
-      "difficulty": "B",
-      "date": "18 Aug '17",
-      "time": "18:00",
-      "attendanceIds": [
-        3
-      ],
-      "maxPeople": 10,
-      "waitingListIds": [
-        2,
-        4
-      ],
-      "timestamp": 1503068400,
-      "feedback": [
-        {
-          "clarity": "1",
-          "originality": "3",
           "complexity": "4",
           "engagement": "4",
           "cursive": "4",
-          "usersId": 13
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "name": "Inheritance Is The Base Class of Evil 2",
-      "type": "Presentation",
-      "lang": "C++",
-      "usersId": 13,
-      "duration": "1h",
-      "difficulty": "I",
-      "date": "01 Sep '19",
-      "time": "17:00",
-      "attendanceIds": [
-        1
-      ],
-      "maxPeople": 10,
-      "waitingListIds": [
-        7,
-        8
-      ],
-      "timestamp": 1567357200,
-      "feedback": [
-        {
-          "usersId": 2,
-          "clarity": "1",
-          "originality": "3",
-          "complexity": "5",
-          "engagement": "2",
-          "cursive": "5"
+          "userId": "_weyi9l0qi"
         },
         {
-          "usersId": 5,
-          "clarity": "5",
-          "originality": "5",
+          "clarity": "3",
+          "originality": "3",
           "complexity": "3",
-          "engagement": "5",
-          "cursive": "5"
+          "engagement": "4",
+          "cursive": "4",
+          "userId": "_2v43ouuts"
         }
       ]
     },
     {
-      "id": 7,
-      "name": "Inheritance2",
+      "id": 2,
+      "name": "ECMAScript 6®",
       "type": "Presentation",
-      "lang": "C++",
-      "usersId": 13,
-      "duration": "1h",
-      "difficulty": "I",
-      "date": "01 Sep '16",
-      "time": "17:00",
+      "lang": "JS",
+      "userId": 12,
+      "duration": "1.5h",
+      "difficulty": "A",
+      "date": "12 Jun '20",
+      "time": "16:00",
       "attendanceIds": [
-        6
+        "_2v43ouuts"
       ],
       "maxPeople": 10,
-      "waitingListIds": [
-        7,
-        8
-      ],
-      "timestamp": 1472738400,
+      "waitingListIds": [],
+      "timestamp": 1591977600,
       "feedback": []
     }
   ],
-  "users": [
-    {
-      "id": 1,
-      "fullName": "Adi",
-      "email": "adi@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC1"
-    },
-    {
-      "id": 2,
-      "fullName": "Alex",
-      "email": "alex@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC2"
-    },
-    {
-      "id": 3,
-      "fullName": "Calin",
-      "email": "calin@mail.arobs.com",
-      "password": "pass123",
-      "points": 1235,
-      "token": "usrABC3"
-    },
-    {
-      "id": 4,
-      "fullName": "Bogdan",
-      "email": "bogdan@mail.arobs.com",
-      "password": "pass123",
-      "points": 15,
-      "token": "usrABC4"
-    },
-    {
-      "id": 5,
-      "fullName": "Simi",
-      "email": "simi@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC5"
-    },
-    {
-      "id": 6,
-      "fullName": "Zoli",
-      "email": "zoli@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC6"
-    },
-    {
-      "id": 7,
-      "fullName": "Adi Fatol",
-      "email": "adi.fatol@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC7"
-    },
-    {
-      "id": 9,
-      "fullName": "Samuel Pop",
-      "email": "samuel@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC9"
-    },
-    {
-      "id": 10,
-      "fullName": "Bran Deloit",
-      "email": "bran@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC10"
-    },
-    {
-      "id": 11,
-      "fullName": "Johanna Martin",
-      "email": "johanna@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC11"
-    },
-    {
-      "id": 12,
-      "fullName": "Andrew Miller",
-      "email": "andrew@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC12"
-    },
-    {
-      "id": 13,
-      "fullName": "John Snow",
-      "email": "john@mail.arobs.com",
-      "password": "pass123",
-      "points": 0,
-      "token": "usrABC13"
-    },
-    {
-      "fullName": "Tamas Tamara",
-      "email": "tamara@mail.arobs.com",
-      "password": "Tamara72#",
-      "points": 0,
-      "token": "usrABC14",
-      "id": 14
-    }
-  ],
   "leaderboards": [
-    {
-      "id": 1,
-      "usersId": 3
-    },
-    {
-      "id": 2,
-      "usersId": 2
-    },
-    {
-      "id": 3,
-      "usersId": 1
-    },
-    {
-      "id": 4,
-      "usersId": 9
-    },
-    {
-      "id": 5,
-      "usersId": 6
-    }
+    {}
   ],
   "achievements": [
     {
@@ -456,283 +145,108 @@
           "value": 2,
           "type": "Feedback",
           "date": "11 Apr 2019"
+        },
+        {
+          "id": 8,
+          "value": 2,
+          "type": "Feedback",
+          "date": "11 Apr 2019"
+        },
+        {
+          "id": 9,
+          "value": 2,
+          "type": "Feedback",
+          "date": "27 Mar 2019"
+        },
+        {
+          "id": 10,
+          "value": 10,
+          "type": "Training",
+          "date": "15 Mar 2019"
         }
       ]
     }
   ],
   "proposedTopics": [
     {
-      "id": 2,
-      "topicType": "Presentation",
-      "topicTitle": "ECMAScript 6® - noutati si directii",
-      "topicContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "usersId": 4,
-      "isUserPresenter": "true",
-      "userVotes": [
-        {
-          "userId": 2,
-          "vote": -1
-        },
-        {
-          "userId": 1,
-          "vote": -1
-        },
-        {
-          "userId": 3,
-          "vote": 1
-        },
-        {
-          "userId": 120,
-          "vote": 1
-        },
-        {
-          "userId": 14,
-          "vote": -1
-        },
-        {
-          "userId": 4,
-          "vote": 1
-        },
-        {
-          "userId": 5,
-          "vote": -1
-        }
-      ],
-      "sumOfVotes": -1
-    },
-    {
-      "id": 3,
-      "usersId": "",
+      "userId": "_weyi9l0qi",
       "isUserPresenter": false,
       "topicType": "Presentation",
-      "topicTitle": "New features in PHP 8",
-      "topicContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "userVotes": [
-        {
-          "userId": 2,
-          "vote": -1
-        },
-        {
-          "userId": 1,
-          "vote": 1
-        },
-        {
-          "userId": 3,
-          "vote": -1
-        },
-        {
-          "userId": 9,
-          "vote": 1
-        },
-        {
-          "userId": 11,
-          "vote": -1
-        },
-        {
-          "userId": 120,
-          "vote": 1
-        },
-        {
-          "userId": 14,
-          "vote": 1
-        },
-        {
-          "userId": 4,
-          "vote": -1
-        },
-        {
-          "userId": 5,
-          "vote": 1
-        }
-      ],
-      "sumOfVotes": 1
-    },
-    {
-      "id": 4,
-      "usersId": "",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "Tips for concurency",
-      "topicContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "userVotes": [
-        {
-          "userId": 3,
-          "vote": 1
-        },
-        {
-          "userId": 1,
-          "vote": 1
-        },
-        {
-          "userId": 2,
-          "vote": 1
-        },
-        {
-          "userId": 4,
-          "vote": 1
-        },
-        {
-          "userId": 9,
-          "vote": 1
-        },
-        {
-          "userId": 11,
-          "vote": 1
-        },
-        {
-          "userId": 120,
-          "vote": 1
-        },
-        {
-          "userId": 14,
-          "vote": 1
-        },
-        {
-          "userId": 5,
-          "vote": -1
-        }
-      ],
-      "sumOfVotes": 7
-    },
-    {
-      "usersId": "",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "Machine Learning Libraries in Python",
-      "topicContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "userVotes": [
-        {
-          "userId": 3,
-          "vote": 1
-        },
-        {
-          "userId": 1,
-          "vote": 1
-        },
-        {
-          "userId": 2,
-          "vote": 1
-        },
-        {
-          "userId": 4,
-          "vote": -1
-        },
-        {
-          "userId": 7,
-          "vote": 1
-        },
-        {
-          "userId": 9,
-          "vote": 1
-        },
-        {
-          "userId": 11,
-          "vote": -1
-        },
-        {
-          "userId": 120,
-          "vote": 1
-        },
-        {
-          "userId": 14,
-          "vote": 1
-        },
-        {
-          "userId": 5,
-          "vote": 1
-        }
-      ],
-      "id": 5,
-      "sumOfVotes": 6
-    },
-    {
-      "usersId": "",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "HTML5 New Elements",
-      "topicContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "userVotes": [
-        {
-          "userId": 1,
-          "vote": 1
-        },
-        {
-          "userId": 2,
-          "vote": 1
-        },
-        {
-          "userId": 3,
-          "vote": 1
-        },
-        {
-          "userId": 4,
-          "vote": -1
-        },
-        {
-          "userId": 7,
-          "vote": 1
-        },
-        {
-          "userId": 6,
-          "vote": 1
-        },
-        {
-          "userId": 5,
-          "vote": 1
-        },
-        {
-          "userId": 8,
-          "vote": 1
-        },
-        {
-          "userId": 9,
-          "vote": 1
-        },
-        {
-          "userId": 11,
-          "vote": 1
-        },
-        {
-          "userId": 120,
-          "vote": 1
-        },
-        {
-          "userId": 14,
-          "vote": 1
-        }
-      ],
-      "id": 7,
-      "sumOfVotes": 10
-    },
-    {
-      "usersId": "",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "MyTopic",
-      "topicContent": "Details",
+      "topicTitle": "My Topic",
+      "topicContent": "Your topic",
       "sumOfVotes": 1,
       "userVotes": [
         {
-          "userId": 4,
+          "userId": "_weyi9l0qi",
           "vote": 1
         }
       ],
-      "id": 8
+      "id": 1
     },
     {
-      "usersId": "",
+      "userId": "_weyi9l0qi",
       "isUserPresenter": false,
       "topicType": "Presentation",
-      "topicTitle": "wdkfskjvvskjg",
-      "topicContent": "sdkjvgwswefg",
-      "sumOfVotes": 1,
+      "topicTitle": "Bogdan",
+      "topicContent": "Topic",
+      "sumOfVotes": -1,
       "userVotes": [
         {
-          "userId": 4,
-          "vote": 1
+          "userId": "_weyi9l0qi",
+          "vote": -1
         }
       ],
-      "id": 9
+      "id": 2
+    },
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "BogdanTamas",
+      "topicContent": "TamasBogdan",
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 3
+    },
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "jhfjhf",
+      "topicContent": "jhfjhjhf",
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 4
+    },
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "jhfhjf",
+      "topicContent": "jhfjhf",
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 5
+    },
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "hgdghghd",
+      "topicContent": "ghhgdhgd",
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 6
+    },
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "jhfjhfjhf",
+      "topicContent": "jhfjhffj",
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 7
     }
   ]
 }

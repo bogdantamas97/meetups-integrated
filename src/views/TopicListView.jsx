@@ -1,12 +1,12 @@
 import React from "react";
-import FutureEvents from "../components/future-events-list/FutureEvents.jsx";
+import TopicList from "../components/vote-topics-list/TopicList";
 import { theme } from "../GlobalTheme/globalTheme";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
-const FutureEventView = () => (
+const PastEventsView = () => (
   <MuiThemeProvider theme={theme}>
-    <FutureEvents />
+    <TopicList />
   </MuiThemeProvider>
 );
 
-export default FutureEventView;
+export default PastEventsView;

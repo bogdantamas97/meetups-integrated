@@ -1,5 +1,23 @@
 import React from "react";
+import { theme } from "../GlobalTheme/globalTheme";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import ErrorPage from "../images/errorImage.png";
+import {withStyles} from "@material-ui/core";
 
-const NotFoundPageView = () => <h1>Not found</h1>;
+const styles = {
+  image: {
+    height: "100%",
+    width: "100%",
+  },
+};
 
-export default NotFoundPageView;
+const NotFoundPagesView = (props) => {
+  const { classes } = props;
+  return (
+    <MuiThemeProvider theme={theme}>
+      <img className={classes.image} alt="404" src={ErrorPage} />;
+    </MuiThemeProvider>
+  );
+};
+
+export default withStyles(styles)(NotFoundPagesView);

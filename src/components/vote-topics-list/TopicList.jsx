@@ -1,29 +1,41 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout.jsx";
-import { withStyles, ListItem, List } from "@material-ui/core";
+import {
+  Button,
+  Typography,
+  withStyles,
+  ListItem,
+  List,
+} from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
 import TopicItem from "./TopicItem.jsx";
 import Cookies from "universal-cookie";
 import { eventType } from "../../constants/index";
 import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { button, footerBar, theme } from "../../GlobalTheme/globalTheme.js";
+import TopicDialog from "./TopicDialog.jsx";
 
 const styles = {
+  typography: theme.typography,
+  button: button,
+  footerBar: footerBar,
   root: {
     width: "100%",
     height: "100%",
-    overflow: "scroll"
+    overflow: "scroll",
   },
   header: {
     display: "block",
     height: "30%",
     width: "100%",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   list: {
     height: "98%",
     width: "100%",
-    overflow: "scroll"
+    overflow: "scroll",
   },
   listItem: {
     width: "100%",
@@ -31,18 +43,19 @@ const styles = {
     paddingLeft: "0px",
     paddingRight: "0px",
     paddingTop: "0px",
-    paddingBottom: "0px"
-  }
+    paddingBottom: "0px",
+  },
 };
 const cookies = new Cookies();
-const TopicList = props => {
-  
+
+const TopicList = (props) => {
   const [isMessageVisible, changeMessageDisplay] = useState(
-    !cookies.get("voteTopicsMessageClosed")
+    cookies.get("voteTopicsMessageClosed")
   );
+  const [open, setOpen] = useState(false);
   const [event, changeEvent] = useState([{}]);
   const [isLoaded, changeLoad] = useState(false);
-  const userId = parseInt(new Cookies().get("token").substring(6));
+  const forceUpdate = React.useCallback((result) => changeEvent(result), []);
 
   const { classes } = props;
 
@@ -68,47 +81,67 @@ const TopicList = props => {
     changeMessageDisplay(false);
   };
 
+  const handleClose = (string) => {
+    if (string === "sent") {
+      const result = axios("http://localhost:3001/proposedTopics");
+      forceUpdate(result.data);
+      changeLoad(true);
+    }
+    setOpen(false);
+  };
+
   return (
     <MainLayout topBarTitle={"Vote Topics"}>
-      <div className={classes.root}>
-        {!cookies.get("voteTopicsMessageClosed") && (
-          <div style={styleHeader}>
-            <EventsMessage eventTypeMessage={eventType.voteTopics}>
-              <CloseMessageButton onClick={handleOnClick} />
-            </EventsMessage>
-          </div>
-        )}
-        <div style={styleContent}>
-          <List className={classes.list}>
-            {isLoaded
-              ? event
-                  .sort((a, b) => a.sumOfVotes - b.sumOfVotes)
-                  .reverse()
-                  .map(item => (
-                    <ListItem
-                      key={item.sumOfVotes}
-                      className={classes.listItem}
-                    >
-                      <TopicItem
-                        userId={userId}
-                        id={item.id}
-                        title={item.topicTitle}
-                        content={item.topicContent}
-                        userVotes={item.userVotes}
-                        sumOfVotes={item.sumOfVotes}
-                      />
-                    </ListItem>
-                  ))
-              : undefined}
-          </List>
+      {!cookies.get("voteTopicsMessageClosed") && (
+        <div style={styleHeader}>
+          <EventsMessage eventTypeMessage={eventType.voteTopics}>
+            <CloseMessageButton onClick={handleOnClick} />
+          </EventsMessage>
         </div>
+      )}
+      <TopicDialog open={open} handleClose={handleClose} />
+      <div style={styleContent}>
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={() => setOpen(true)}
+        >
+          <Typography
+            style={{
+              color: theme.palette.primary.contrastText,
+              fontSize: theme.typography.subheading.fontSize,
+            }}
+          >
+            {" "}
+            Propose a topic!
+          </Typography>
+        </Button>
+        <List className={classes.list}>
+          {isLoaded && event
+            ? event
+                .sort((a, b) => a.sumOfVotes - b.sumOfVotes)
+                .reverse()
+                .map((item) => (
+                  <ListItem key={item.sumOfVotes} className={classes.listItem}>
+                    <TopicItem
+                      userId={new Cookies().get("token")}
+                      id={item.id}
+                      title={item.topicTitle}
+                      content={item.topicContent}
+                      userVotes={item.userVotes}
+                      sumOfVotes={item.sumOfVotes}
+                    />
+                  </ListItem>
+                ))
+            : undefined}
+        </List>
       </div>
     </MainLayout>
   );
 };
 
 TopicList.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(TopicList);

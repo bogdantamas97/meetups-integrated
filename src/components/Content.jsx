@@ -7,7 +7,7 @@ const styles = {
     backgroundColor: theme.palette.secondary.light,
     height: "100%",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   }
 };
 

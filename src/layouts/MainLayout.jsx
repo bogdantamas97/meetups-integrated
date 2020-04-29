@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FooterBar from "../components/FooterBar.jsx";
 import Content from "../components/Content";
 import BaseHeader from "../components/BaseHeader";
 import { withStyles } from "@material-ui/core";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import axios from "axios";
 
 const apiBaseUrl = "http://localhost:8000";
@@ -16,41 +16,43 @@ const styles = {
   },
 };
 
-const getInitData = async (currentUserId, setFullName) => {
-  axios
-    .get(apiBaseUrl)
-    .then((result) =>
-      setFullName(
-        result.data.filter((element) => element.id === currentUserId)[0]
-          .firstname +
-          " " +
-          result.data.filter((element) => element.id === currentUserId)[0]
-            .lastname
-      )
-    )
-    .catch(() => {
-      console.log("error");
-    });
-};
-
 const MainLayout = (props) => {
-  const { classes } = props;
-  const currentUserId = Cookie.get("token");
-  const [fullName, setFullName] = useState("");
+  const { classes, avatarInitials, topBarTitle, children } = props;
+  const [ fullName, setFullName ] = useState("");
 
-  getInitData(currentUserId, setFullName);
+  useEffect(() => {
+    async function fetchData() {
+      axios
+        .get(apiBaseUrl)
+        .then((result) =>
+          setFullName(
+            result.data.filter(
+              (element) => element.id === Cookies.get("token")
+            )[0].firstname +
+              " " +
+              result.data.filter(
+                (element) => element.id === Cookies.get("token")
+              )[0].lastname
+          )
+        )
+        .catch(() => {
+          console.log("error");
+        });
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className={classes.mainLayout}>
-      <div style={{ height: "7%" }}>
+      <div style={{ height: "10%" }}>
         <BaseHeader
-          userFullName={fullName}
-          name={props.avatarInitials}
-          inputText={props.topBarTitle}
+          fullName={fullName}
+          name={avatarInitials}
+          inputText={topBarTitle}
         />
       </div>
-      <div style={{ height: "83%" }}>
-        <Content>{props.children}</Content>
+      <div style={{ height: "80%" }}>
+        <Content>{children}</Content>
       </div>
       <div style={{ height: "10%" }}>
         <FooterBar />

@@ -11,8 +11,7 @@ const styles ={
         flexDirection: 'column'
     },
     achievementsBox: {
-        height:'25%',
-        padding:'20px 20px 10px',
+        height:'20%',
         display:'flex',
         justifyContent:'center',
         flexDirection:'column',
@@ -34,17 +33,17 @@ const styles ={
 const Achievements = props => {
 
     const { classes } = props;
-    const [achievements, setAchievements] = useState([]);
+    const [ achievements, setAchievements ] = useState([]);
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:3001/achievements`)
-            .then(result => {
-                const currentAchievements =  result.data;
-                setAchievements(currentAchievements);
-                }
-            )
-    });
+        async function fetchData() {
+          const result = await axios(
+            "http://localhost:3001/achievements"
+          );
+          setAchievements(result.data);
+        }
+        fetchData();
+    }, []);
 
     return (
         <MainLayout topBarTitle={'Achievements'}>

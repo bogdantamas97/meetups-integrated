@@ -15,7 +15,6 @@ const palette = {
     contrastText: "#000000"
   }
 };
-
 const typography = {
   useNextGen: true,
   headline: {
@@ -136,10 +135,9 @@ export const button = {
   "&:hover": {
     backgroundColor: green[700]
   },
-  width: "55%",
-  height: "60%",
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
+  margin: 'auto',
 };
 
 export const eventTitle = {

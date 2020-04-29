@@ -10,7 +10,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    width: "100%"
+    width: "100%",
   },
   icons: {
     fontSize: 10,
@@ -20,8 +20,8 @@ const styles = {
     height: "4vw",
     maxWidth: 25,
     maxHeight: 25,
-    borderRadius: 90
-  }
+    borderRadius: 90,
+  },
 };
 
 export class EventsMessage extends React.Component {
@@ -29,7 +29,8 @@ export class EventsMessage extends React.Component {
     super(props);
     this.state = {
       eventType: props.eventTypeMessage,
-      numberOfPastEventsWithoutFeedback: props.numberOfPastEventsWithoutFeedback
+      numberOfPastEventsWithoutFeedback:
+        props.numberOfPastEventsWithoutFeedback,
     };
   }
 
@@ -40,7 +41,7 @@ export class EventsMessage extends React.Component {
     ) {
       this.setState({
         numberOfPastEventsWithoutFeedback: this.props
-          .numberOfPastEventsWithoutFeedback
+          .numberOfPastEventsWithoutFeedback,
       });
     }
   }
@@ -107,7 +108,7 @@ export class EventsMessage extends React.Component {
                 width: "10%",
                 justifyContent: "center",
                 alignItems: "center",
-                display: "flex"
+                display: "flex",
               }}
             >
               {this.props.children}

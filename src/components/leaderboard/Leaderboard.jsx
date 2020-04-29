@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { theme } from "../../GlobalTheme/globalTheme";
 import ListComponent from "./ListComponent.jsx";
-import LeaderboardPic from "../../images/LeaderboardPic1.png";
+import LeaderboardPic from "../../images/leaderboardPic.png";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 
@@ -107,15 +107,20 @@ const Leaderboard = props => {
         <div className={classes.content}>
           <List className={classes.List}>
             {isLoaded
-              ? info.map(item => (
+              ? info.map(item => {
+                console.log('something',item)
+                return (
                   <ListItem className={classes.ListItem} key={item.id}>
                     <ListComponent
                       id={`#${item.id}`}
-                      name={item.users.fullName}
-                      points={`${item.users.points} points`}
+                      name={'nothing'}
+                      points={
+                      // ${item.users.points}
+                      '0 points'}
                     />
                   </ListItem>
-                ))
+                )
+              })
               : undefined}
           </List>
           <div className={classes.loadMore}>

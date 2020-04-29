@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import LayoutLogin from "../layouts/LayoutLogin.jsx";
 import { theme, Background } from "../GlobalTheme/globalTheme";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
 import MuiAlert from "@material-ui/lab/Alert";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import axios from "axios/index";
 import { Redirect } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -80,6 +80,7 @@ const styles = {
 const Alert = (props) => <MuiAlert elevation={5} variant="filled" {...props} />;
 
 const LoginPage = (props) => {
+
   const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const classes = props.classes;
 
@@ -96,6 +97,9 @@ const LoginPage = (props) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+  // check if its logged in
+  const [isLoggedIn, setLoggedIn] = useState(!!Cookies.get("token"));
+
   const invalidEmail = (email) => {
     if (email === "" || !regex.test(email)) return true;
     return false;
@@ -106,23 +110,30 @@ const LoginPage = (props) => {
     return false;
   };
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const onKeyEnterPressed = event => {
+    if (event.keyCode === 13) {
+      handleSubmit();
+    }
+  }
 
   const handleSubmit = () => {
+
     if (invalidEmail(email)) setEmailError(true);
     if (invalidPassword(password)) setPasswordError(true);
 
     setOpen(true);
+
     if (email.length !== 0 && password.length !== 0) {
       if (!invalidEmail(email) && !invalidPassword(password)) {
         axios.get(apiBaseUrl).then((response) => {
           if (response.data.filter((user) => user.email === email)[0])
             if (response.data.filter((user) => user.password === password)[0]) {
-              setOpen(false);
-              Cookie.set(
+              console.log('here it is');
+              Cookies.set(
                 "token",
                 response.data.filter((user) => user.password === password)[0]
                   .id,
@@ -150,12 +161,20 @@ const LoginPage = (props) => {
     }
   };
 
+
+  useEffect(() => {
+    document.addEventListener('keyup', onKeyEnterPressed)
+    return () => {
+      document.removeEventListener('keyup', onKeyEnterPressed)
+    }
+  }, [])
+
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
   } else
     return (
       <LayoutLogin backgroundStyle={Background}>
-        <FormControl className={classes.formStyle} onSubmit={handleSubmit}>
+        <FormControl id="the_form" className={classes.formStyle} onSubmit={handleSubmit}>
           <TextField
             className={classes.emailInput}
             onChange={(event) => {
@@ -179,6 +198,7 @@ const LoginPage = (props) => {
             }}
             label="Email"
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             error={emailError}
           />
           <TextField
@@ -206,6 +226,7 @@ const LoginPage = (props) => {
             type="Password"
             label="Password"
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             error={passwordError}
           />
           <Button

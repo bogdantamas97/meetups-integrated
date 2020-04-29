@@ -38,7 +38,7 @@ const styles = {
 class PastEvents extends React.Component {
   state = {
     isOpen: false,
-    usersId: 0,
+    userId: 0,
     eventId: null,
     eventName: "",
     isLoaded: false,
@@ -55,18 +55,17 @@ class PastEvents extends React.Component {
   }
 
   componentDidMount() {
-    let getUser = this.state.cookies.get("token").substring(6); //get user
-    let isMessageVisible = !this.state.cookies.get("pastEventsMessageClosed");
+    const isMessageVisible = !this.state.cookies.get("pastEventsMessageClosed");
     axios.get("http://localhost:3001/events?_expand=users").then(res => {
       const event = res.data;
-      let buttonList = [];
-      let events = [];
+      const buttonList = [];
+      const events = [];
       let noFeedback = 0;
       event.forEach(item => {
         if (item.timestamp < moment().unix()) {
           buttonList.push({
             key: item.id,
-            usersId: item.usersId,
+            userId: item.userId,
             value: false
           });
           noFeedback += 1;
@@ -76,14 +75,14 @@ class PastEvents extends React.Component {
 
       events.forEach((item, i) => {
         item.feedback.forEach(feedbackItem => {
-          if (feedbackItem.usersId === Number.parseInt(getUser)) {
+          if (feedbackItem.userId === this.state.cookies.get("token")) {
             buttonList[i].value = true;
             noFeedback -= 1; //TODO could lead to errors if the db is worng, or return duplicate
           }
         });
       });
       this.setState({
-        usersId: getUser,
+        userId: this.state.cookies.get("token"),
         buttonList: buttonList,
         events: events,
         isLoaded: true,
@@ -143,7 +142,7 @@ class PastEvents extends React.Component {
     //TODO Replace logic here
     this.state.events.forEach((item, i) => {
       item.feedback.forEach(feedbackItem => {
-        if (feedbackItem.usersId === this.state.usersId) {
+        if (feedbackItem.userId === this.state.userId) {
           buttonListCopy[i].value = true;
         }
       });
@@ -202,7 +201,7 @@ class PastEvents extends React.Component {
                     return (
                       <ListItem key={item.id} className={classes.listItem}>
                         <PastEventItem
-                          usrId={this.state.usersId}
+                          usreId={this.state.userId}
                           itemId={item.id}
                           lang={item.lang}
                           name={item.name}
@@ -212,7 +211,7 @@ class PastEvents extends React.Component {
                           feedbackList={item.feedback}
                           handleFeedbackClick={() =>
                             this.handleFeedbackClick(
-                              this.state.usersId,
+                              this.state.userId,
                               item.id,
                               item.name
                             )
@@ -221,7 +220,7 @@ class PastEvents extends React.Component {
                             .unix(item.timestamp)
                             .format(`DD MMM 'YY`)}
                           time={moment.unix(item.timestamp).format(`hh:mm`)}
-                          secondLine={`${item.type} - ${item.users.fullName} (${
+                          secondLine={`${item.type} (${
                             item.difficulty
                           }) ~ ${item.duration}`}
                         />
@@ -234,7 +233,7 @@ class PastEvents extends React.Component {
         </div>
         <Feedback
           isOpen={this.state.isOpen}
-          userId={this.state.usersId}
+          userId={this.state.userId}
           eventId={this.state.eventId}
           eventName={this.state.eventName}
           closeFeedbackDialog={this.closeFeedbackDialog}

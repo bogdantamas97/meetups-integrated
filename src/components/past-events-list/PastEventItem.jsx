@@ -79,7 +79,8 @@ const styles = {
 };
 
 const PastEventItem = props => {
-  const { classes } = props;
+  console.log(props);
+  const { classes, itemId, userId, eventId, name } = props;
   const [width, updateWidth] = useState(0);
 
   const fontTitle = () => {
@@ -111,8 +112,8 @@ const PastEventItem = props => {
 
   // Click event for FeedbackButton
   const handleOnClick = () => {
-    props.changeButtonStateById(props.itemId, true);
-    props.handleFeedbackClick(props.usrId, props.eventId, props.name);
+    props.changeButtonStateById(itemId, true);
+    props.handleFeedbackClick(userId, eventId, name);
   };
 
   const animatedHeight = useSpring({

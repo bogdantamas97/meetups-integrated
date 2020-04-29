@@ -1,18 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Typography, withStyles } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import { eventSubtitle } from "../../GlobalTheme/globalTheme";
 
 const styles = {
   container: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    width: "100%",
-    height: "15%",
     border: "1px solid #b8bdc4",
     borderLeftStyle: "none",
     borderRightStyle: "none",
@@ -23,10 +19,10 @@ const styles = {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    width: "15%"
+    width: "1-%"
   },
   iconItems: {
-    width: "15%"
+    width: "10%"
   },
   points: {
     width: 48,
@@ -37,11 +33,8 @@ const styles = {
     flexDirection: "column"
   },
   typography: {
-    fontWeight: "bold"
-  },
-  pDescription: {
-    fontSize: eventSubtitle.fontSize,
-    color: eventSubtitle.color
+    fontWeight: "bold",
+    fontSize: '20px'
   },
   iconImg: {
     width: "100%",
@@ -65,13 +58,17 @@ const AchievementsItem = props => {
         direction="row"
         alignItems="stretch"
       >
+        <Grid container className={classes.textContainer}>
+          <Typography className={classes.typography}>
+            {props.title}
+          </Typography>
+        </Grid>
         <Grid item className={classes.pointsItem}>
           <Avatar className={classes.points}>
             <Typography
               className={classes.typography}
-              style={{ fontSize: "medium" }}
             >
-              {this.props.points}
+              {props.points}
             </Typography>
             <Typography
               className={classes.typography}
@@ -81,18 +78,10 @@ const AchievementsItem = props => {
             </Typography>
           </Avatar>
         </Grid>
-        <Grid container className={classes.textContainer}>
-          <Typography className={classes.typography}>
-            {this.props.title}
-          </Typography>
-          <Typography className={classes.pDescription}>
-            {this.props.description}
-          </Typography>
-        </Grid>
         <Grid container className={classes.iconItems}>
           <img
             className={classes.iconImg}
-            src={this.props.picturePath}
+            src={props.picturePath}
             alt={""}
           />
         </Grid>

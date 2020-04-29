@@ -39,7 +39,7 @@ Start JSON Server
 json-server --watch db.json
 ```
 
-Now if you go to [http://localhost:3000/posts/1](http://localhost:3000/posts/1), you'll get
+Now if you go to [http://localhost:3001/posts/1](http://localhost:3001/posts/1), you'll get
 
 ```json
 { "id": 1, "title": "json-server", "author": "typicode" }
@@ -104,7 +104,7 @@ GET /comments?author.name=typicode
 ```
 
 ### Expand 
-http://localhost:3000/posts?_expand=users
+http://localhost:3001/posts?_expand=users
 
 ### Example:
 
@@ -114,7 +114,7 @@ http://localhost:3000/posts?_expand=users
     "name": "Go! This way",
     "type": "Presentation",
     "lang": "Go",
-    "usersId": 12,
+    "userId": 12,
     "duration": "1h",
     "difficulty": "B",
     "date": "18 Aug '19",
@@ -147,7 +147,7 @@ const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 server.use(router)
-server.listen(3000, () => {
+server.listen(3001, () => {
   console.log('JSON Server is running')
 })
 ```
@@ -173,7 +173,7 @@ server.use((req, res, next) => {
  }
 })
 server.use(router)
-server.listen(3000, () => {
+server.listen(3001, () => {
   console.log('JSON Server is running')
 })
 ```
