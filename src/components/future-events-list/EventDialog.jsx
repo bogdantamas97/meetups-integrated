@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Typography from "@material-ui/core/Typography";
 import Slide from "@material-ui/core/Slide";
+import { blue, grey } from "@material-ui/core/colors";
 
 const styles = theme => ({
   typography: theme.typography,
@@ -15,18 +16,26 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2
   },
   dialogButton: {
-    color: theme.palette.grey[500],
-    borderTop: `1px solid lightgray`
+    color: blue[300],
+    borderTop: `1px solid lightgray`,
+    margin: "auto",
+    backgroundColor: "white",
+    "&:hover": {
+      backgroundColor: grey[300],
+    },
   },
   highlightedWord: {
     color: "blue"
+  },
+  title: {
+    margin: "auto",
   }
 });
 
 const Transition = (props) => <Slide direction="down" {...props} />;
 
 const EventDialog = props => {
-  
+
   const { classes } = props;
   const [titleMessage, setTitleMessage] = useState("");
   const [coloredWord, setColoredWord] = useState("");
@@ -67,7 +76,7 @@ const EventDialog = props => {
           aria-labelledby="customized-dialog-title"
           open={props.isOpen}
         >
-          <DialogTitle id="customized-dialog-title" onClose={props.handleClose}>
+          <DialogTitle id="customized-dialog-title" className = {classes.title} onClose={props.handleClose}>
             {titleMessage}
             <span className={classes.highlightedWord}>
               {coloredWord}

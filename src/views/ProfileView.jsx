@@ -5,7 +5,7 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 const ProfileView = props => (
   <MuiThemeProvider theme={theme}>
-    <Profile userId={2} />
+    <Profile />
   </MuiThemeProvider>
 );
 

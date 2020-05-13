@@ -44,7 +44,8 @@
       "date": "12 Jun '20",
       "time": "16:00",
       "attendanceIds": [
-        "_2v43ouuts"
+        "_2v43ouuts",
+        "_weyi9l0qi"
       ],
       "maxPeople": 10,
       "waitingListIds": [],
@@ -102,7 +103,7 @@
   "pointsReceived": [
     {
       "id": 3,
-      "userId": 4,
+      "userId": "_weyi9l0qi",
       "points": [
         {
           "id": 1,
@@ -163,90 +164,29 @@
           "value": 10,
           "type": "Training",
           "date": "15 Mar 2019"
+        },
+        {
+          "id": 11,
+          "value": 2,
+          "type": "Feedback",
+          "date": "11 Apr 2019"
+        },
+        {
+          "id": 12,
+          "value": 2,
+          "type": "Feedback",
+          "date": "27 Mar 2019"
+        },
+        {
+          "id": 13,
+          "value": 10,
+          "type": "Training",
+          "date": "15 Mar 2019"
         }
+
       ]
     }
   ],
   "proposedTopics": [
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "My Topic",
-      "topicContent": "Your topic",
-      "sumOfVotes": 1,
-      "userVotes": [
-        {
-          "userId": "_weyi9l0qi",
-          "vote": 1
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "Bogdan",
-      "topicContent": "Topic",
-      "sumOfVotes": -1,
-      "userVotes": [
-        {
-          "userId": "_weyi9l0qi",
-          "vote": -1
-        }
-      ],
-      "id": 2
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "BogdanTamas",
-      "topicContent": "TamasBogdan",
-      "sumOfVotes": 0,
-      "userVotes": [],
-      "id": 3
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "jhfjhf",
-      "topicContent": "jhfjhjhf",
-      "sumOfVotes": 0,
-      "userVotes": [],
-      "id": 4
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "jhfhjf",
-      "topicContent": "jhfjhf",
-      "sumOfVotes": 0,
-      "userVotes": [],
-      "id": 5
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "hgdghghd",
-      "topicContent": "ghhgdhgd",
-      "sumOfVotes": 0,
-      "userVotes": [],
-      "id": 6
-    },
-    {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "jhfjhfjhf",
-      "topicContent": "jhfjhffj",
-      "sumOfVotes": 0,
-      "userVotes": [],
-      "id": 7
-    }
   ]
 }

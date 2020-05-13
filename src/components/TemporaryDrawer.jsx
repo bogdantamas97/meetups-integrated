@@ -20,9 +20,13 @@ const styles = {
     textDecoration: "none",
   },
   menuButton: {
-    marginLeft: -15,
+    marginLeft: -10,
     marginRight: 20,
   },
+  menuIcon: {
+    width: "40px",
+    height: "40px",
+  }
 };
 
 const TemporaryDrawer = (props) => {
@@ -33,10 +37,6 @@ const TemporaryDrawer = (props) => {
   const deleteCookie = () => {
     const cookies = new Cookies();
     cookies.remove("token");
-    cookies.remove("futureEventsMessageClosed");
-    cookies.remove("myEventsMessageClosed");
-    cookies.remove("pastEventsMessageClosed");
-    cookies.remove("voteTopicsMessageClosed");
   };
 
   const fullList = (
@@ -121,7 +121,7 @@ const TemporaryDrawer = (props) => {
         aria-label="Menu"
         onClick={() => setOpen(true)}
       >
-        <MenuIcon />
+        <MenuIcon className={classes.menuIcon} />
       </IconButton>
 
       <SwipeableDrawer

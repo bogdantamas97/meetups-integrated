@@ -23,7 +23,6 @@ const styles = {
   list: {
     height: "98%",
     width: "100%",
-    overflow: "scroll"
   },
   listItem: {
     width: "100%",
@@ -37,25 +36,21 @@ const styles = {
 
 class FutureEvents extends React.Component {
   state = {
-    isDisplayed: true,
+    userId: "",
+    list: [],
     event: [],
+    dialogType: "",
     isLoaded: false,
     isOpen: false,
-    dialogType: "",
-    cookies: new Cookies(),
-    list: [],
     isLoading: true,
-    isMessageVisible: true,
-    userId: 0
+    isMessageVisible: true
   };
 
   componentDidMount() {
-    let isMessageVisible = !this.state.cookies.get("futureEventsMessageClosed");
-    let userId = new Cookies().get("token");
+    const userId = new Cookies().get("token");
     axios("http://localhost:3001/events?_expand=users").then(result => {
       this.setState({
         userId,
-        isMessageVisible,
         event: result.data,
         isLoaded: true
       });
@@ -63,8 +58,7 @@ class FutureEvents extends React.Component {
   }
 
   handleOnClick = () => {
-    this.setState({ isDisplayed: false });
-    this.state.cookies.set("futureEventsMessageClosed", true, { path: "/" });
+    this.setState({ isMessageVisible: false });
   };
 
   checkUser = item => {
@@ -89,7 +83,7 @@ class FutureEvents extends React.Component {
   handleOpenWaitingDialog = eventId => {
     axios(`http://localhost:3001/events/${eventId}`)
       .then(result => {
-        let list = result.data.waitingListIds;
+        const list = result.data.waitingListIds;
         list.push(this.state.userId);
         this.setState({ list });
       })
@@ -114,7 +108,7 @@ class FutureEvents extends React.Component {
   handleOpenSubscribeDialog = eventId => {
     axios(`http://localhost:3001/events/${eventId}`)
       .then(result => {
-        let list = result.data.attendanceIds;
+        const list = result.data.attendanceIds;
         list.push(this.state.userId);
         this.setState({ list });
       })
@@ -187,7 +181,7 @@ class FutureEvents extends React.Component {
     return (
       <MainLayout topBarTitle={"Future Events"}>
         <div className={classes.root}>
-          {!this.state.cookies.get("futureEventsMessageClosed") && (
+          {this.state.isMessageVisible && (
             <div style={styleHeader}>
               <EventsMessage eventTypeMessage={eventType.futureEvents}>
                 <CloseMessageButton onClick={this.handleOnClick} />

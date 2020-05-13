@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles/index";
-import green from "@material-ui/core/colors/green";
+import { green } from "@material-ui/core/colors";
 
 const palette = {
   primary: {
@@ -84,8 +84,8 @@ const typography = {
     color: "steelblue",
     fontFamily: "Lato / sans-serif",
     lineHeight: "22px",
-    fontSize: "14px",
-    fontWeight: 700
+    fontSize: "20px",
+    fontWeight: 700,
   },
   fontSize: 14,
   fontWeightMedium: 500,
@@ -158,15 +158,6 @@ export const eventBottom = {
   fontSize: "3vw",
   fontWeight: 500,
   color: "#1252ba"
-};
-
-export const footerBar = {
-  backgroundColor: palette.primary.dark,
-  position: "fix",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100%"
 };
 
 export const difficultyBar = {

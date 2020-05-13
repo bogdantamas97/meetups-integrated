@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
 import axios from "axios";
-import { green } from "@material-ui/core/colors";
-import { Grid } from "@material-ui/core";
+import { green, grey } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { theme } from "../../GlobalTheme/globalTheme";
 
@@ -14,30 +11,37 @@ const styles = {
   achiv: theme.typography.captionProfile,
   achivNext: theme.typography.caption,
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   spacing: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
-  }
+    paddingBottom: theme.spacing.unit * 2,
+  },
+  link: {
+    textDecoration: "none",
+    backgroundColor: grey[100],
+    "&:hover": {
+      backgroundColor: grey[500],
+    },
+  },
 };
 
 class Header extends Component {
   state = {
     points: 0,
     allPoints: [],
-    isLoaded: false
+    isLoaded: false,
   };
 
   componentDidMount() {
     axios
       .get(`http://localhost:3001/users/${this.props.userId}`)
-      .then(result => {
+      .then((result) => {
         const points = result.data.points;
         this.setState({ points });
       });
-    axios.get("http://localhost:3001/achievements").then(result => {
+    axios.get("http://localhost:3001/achievements").then((result) => {
       const allPoints = result.data;
       const isLoaded = true;
       this.setState({ allPoints, isLoaded });
@@ -45,7 +49,7 @@ class Header extends Component {
   }
 
   nextAchievement = () => {
-    const data = this.state.allPoints.filter(item => {
+    const data = this.state.allPoints.filter((item) => {
       return this.state.points <= item.points;
     });
 
@@ -53,9 +57,9 @@ class Header extends Component {
       <Fragment>
         {data.length !== 0 ? (
           <Fragment>
-            <div style={{ marginTop: "20px" }}>
+            <div style={{ marginTop: "10px" }}>
               <Typography style={styles.achivNext} align="right">
-                next Achievement: {`${data[0].points} points`}
+                Next Achievement: {`${data[0].points} points`}
               </Typography>
             </div>
             <Typography style={{ color: green[500] }} align="right">
@@ -91,12 +95,12 @@ class Header extends Component {
                 justify="space-evenly"
                 style={{ width: "100%", marginTop: "10px" }}
               >
-                <Link style={{ textDecoration: "none" }} to={"/leaderboard"}>
+                <Link className={classes.link} to={"/leaderboard"}>
                   <Typography style={styles.achiv} align="right">
                     Leaderboard
                   </Typography>
                 </Link>
-                <Link style={{ textDecoration: "none" }} to={"/achievements"}>
+                <Link className={classes.link} to={"/achievements"}>
                   <Typography style={styles.achiv} align="right">
                     Achievements
                   </Typography>
@@ -113,7 +117,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Header);

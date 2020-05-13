@@ -28,11 +28,10 @@ const styles = {
   },
   itemMiddle: {
     height: 15,
-    marginTop: 5
   },
   itemBottom: {
     height: 9,
-    marginTop: 10
+    marginTop: 5
   },
   avatar: {
     width: 50,
@@ -70,37 +69,23 @@ const FutureEventItem = props => {
   //   let fontTitle, fontSubtitle, fontBottom;
 
   const fontTitle = () => {
-    while (width < 1024) return 8 + width / 90;
-    return 20;
+    while (width < 1024) return 10 + width / 140;
+    return 17;
   };
 
   const fontSubtitle = () => {
-    while (width < 1024) return 6.5 + width / 90;
+    while (width < 1024) return 8 + width / 140;
     return 15;
   };
 
   const fontBottom = () => {
-    while (width < 1024) return 5 + width / 90;
-    return 10;
-  };
-
-  const willOverflow = () => {
-    while (width < 400) return "scroll";
-    return "visible";
+    while (width < 1024) return 6 + width / 140;
+    return 13;
   };
 
   const updateWidthFunction = () => {
     updateWidth(window.innerWidth);
   };
-
-  useEffect(() => {
-    updateWidthFunction();
-    window.addEventListener("resize", updateWidthFunction);
-
-    return () => {
-      window.removeEventListener("resize", updateWidthFunction);
-    };
-  }, []);
 
   const checkSubscribe = () => {
     if (props.action === "Subscribe") return true;
@@ -116,7 +101,7 @@ const FutureEventItem = props => {
     return false;
   };
 
-  const animatedHeight = useSpring({
+  const animation = useSpring({
     height: "100%",
     from: { height: "0%" },
     width: "100%",
@@ -124,11 +109,22 @@ const FutureEventItem = props => {
       mass: 3,
       tension: 340,
       friction: 30
-    }
+    }, 
+    border: "2px dotted rgba(28,110,164,0.45)",
+    borderRadius: "10px"
   });
 
+  useEffect(() => {
+    updateWidthFunction();
+    window.addEventListener("resize", updateWidthFunction);
+
+    return () => {
+      window.removeEventListener("resize", updateWidthFunction);
+    };
+  }, []);
+
   return (
-    <animated.div style={animatedHeight}>
+    <animated.div style={animation}>
       <Grid
         container
         className={classes.container}
@@ -150,7 +146,7 @@ const FutureEventItem = props => {
             <Grid
               container
               alignItems="center"
-              style={{ height: 20, marginTop: 8, overflow: willOverflow() }}
+              style={{ height: 20, marginTop: 5 }}
             >
               <Typography
                 style={{

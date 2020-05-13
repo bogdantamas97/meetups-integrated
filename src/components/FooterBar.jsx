@@ -1,26 +1,18 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import {
-  MenuItem,
-  TextField,
-  Checkbox,
-  BottomNavigation,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-  Paper,
-  withStyles,
-  requirePropFactory,
-} from "@material-ui/core";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { button, footerBar, theme } from "../GlobalTheme/globalTheme.js";
+import { BottomNavigation, Paper, withStyles } from "@material-ui/core";
 
 const styles = {
-  footerBar: footerBar,
+  paper: {
+    backgroundColor: "#22306F ",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    border: "3px double rgba(30,111,164,0.6)",
+    borderRadius: "5px 5px 0px 0px"
+  },
 };
 
 const FooterBar = (props) => {
@@ -28,8 +20,8 @@ const FooterBar = (props) => {
 
   return (
     <Fragment>
-      <Paper style={{ height: "100%" }}>
-        <BottomNavigation className={classes.footerBar}></BottomNavigation>
+      <Paper className={classes.paper}>
+        <BottomNavigation></BottomNavigation>
       </Paper>
     </Fragment>
   );

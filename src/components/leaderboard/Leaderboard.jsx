@@ -35,7 +35,6 @@ const styles = {
   List: {
     width: "100%",
     height: "60%",
-    overflow: "scroll"
   },
   ListItem: {
     height: "20%"

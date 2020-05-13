@@ -11,34 +11,33 @@ const styles = {
   content: {
     width: "100%",
     height: "100%",
-    borderBottom: "1px solid #c0c3c6"
+    borderBottom: "1px solid #c0c3c6",
   },
   container: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   itemOne: {
-    width: 65
+    width: 65,
   },
   itemThree: {
-    width: 105
+    width: 105,
   },
   itemMiddle: {
     height: 15,
-    marginTop: 5
   },
   itemBottom: {
     height: 5,
-    fontSize: 8 + "px"
+    fontSize: 8 + "px",
   },
   avatar: {
     width: 50,
     height: 50,
     marginLeft: "5%",
-    marginTop: 10
+    marginTop: 10,
   },
   typography: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   timeFrame: {
     width: 80,
@@ -48,15 +47,15 @@ const styles = {
     borderRadius: 20,
     borderColor: "#10cfcf",
     marginRight: "5%",
-    marginTop: "10%"
+    marginTop: "10%",
   },
   typographyThreeTop: {
     marginLeft: 6,
-    marginTop: 10
+    marginTop: 10,
   },
   typographyThreeBottom: {
     marginLeft: 20,
-    marginTop: -6
+    marginTop: -6,
   },
   buttonStyle: {
     borderRadius: 20 + "px",
@@ -67,40 +66,33 @@ const styles = {
     marginBotton: 30 + "px",
     boxShadow: ["none"],
     shadows: ["none"],
-    backgroundColor: "#7cff89"
+    backgroundColor: "#7cff89",
   },
   typographyButton: {
     marginTop: -5 + "px",
     color: "#282828",
     textTransform: ["none"],
     fontSize: 12 + "px",
-    fontWeight: 600
-  }
+    fontWeight: 600,
+  },
 };
 
-const PastEventItem = props => {
-  console.log(props);
+const PastEventItem = (props) => {
+
   const { classes, itemId, userId, eventId, name } = props;
   const [width, updateWidth] = useState(0);
 
   const fontTitle = () => {
-    if (width < 1024) return 8 + width / 90;
-    return 20;
+    if (width < 1024) return 7 + width / 100;
+    return 17;
   };
 
   const fontSubtitle = () => {
-    if (width < 1024) return 6.5 + width / 90;
+    if (width < 1024) return 5 + width / 100;
     return 15;
   };
 
-  const willOverflow = () => {
-    if (width < 400) return "scroll";
-    return "visible";
-  };
-
-  const updateWidthFunction = () => {
-    updateWidth(window.innerWidth);
-  };
+  const updateWidthFunction = () => updateWidth(window.innerWidth);
 
   useEffect(() => {
     updateWidthFunction();
@@ -116,19 +108,19 @@ const PastEventItem = props => {
     props.handleFeedbackClick(userId, eventId, name);
   };
 
-  const animatedHeight = useSpring({
+  const animation = useSpring({
     height: "100%",
     from: { height: "0%" },
     width: "100%",
     config: {
       mass: 1,
       tension: 340,
-      friction: 30
-    }
+      friction: 30,
+    },
   });
 
   return (
-    <animated.div style={animatedHeight}>
+    <animated.div style={animation}>
       <Grid
         container
         className={classes.container}
@@ -150,14 +142,14 @@ const PastEventItem = props => {
             <Grid
               container
               alignItems="center"
-              style={{ height: 20, marginTop: 8, overflow: willOverflow() }}
+              style={{ height: 20, marginTop: 8 }}
             >
               <Typography
                 style={{
                   fontSize: fontTitle(),
                   fontFamily: eventTitle.fontFamily,
                   color: eventTitle.color,
-                  fontWeight: eventTitle.fontWeight
+                  fontWeight: eventTitle.fontWeight,
                 }}
               >
                 {props.name}
@@ -169,7 +161,7 @@ const PastEventItem = props => {
                   fontSize: fontSubtitle(),
                   fontFamily: eventSubtitle.fontFamily,
                   color: eventSubtitle.color,
-                  fontWeight: eventSubtitle.fontWeight
+                  fontWeight: eventSubtitle.fontWeight,
                 }}
               >
                 {props.secondLine}
@@ -211,7 +203,7 @@ const PastEventItem = props => {
 };
 
 PastEventItem.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PastEventItem);

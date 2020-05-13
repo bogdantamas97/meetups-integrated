@@ -26,7 +26,6 @@ const styles = {
   list: {
     height: "98%",
     width: "100%",
-    overflow: "scroll",
   },
   listItem: {
     width: "100%",

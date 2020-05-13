@@ -3,14 +3,9 @@ import { withStyles, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
+import { useSpring, animated } from "react-spring";
 
 const styles = {
-  content: {
-    width: "90%",
-    height: "100%",
-    borderBottom: "1px solid #c0c3c6",
-    margin: "auto",
-  },
   container: {
     width: "100%",
     height: "100%",
@@ -27,9 +22,7 @@ const styles = {
   },
   itemBottom: {
     height: "65%",
-    overflow: "scroll",
     marginBottom: "2px",
-    overflowX: "hidden",
   },
   itemTopTypography: {
     fontSize: 12,
@@ -146,7 +139,6 @@ const TopicItem = (props) => {
               .map((item) => item.vote)
               .reduce((a, b) => a + b);
         }
-        console.log(listOfVoters, sumVotes);
         setVotersList(listOfVoters);
         setSumOfVotes(sumVotes);
         sendVote(listOfVoters, sumVotes);
@@ -165,8 +157,24 @@ const TopicItem = (props) => {
     );
   }
 
+  const animation = useSpring({
+    width: "90%",
+    margin: "auto",
+    height: "100%",
+    from: { height: "20%", width: "70%" },
+    config: {
+      mass: 20,
+      tension: 300,
+      friction: 300,
+    },
+    border: "1px dotted rgba(28,110,164,0.45)",
+    borderRadius: "10px",
+  });
+
+
   return (
-    <div className={classes.content}>
+
+    <animated.div style={animation}>
       <Grid
         container
         className={classes.container}
@@ -212,7 +220,7 @@ const TopicItem = (props) => {
           />
         </Grid>
       </Grid>
-    </div>
+    </animated.div>
   );
 };
 

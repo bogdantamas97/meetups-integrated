@@ -1,6 +1,11 @@
 import React from "react";
 import MainLayout from "../../layouts/MainLayout.jsx";
-import { withStyles, ListItem, List } from "@material-ui/core";
+import {
+  withStyles,
+  CircularProgress,
+  ListItem,
+  List,
+} from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
 import PastEventItem from "./PastEventItem.jsx";
@@ -13,17 +18,16 @@ import Feedback from "../feedback/Feedback.jsx";
 const styles = {
   root: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   header: {
     display: "block",
     height: "30%",
-    width: "100%"
+    width: "100%",
   },
   list: {
     height: "98%",
     width: "100%",
-    overflow: "scroll"
   },
   listItem: {
     width: "100%",
@@ -31,8 +35,8 @@ const styles = {
     paddingLeft: "0px",
     paddingRight: "0px",
     paddingTop: "0px",
-    paddingBottom: "0px"
-  }
+    paddingBottom: "0px",
+  },
 };
 
 class PastEvents extends React.Component {
@@ -46,7 +50,7 @@ class PastEvents extends React.Component {
     buttonList: [],
     noPastEventsWithoutFeedback: 0,
     isMessageVisible: true,
-    cookies: new Cookies() //.set("token", "usrABC13") TODO remove later
+    cookies: new Cookies(), //.set("token", "usrABC13") TODO remove later
   };
 
   constructor(props) {
@@ -56,17 +60,17 @@ class PastEvents extends React.Component {
 
   componentDidMount() {
     const isMessageVisible = !this.state.cookies.get("pastEventsMessageClosed");
-    axios.get("http://localhost:3001/events?_expand=users").then(res => {
+    axios.get("http://localhost:3001/events?_expand=users").then((res) => {
       const event = res.data;
       const buttonList = [];
       const events = [];
       let noFeedback = 0;
-      event.forEach(item => {
+      event.forEach((item) => {
         if (item.timestamp < moment().unix()) {
           buttonList.push({
             key: item.id,
             userId: item.userId,
-            value: false
+            value: false,
           });
           noFeedback += 1;
           events.push(item);
@@ -74,7 +78,7 @@ class PastEvents extends React.Component {
       });
 
       events.forEach((item, i) => {
-        item.feedback.forEach(feedbackItem => {
+        item.feedback.forEach((feedbackItem) => {
           if (feedbackItem.userId === this.state.cookies.get("token")) {
             buttonList[i].value = true;
             noFeedback -= 1; //TODO could lead to errors if the db is worng, or return duplicate
@@ -87,7 +91,7 @@ class PastEvents extends React.Component {
         events: events,
         isLoaded: true,
         isMessageVisible: isMessageVisible,
-        noPastEventsWithoutFeedback: noFeedback
+        noPastEventsWithoutFeedback: noFeedback,
       });
     });
   }
@@ -95,7 +99,7 @@ class PastEvents extends React.Component {
   handleOnClickInfoMessage = () => {
     this.state.cookies.set("pastEventsMessageClosed", true, { path: "/" });
     this.setState({
-      isMessageVisible: false
+      isMessageVisible: false,
     });
   };
 
@@ -120,11 +124,11 @@ class PastEvents extends React.Component {
 
   closeFeedbackDialog = () => {
     this.setState({
-      isOpen: false
+      isOpen: false,
     });
   };
 
-  handleClickDialogCancel = eventId => {
+  handleClickDialogCancel = (eventId) => {
     this.changeButtonStateById(eventId, false);
 
     let noFeedback = this.state.noPastEventsWithoutFeedback; //TODO Move logic to change button state by Id
@@ -132,7 +136,7 @@ class PastEvents extends React.Component {
 
     this.setState({
       isOpen: false,
-      noPastEventsWithoutFeedback: noFeedback
+      noPastEventsWithoutFeedback: noFeedback,
     });
   };
 
@@ -141,7 +145,7 @@ class PastEvents extends React.Component {
 
     //TODO Replace logic here
     this.state.events.forEach((item, i) => {
-      item.feedback.forEach(feedbackItem => {
+      item.feedback.forEach((feedbackItem) => {
         if (feedbackItem.userId === this.state.userId) {
           buttonListCopy[i].value = true;
         }
@@ -157,7 +161,7 @@ class PastEvents extends React.Component {
       eventId: ei,
       eventName: en,
       buttonList: buttonListCopy,
-      noPastEventsWithoutFeedback: noFeedback
+      noPastEventsWithoutFeedback: noFeedback,
     });
   };
 
@@ -189,45 +193,40 @@ class PastEvents extends React.Component {
           )}
           <div style={styleContent}>
             <List className={classes.list}>
-              {this.state.isLoaded
-                ? this.state.events.map(item => {
-                    let buttonState = this.findButtonStateById(item.id);
-                    let feedbackText = "";
-                    if (buttonState) {
-                      feedbackText = "Thank you!";
-                    } else {
-                      feedbackText = "Feedback";
-                    }
-                    return (
-                      <ListItem key={item.id} className={classes.listItem}>
-                        <PastEventItem
-                          usreId={this.state.userId}
-                          itemId={item.id}
-                          lang={item.lang}
-                          name={item.name}
-                          feedbackText={feedbackText}
-                          isDisabled={buttonState}
-                          changeButtonStateById={this.changeButtonStateById}
-                          feedbackList={item.feedback}
-                          handleFeedbackClick={() =>
-                            this.handleFeedbackClick(
-                              this.state.userId,
-                              item.id,
-                              item.name
-                            )
-                          }
-                          date={moment
-                            .unix(item.timestamp)
-                            .format(`DD MMM 'YY`)}
-                          time={moment.unix(item.timestamp).format(`hh:mm`)}
-                          secondLine={`${item.type} (${
-                            item.difficulty
-                          }) ~ ${item.duration}`}
-                        />
-                      </ListItem>
-                    );
-                  })
-                : `loading...`}
+              {this.state.isLoaded &&
+                this.state.events.map((item) => {
+                  let buttonState = this.findButtonStateById(item.id);
+                  let feedbackText = "";
+                  if (buttonState) {
+                    feedbackText = "Thank you!";
+                  } else {
+                    feedbackText = "Feedback";
+                  }
+                  return (
+                    <ListItem key={item.id} className={classes.listItem}>
+                      <PastEventItem
+                        usreId={this.state.userId}
+                        itemId={item.id}
+                        lang={item.lang}
+                        name={item.name}
+                        feedbackText={feedbackText}
+                        isDisabled={buttonState}
+                        changeButtonStateById={this.changeButtonStateById}
+                        feedbackList={item.feedback}
+                        handleFeedbackClick={() =>
+                          this.handleFeedbackClick(
+                            this.state.userId,
+                            item.id,
+                            item.name
+                          )
+                        }
+                        date={moment.unix(item.timestamp).format(`DD MMM 'YY`)}
+                        time={moment.unix(item.timestamp).format(`hh:mm`)}
+                        secondLine={`${item.type} (${item.difficulty}) ~ ${item.duration}`}
+                      />
+                    </ListItem>
+                  );
+                })}
             </List>
           </div>
         </div>
@@ -248,7 +247,7 @@ class PastEvents extends React.Component {
 }
 
 PastEvents.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(PastEvents);
