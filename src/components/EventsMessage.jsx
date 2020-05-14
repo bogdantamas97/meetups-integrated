@@ -69,7 +69,7 @@ export const EventsMessage = (props) => {
                       participated. Please don't forget to leave a quick
                       Feedback and you will be rewarded! There are{" "}
                       <b style={{ fontSize: 14 }}>
-                        {this.state.numberOfPastEventsWithoutFeedback}
+                        {numberOfPastEventsWithoutFeedback}
                       </b>{" "}
                       more events that require your feedback.
                     </Typography>

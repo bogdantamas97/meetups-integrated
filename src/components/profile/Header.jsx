@@ -1,10 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
 import axios from "axios";
 import { green, grey } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { theme } from "../../GlobalTheme/globalTheme";
+
+const apiBaseUrl = "http://localhost:8000/";
 
 const styles = {
   summary: theme.typography.subheading,
@@ -27,31 +29,27 @@ const styles = {
   },
 };
 
-class Header extends Component {
-  state = {
-    points: 0,
-    allPoints: [],
-    isLoaded: false,
-  };
+const Header = (props) => {
+  const { classes, userId } = props;
 
-  componentDidMount() {
-    axios
-      .get(`http://localhost:3001/users/${this.props.userId}`)
-      .then((result) => {
-        const points = result.data.points;
-        this.setState({ points });
+  const [points, setPoints] = React.useState(0);
+  const [allPoints, setAllPoints] = React.useState([]);
+  const [isLoaded, setLoaded] = React.useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(apiBaseUrl);
+      setPoints(result.data.find((item) => item.userId === userId).points);
+      await axios.get("http://localhost:3001/achievements").then((result) => {
+        setAllPoints(result.data);
+        setLoaded(true);
       });
-    axios.get("http://localhost:3001/achievements").then((result) => {
-      const allPoints = result.data;
-      const isLoaded = true;
-      this.setState({ allPoints, isLoaded });
-    });
-  }
+    }
+    fetchData();
+  }, []);
 
-  nextAchievement = () => {
-    const data = this.state.allPoints.filter((item) => {
-      return this.state.points <= item.points;
-    });
+  const nextAchievement = () => {
+    const data = allPoints.filter((item) => points < item.points)[0];
 
     return (
       <Fragment>
@@ -59,11 +57,11 @@ class Header extends Component {
           <Fragment>
             <div style={{ marginTop: "10px" }}>
               <Typography style={styles.achivNext} align="right">
-                Next Achievement: {`${data[0].points} points`}
+                Next Achievement: {`${data.points} points`}
               </Typography>
             </div>
             <Typography style={{ color: green[500] }} align="right">
-              {data[0].title}
+              {data.title}
             </Typography>
           </Fragment>
         ) : (
@@ -75,46 +73,42 @@ class Header extends Component {
     );
   };
 
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <Paper elevation={15} square={true} className={classes.spacing}>
-          <Typography className={classes.summary}>Summary</Typography>
-          {this.state.isLoaded ? (
-            <React.Fragment>
-              <div style={{ marginTop: "20px" }}>
-                <Typography className={classes.summary} align="right">
-                  {this.state.points} Points
+  return (
+    <div className={classes.root}>
+      <Paper elevation={15} square={true} className={classes.spacing}>
+        <Typography className={classes.summary}>Summary</Typography>
+        {isLoaded ? (
+          <React.Fragment>
+            <div style={{ marginTop: "20px" }}>
+              <Typography className={classes.summary} align="right">
+                {points} Points
+              </Typography>
+            </div>
+            {nextAchievement()}
+            <Grid
+              container
+              justify="space-evenly"
+              style={{ width: "100%", marginTop: "10px" }}
+            >
+              <Link className={classes.link} to={"/leaderboard"}>
+                <Typography style={styles.achiv} align="right">
+                  Leaderboard
                 </Typography>
-              </div>
-              {this.nextAchievement()}
-              <Grid
-                container
-                justify="space-evenly"
-                style={{ width: "100%", marginTop: "10px" }}
-              >
-                <Link className={classes.link} to={"/leaderboard"}>
-                  <Typography style={styles.achiv} align="right">
-                    Leaderboard
-                  </Typography>
-                </Link>
-                <Link className={classes.link} to={"/achievements"}>
-                  <Typography style={styles.achiv} align="right">
-                    Achievements
-                  </Typography>
-                </Link>
-              </Grid>
-            </React.Fragment>
-          ) : (
-            "Loading"
-          )}
-        </Paper>
-      </div>
-    );
-  }
-}
+              </Link>
+              <Link className={classes.link} to={"/achievements"}>
+                <Typography style={styles.achiv} align="right">
+                  Achievements
+                </Typography>
+              </Link>
+            </Grid>
+          </React.Fragment>
+        ) : (
+          "Loading"
+        )}
+      </Paper>
+    </div>
+  );
+};
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,

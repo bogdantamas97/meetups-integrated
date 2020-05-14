@@ -18,7 +18,12 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import TopicItem from "./TopicItem.jsx";
 import Cookies from "universal-cookie";
-import { eventType, TOPIC_TITLE_LIMIT, TOPIC_DESCRIPTION_LIMIT } from "../../constants/index";
+import {
+  eventType,
+  TOPIC_TITLE_LIMIT,
+  TOPIC_DESCRIPTION_LIMIT,
+} from "../../constants/index";
+import Modal from "react-animated-modal";
 import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { button, theme } from "../../GlobalTheme/globalTheme.js";
@@ -159,15 +164,17 @@ class TopicList extends React.Component {
         open: false,
       });
       event.preventDefault();
-      axios.post(dataBaseUrl, newTopic, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then(()=>
-        axios.get(dataBaseUrl).then((response) => {
-          this.setState({event: response.data})
-        }
-      ));
+      axios
+        .post(dataBaseUrl, newTopic, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(() =>
+          axios.get(dataBaseUrl).then((response) => {
+            this.setState({ event: response.data });
+          })
+        );
     }
   };
 
@@ -208,10 +215,11 @@ class TopicList extends React.Component {
             </EventsMessage>
           </div>
         )}
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="topic-dialog"
+        <Modal
+          visible={this.state.open}
+          style={{margin: "auto"}}
+          closemodal={this.handleClose}
+          type="rotateIn"
         >
           <DialogTitle id="topic-dialog">
             <p className={classes.mainTitle}>Propose a topic</p>
@@ -313,14 +321,11 @@ class TopicList extends React.Component {
                   >
                     Send
                   </Button>
-                  <Button onClick={this.handleClose} color="primary">
-                    Cancel
-                  </Button>
                 </DialogActions>
               </div>
             </ValidatorForm>
           </DialogContent>
-        </Dialog>
+        </Modal>
         <div style={styleContent}>
           <Button
             variant="contained"
@@ -354,7 +359,6 @@ class TopicList extends React.Component {
                         content={item.topicContent}
                         userVotes={item.userVotes}
                         sumOfVotes={item.sumOfVotes}
-                
                       />
                     </ListItem>
                   ))

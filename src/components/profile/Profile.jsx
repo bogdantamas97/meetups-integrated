@@ -37,12 +37,12 @@ const styles = (theme) => ({
     textTransform: "none",
     margin: "auto",
     width: "100%",
-  }
+  },
 });
 
 const Profile = (props) => {
   const [width, updateWidth] = useState(0);
-  const [content, setContent] = useState({});
+  const [points, setPoints] = useState([]);
   const [isLoaded, setLoaded] = useState(false);
   const [elementsToShow, setElementsToShow] = useState(5);
 
@@ -62,12 +62,14 @@ const Profile = (props) => {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(apiBaseUrl);
-      setLoaded(false);
-      setContent(
-        result.data.filter(
-          (item) => item.userId === new Cookies().get("token")
-        )[0]
-      );
+      const hasPoints = result.data.filter(
+        (item) => item.userId === new Cookies().get("token")
+      )[0];
+
+      setLoaded(true);
+      if (hasPoints) {
+        setPoints(hasPoints.points);
+      }
     }
     fetchData();
   }, []);
@@ -77,10 +79,10 @@ const Profile = (props) => {
     setElementsToShow(numberOfElements);
   };
 
-  const Pagination = () =>
-    content.points !== undefined ? (
-      content.points
-        .filter((item) => content.points.indexOf(item) < elementsToShow)
+  const Pagination = () => {
+    return points !== undefined ? (
+      points
+        .filter((item) => points.indexOf(item) < elementsToShow)
         .map((item) => (
           <ListItem key={item.id}>
             <ListComponent
@@ -108,6 +110,7 @@ const Profile = (props) => {
         </Typography>
       </Paper>
     );
+  };
 
   const { classes } = props;
 
@@ -124,14 +127,14 @@ const Profile = (props) => {
                 width: "120px",
                 height: "120px",
                 marginTop: "180px",
-                marginLeft: (width - 180)/ 2,
+                marginLeft: (width - 180) / 2,
               }}
             />
             <h2
               style={{
                 width: "120px",
                 height: "120px",
-                marginLeft: (width - 180)/ 2,
+                marginLeft: (width - 180) / 2,
               }}
             >
               LOADING...

@@ -5,42 +5,48 @@ import Grid from "@material-ui/core/Grid";
 import {
   eventTitle,
   eventSubtitle,
-  eventBottom
+  eventBottom,
 } from "../../GlobalTheme/globalTheme";
 import Avatar from "@material-ui/core/Avatar";
 import { useSpring, animated } from "react-spring";
+import { blue } from "@material-ui/core/colors";
 
 const styles = {
   content: {
     width: "100%",
     height: "100%",
-    borderBottom: "1px solid #c0c3c6"
+    borderBottom: "1px solid #c0c3c6",
   },
   container: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   itemOne: {
-    width: 65
+    width: 65,
   },
   itemThree: {
-    width: 105
+    width: 105,
   },
   itemMiddle: {
     height: 15,
   },
   itemBottom: {
     height: 9,
-    marginTop: 5
+    marginTop: 5,
+  },
+  hoverButton : {
+    "&:hover": {
+      color: blue[100],
+    },
   },
   avatar: {
     width: 50,
     height: 50,
     marginLeft: "5%",
-    marginTop: 10
+    marginTop: 10,
   },
   typography: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   timeFrame: {
     width: 80,
@@ -50,21 +56,21 @@ const styles = {
     borderRadius: 20,
     borderColor: "#10cfcf",
     marginRight: "5%",
-    marginTop: "10%"
+    marginTop: "10%",
   },
   typographyThreeTop: {
     marginLeft: 6,
-    marginTop: 10
+    marginTop: 10,
   },
   typographyThreeBottom: {
     marginLeft: 20,
-    marginTop: -6
-  }
+    marginTop: -6,
+  },
 };
 
-const FutureEventItem = props => {
+const FutureEventItem = (props) => {
   const { classes } = props;
-  
+
   const [width, updateWidth] = useState(0);
   //   let fontTitle, fontSubtitle, fontBottom;
 
@@ -103,15 +109,15 @@ const FutureEventItem = props => {
 
   const animation = useSpring({
     height: "100%",
-    from: { height: "0%" },
+    from: { height: "0%", width: "50%" },
     width: "100%",
     config: {
       mass: 3,
       tension: 340,
-      friction: 30
-    }, 
+      friction: 30,
+    },
     border: "2px dotted rgba(28,110,164,0.45)",
-    borderRadius: "10px"
+    borderRadius: "10px",
   });
 
   useEffect(() => {
@@ -153,7 +159,7 @@ const FutureEventItem = props => {
                   fontSize: fontTitle(),
                   fontFamily: eventTitle.fontFamily,
                   color: eventTitle.color,
-                  fontWeight: eventTitle.fontWeight
+                  fontWeight: eventTitle.fontWeight,
                 }}
               >
                 {props.name}
@@ -165,7 +171,7 @@ const FutureEventItem = props => {
                   fontSize: fontSubtitle(),
                   fontFamily: eventSubtitle.fontFamily,
                   color: eventSubtitle.color,
-                  fontWeight: eventSubtitle.fontWeight
+                  fontWeight: eventSubtitle.fontWeight,
                 }}
               >
                 {props.secondLine}
@@ -177,7 +183,7 @@ const FutureEventItem = props => {
                   fontSize: fontBottom(),
                   fontFamily: eventBottom.fontFamily,
                   color: eventBottom.color,
-                  fontWeight: eventBottom.fontWeight
+                  fontWeight: eventBottom.fontWeight,
                 }}
                 onClick={
                   checkSubscribe()
@@ -189,7 +195,7 @@ const FutureEventItem = props => {
                     : () => {}
                 }
               >
-                {props.action}
+                <div className={classes.hoverButton}>{props.action}</div>
               </Typography>
             </Grid>
           </Grid>
@@ -215,7 +221,7 @@ const FutureEventItem = props => {
 };
 
 FutureEventItem.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(FutureEventItem);

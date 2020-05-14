@@ -16,20 +16,20 @@
       "timestamp": 1560355200,
       "feedback": [
         {
-          "clarity": "3",
-          "originality": "3",
+          "clarity": "5",
+          "originality": "2",
           "complexity": "4",
-          "engagement": "4",
-          "cursive": "4",
+          "engagement": "2",
+          "cursive": "5",
           "userId": "_weyi9l0qi"
         },
         {
-          "clarity": "3",
+          "clarity": "1",
           "originality": "3",
-          "complexity": "3",
-          "engagement": "4",
-          "cursive": "4",
-          "userId": "_2v43ouuts"
+          "complexity": "4",
+          "engagement": "2",
+          "cursive": "5",
+          "userId": "_juw7b7a87"
         }
       ]
     },
@@ -45,16 +45,14 @@
       "time": "16:00",
       "attendanceIds": [
         "_2v43ouuts",
-        "_weyi9l0qi"
+        "_weyi9l0qi",
+        "_juw7b7a87"
       ],
       "maxPeople": 10,
       "waitingListIds": [],
       "timestamp": 1591977600,
       "feedback": []
     }
-  ],
-  "leaderboards": [
-    {}
   ],
   "achievements": [
     {
@@ -183,10 +181,46 @@
           "type": "Training",
           "date": "15 Mar 2019"
         }
-
       ]
     }
   ],
   "proposedTopics": [
+    {
+      "userId": "_weyi9l0qi",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "Latest discoveries on IT industry",
+      "topicContent": "The details will be presented at the workshop",
+      "sumOfVotes": 2,
+      "userVotes": [
+        {
+          "userId": "_weyi9l0qi",
+          "vote": 1
+        },
+        {
+          "userId": "_juw7b7a87",
+          "vote": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "Javascript: Tips and tricks",
+      "topicContent": "New thing inside that",
+      "sumOfVotes": 0,
+      "userVotes": [
+        {
+          "userId": "_weyi9l0qi",
+          "vote": 1
+        },
+        {
+          "userId": "_juw7b7a87",
+          "vote": -1
+        }
+      ],
+      "id": 2
+    }
   ]
 }

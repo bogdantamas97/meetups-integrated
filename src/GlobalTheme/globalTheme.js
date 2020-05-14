@@ -133,7 +133,7 @@ export const button = {
   fontWeight: "normal",
   backgroundColor: green[500],
   "&:hover": {
-    backgroundColor: green[700]
+    backgroundColor: green[900]
   },
   display: "flex",
   flexDirection: "column",

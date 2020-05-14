@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import LayoutLogin from "../layouts/LayoutLogin.jsx";
 import { theme, Background } from "../GlobalTheme/globalTheme";
 import {
@@ -82,7 +82,7 @@ const Alert = (props) => <MuiAlert elevation={5} variant="filled" {...props} />;
 const LoginPage = (props) => {
 
   const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const classes = props.classes;
+  const { classes } = props;
 
   // fields
   const [email, setEmail] = useState("");
@@ -101,6 +101,7 @@ const LoginPage = (props) => {
   const [isLoggedIn, setLoggedIn] = useState(!!Cookies.get("token"));
 
   const invalidEmail = (email) => {
+    console.log()
     if (email === "" || !regex.test(email)) return true;
     return false;
   };
@@ -122,8 +123,8 @@ const LoginPage = (props) => {
 
   const handleSubmit = () => {
 
-    if (invalidEmail(email)) setEmailError(true);
-    if (invalidPassword(password)) setPasswordError(true);
+    setEmailError(invalidEmail(email));
+    setPasswordError(invalidPassword(password));
 
     setOpen(true);
 
@@ -132,7 +133,6 @@ const LoginPage = (props) => {
         axios.get(apiBaseUrl).then((response) => {
           if (response.data.filter((user) => user.email === email)[0])
             if (response.data.filter((user) => user.password === password)[0]) {
-              console.log('here it is');
               Cookies.set(
                 "token",
                 response.data.filter((user) => user.password === password)[0]
@@ -160,14 +160,6 @@ const LoginPage = (props) => {
       setSnackbarType("error");
     }
   };
-
-
-  useEffect(() => {
-    document.addEventListener('keyup', onKeyEnterPressed)
-    return () => {
-      document.removeEventListener('keyup', onKeyEnterPressed)
-    }
-  }, [])
 
   if (isLoggedIn) {
     return <Redirect to="/profile" />;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -46,8 +46,8 @@ const styles = {
     textTransform: "none",
     fontWeight: "normal",
     height: 35,
-    width: "80%",
-    maxWidth: 350,
+    width: "100%",
+    maxWidth: 300,
     margin: "12px 0px",
     backgroundColor: red[500],
     "&:hover": {
@@ -90,18 +90,19 @@ const styles = {
     },
   },
 };
-button.width = "80%";
-button.marginTop = 60;
-button.maxWidth = 350;
-// const clearButton = button;
-// clearButton.backgroundColor="red";
+button.width = "100%";
+button.height = "70px";
+button.marginTop = 40;
+button.maxWidth = 400;
 
-const Alert = (props) => <MuiAlert elevation={10} variant="filled" {...props} />;
+const Alert = (props) => (
+  <MuiAlert elevation={10} variant="filled" {...props} />
+);
 
 const RegisterForm = (props) => {
-  
+  const { classes } = props;
   const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  
+
   // fields
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -123,6 +124,13 @@ const RegisterForm = (props) => {
     false
   );
 
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyEnterPressed);
+    return () => {
+      document.removeEventListener("keyup", onKeyEnterPressed);
+    };
+  }, []);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -142,24 +150,47 @@ const RegisterForm = (props) => {
   };
 
   const invalidEmail = (email) => {
-    if (email === "" || !regex.test(email)) return true;
+    if (email === "" || !regex.test(email)) {
+      setEmailError(true);
+      return true;
+    }
+
+    async function fetchData() {
+      const result = await axios(apiBaseUrl);
+      if (result.data.find((item) => item.email === email)) {
+        setSnackbarTitle("Email already exists!");
+        setSnackbarType("error");
+        setEmailError(true);
+        setOpen(true);
+        return true;
+      }
+    }
+
+    fetchData();
+
     return false;
   };
 
   const invalidFirstName = (firstName) => {
-    if (firstName === "" || firstName.length < 5) return true;
+    if (firstName === "" || firstName.length < 5) {
+      setFirstNameError(true);
+
+      return true;
+    }
     return false;
   };
   const invalidLastName = (lastName) => {
-    if (lastName === "" || lastName.length < 5) return true;
+    if (lastName === "" || lastName.length < 5) {
+      setLastNameError(true);
+      return true;
+    }
   };
 
   const invalidPassword = (password) => {
-    if (
-      password === "" ||
-      password.length < 8
-    )
+    if (password === "" || password.length < 8) {
+      setPasswordError(true);
       return true;
+    }
     return false;
   };
 
@@ -168,35 +199,35 @@ const RegisterForm = (props) => {
       passwordConfirmation === "" ||
       passwordConfirmation.length < 8 ||
       passwordConfirmation !== password
-    )
+    ) {
+      setPasswordConfirmationError(true);
       return true;
+    }
     return false;
   };
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
     setOpen(false);
-    setEmailError(false);
-    setFirstNameError(false);
-    setLastNameError(false);
-    setPasswordError(false);
-    setPasswordConfirmationError(false);
+    setEmailError(invalidEmail(email));
+    setFirstNameError(invalidFirstName(firstName));
+    setLastNameError(invalidLastName(lastName));
+    setPasswordError(invalidPassword(password));
+    setPasswordConfirmationError(
+      invalidPasswordConfirmation(passwordConfirmation)
+    );
 
-    // check fields
-    if (invalidEmail(email)) setEmailError(true);
-    if (invalidFirstName(firstName)) setFirstNameError(true);
-    if (invalidLastName(lastName)) setLastNameError(true);
-    if (invalidPassword(password)) setPasswordError(true);
-    if (invalidPasswordConfirmation(passwordConfirmation))
-      setPasswordConfirmationError(true);
+    const isFormInvalid =
+    invalidEmail(email) ||
+    invalidFirstName(firstName) ||
+    invalidLastName(lastName) ||
+    invalidPassword(password) ||
+    invalidPasswordConfirmation(passwordConfirmation);
 
-    const isFormInvalid = invalidEmail(email) || invalidFirstName(firstName) || invalidLastName(lastName) || invalidPassword(password) || invalidPasswordConfirmation(passwordConfirmation); 
-    
     // register an user
     if (!isFormInvalid) {
       setSnackbarTitle("You have registered succesfully!");
       setSnackbarType("success");
-      handleClearFields()
+      handleClearFields();
 
       setOpen(true);
       axios
@@ -211,20 +242,18 @@ const RegisterForm = (props) => {
             "&password=" +
             password
         )
-        .then(function (response) {
-          if (response.data.code === 200) {
-            console.log('what is that');
-           ;
-          }
-        })
         .catch(() => {
           setSnackbarTitle("Your registration failed");
           setSnackbarType("error");
         });
-      }
+    }
   };
 
-  const classes = props.classes;
+  const onKeyEnterPressed = (event) => {
+    if (event.keyCode === 13 && !!email) {
+      handleSubmit();
+    }
+  };
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -261,6 +290,7 @@ const RegisterForm = (props) => {
               }
             }}
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             value={email}
             error={emailError}
           />
@@ -287,6 +317,7 @@ const RegisterForm = (props) => {
               }
             }}
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             value={firstName}
             error={firstNameError}
           />
@@ -307,13 +338,13 @@ const RegisterForm = (props) => {
             }}
             label="Last Name"
             onChange={(event) => {
-              setLastName(event.target.value)              
+              setLastName(event.target.value);
               if (!invalidLastName(event.target.value)) {
                 setLastNameError(false);
               }
-            }
-            }
+            }}
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             value={lastName}
             error={lastNameError}
           />
@@ -335,12 +366,13 @@ const RegisterForm = (props) => {
             }}
             label="Password"
             onChange={(event) => {
-              setPassword(event.target.value)
+              setPassword(event.target.value);
               if (!invalidPassword(event.target.value)) {
                 setPasswordError(false);
               }
             }}
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             value={password}
             error={passwordError}
           />
@@ -362,12 +394,13 @@ const RegisterForm = (props) => {
             }}
             label="Password Confirmation"
             onChange={(event) => {
-              setPasswordConfirmation(event.target.value)
+              setPasswordConfirmation(event.target.value);
               if (!invalidPasswordConfirmation(event.target.value)) {
                 setPasswordConfirmationError(false);
               }
             }}
             variant="outlined"
+            onKeyDown={onKeyEnterPressed}
             value={passwordConfirmation}
             error={passwordConfirmationError}
           />
