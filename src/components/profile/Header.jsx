@@ -5,8 +5,14 @@ import axios from "axios";
 import { green, grey } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
 import { theme } from "../../GlobalTheme/globalTheme";
+import Cookies from "universal-cookie";
+import {
+  DATA_BASE_URL,
+  ACHIEVEMENTS_URL,
+  POINTS_RECEIVED_URL,
+} from "../../constants/index";
 
-const apiBaseUrl = "http://localhost:8000/";
+const currentUserId = new Cookies().get("token");
 
 const styles = {
   summary: theme.typography.subheading,
@@ -30,7 +36,7 @@ const styles = {
 };
 
 const Header = (props) => {
-  const { classes, userId } = props;
+  const { classes } = props;
 
   const [points, setPoints] = React.useState(0);
   const [allPoints, setAllPoints] = React.useState([]);
@@ -38,15 +44,47 @@ const Header = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios(apiBaseUrl);
-      setPoints(result.data.find((item) => item.userId === userId).points);
-      await axios.get("http://localhost:3001/achievements").then((result) => {
+      const result = await axios(POINTS_RECEIVED_URL);
+      const hasPoints = result.data.filter(
+        (item) => item.userId === new Cookies().get("token")
+      )[0];
+
+      if (hasPoints) {
+        const sumOfPoints = hasPoints.points
+          .map((item) => item.value)
+          .reduce((a, b) => a + b);
+        setPoints(sumOfPoints);
+        updatePoints(sumOfPoints);
+      }
+      await axios.get(ACHIEVEMENTS_URL).then((result) => {
         setAllPoints(result.data);
         setLoaded(true);
       });
     }
     fetchData();
   }, []);
+
+  async function updatePoints(sumOfPoints) {
+    const result = await axios(DATA_BASE_URL);
+    const userData = result.data.find((item) => item.id === currentUserId);
+    if(userData){
+    axios.post(
+      DATA_BASE_URL +
+        "/update?firstname=" +
+        userData.firstname +
+        "&lastname=" +
+        userData.lastname +
+        "&email=" +
+        userData.email +
+        "&password=" +
+        userData.password +
+        "&id=" +
+        userData.id +
+        "&points=" +
+        sumOfPoints
+    );
+    }
+  }
 
   const nextAchievement = () => {
     const data = allPoints.filter((item) => points < item.points)[0];
@@ -66,7 +104,7 @@ const Header = (props) => {
           </Fragment>
         ) : (
           <Typography style={styles.achivNext} align="right">
-            no next achievement
+            No next achievement
           </Typography>
         )}
       </Fragment>

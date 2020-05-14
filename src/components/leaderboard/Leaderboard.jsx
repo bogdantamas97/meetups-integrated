@@ -13,8 +13,7 @@ import ListComponent from "./ListComponent.jsx";
 import LeaderboardPic from "../../images/leaderboardPic.png";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-
-const apiBaseUrl = "http://localhost:8000";
+import { DATA_BASE_URL } from "../../constants/index";
 
 const styles = {
   root: {
@@ -66,15 +65,14 @@ const Leaderboard = (props) => {
   // Specific method to Hooks that replaces the componentDidMount method
   useEffect(() => {
     async function fetchData() {
-      const result = await axios(apiBaseUrl);
-      setInfo(result.data);
+      const result = await axios(DATA_BASE_URL);
+      setInfo(result.data.sort((a,b) => a.points > b.points ? -1 : 1));
       changeLoad(true);
     }
     fetchData();
   }, []);
 
   const loadMore = async () => {
-    console.log(numberOfItems);
     setNumberOfItems(numberOfItems + 5);
   }
 

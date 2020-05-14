@@ -1,19 +1,14 @@
 import React from "react";
 import MainLayout from "../../layouts/MainLayout.jsx";
-import {
-  withStyles,
-  CircularProgress,
-  ListItem,
-  List,
-} from "@material-ui/core";
+import { withStyles, ListItem, List } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
-import PastEventItem from "./PastEventItem.jsx";
 import Cookies from "universal-cookie";
 import moment from "moment";
+
+import PastEventItem from "./PastEventItem.jsx";
 import { eventType } from "../../constants/index";
-import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
-import Feedback from "../feedback/Feedback.jsx";
+import { EventsMessage, Feedback } from "../index.js";
 
 const styles = {
   root: {
@@ -25,6 +20,13 @@ const styles = {
     height: "30%",
     width: "100%",
   },
+  styleHeader: {
+    display: "block",
+    height: "15%",
+    width: "100%",
+    maxHeight: 90,
+  },
+  styleContent: { height: "85%", width: "100%" },
   list: {
     height: "98%",
     width: "100%",
@@ -49,8 +51,7 @@ class PastEvents extends React.Component {
     events: [],
     buttonList: [],
     noPastEventsWithoutFeedback: 0,
-    isMessageVisible: true,
-    cookies: new Cookies(), //.set("token", "usrABC13") TODO remove later
+    cookies: new Cookies(),
   };
 
   constructor(props) {
@@ -59,8 +60,7 @@ class PastEvents extends React.Component {
   }
 
   componentDidMount() {
-    const isMessageVisible = !this.state.cookies.get("pastEventsMessageClosed");
-    axios.get("http://localhost:3001/events?_expand=users").then((res) => {
+    axios.get("EVENTS_URL?_expand=users").then((res) => {
       const event = res.data;
       const buttonList = [];
       const events = [];
@@ -90,18 +90,10 @@ class PastEvents extends React.Component {
         buttonList: buttonList,
         events: events,
         isLoaded: true,
-        isMessageVisible: isMessageVisible,
         noPastEventsWithoutFeedback: noFeedback,
       });
     });
   }
-
-  handleOnClickInfoMessage = () => {
-    this.state.cookies.set("pastEventsMessageClosed", true, { path: "/" });
-    this.setState({
-      isMessageVisible: false,
-    });
-  };
 
   findButtonStateById(itemId) {
     for (let item of this.state.buttonList) {
@@ -168,30 +160,18 @@ class PastEvents extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const styleHeader = this.state.isMessageVisible
-      ? { display: "block", height: "15%", width: "100%", maxHeight: 90 }
-      : { display: "none", height: "10%", width: "100%" };
-
-    const styleContent = this.state.isMessageVisible
-      ? { height: "85%", width: "100%" }
-      : { height: "100%", width: "100%" };
-
     return (
       <MainLayout topBarTitle={"Past Events"}>
         <div className={classes.root}>
-          {!this.state.cookies.get("pastEventsMessageClosed") && (
-            <div style={styleHeader}>
-              <EventsMessage
-                eventTypeMessage={eventType.pastEvents}
-                numberOfPastEventsWithoutFeedback={
-                  this.state.noPastEventsWithoutFeedback
-                }
-              >
-                <CloseMessageButton onClick={this.handleOnClickInfoMessage} />
-              </EventsMessage>
-            </div>
-          )}
-          <div style={styleContent}>
+          <div className={classes.styleHeader}>
+            <EventsMessage
+              eventTypeMessage={eventType.pastEvents}
+              numberOfPastEventsWithoutFeedback={
+                this.state.noPastEventsWithoutFeedback
+              }
+            />
+          </div>
+          <div className={classes.styleContent}>
             <List className={classes.list}>
               {this.state.isLoaded &&
                 this.state.events.map((item) => {

@@ -209,11 +209,11 @@
       "topicType": "Presentation",
       "topicTitle": "Javascript: Tips and tricks",
       "topicContent": "New thing inside that",
-      "sumOfVotes": 0,
+      "sumOfVotes": -2,
       "userVotes": [
         {
           "userId": "_weyi9l0qi",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_juw7b7a87",

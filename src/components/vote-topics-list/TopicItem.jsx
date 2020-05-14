@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
 import { useSpring, animated } from "react-spring";
+import { PROPOSED_TOPICS_URL }from '../../constants/index';
 
 const styles = {
   container: {
@@ -119,7 +120,7 @@ const TopicItem = (props) => {
     voters.vote = vote;
 
     axios
-      .get(`http://localhost:3001/proposedTopics/${id}`)
+      .get(`${PROPOSED_TOPICS_URL}/${id}`)
       .then((result) => {
         const listOfVoters = result.data.userVotes;
         let sumVotes = 0;
@@ -148,7 +149,7 @@ const TopicItem = (props) => {
   const sendVote = (listOfVoters, sumVotes) => {
     console.log('sendingVote', userVotes, sumOfVotes);
     axios.patch(
-      `http://localhost:3001/proposedTopics/${id}`,
+      `${PROPOSED_TOPICS_URL}/${id}`,
       {
         userVotes: listOfVoters,
         sumOfVotes: sumVotes,
@@ -161,11 +162,11 @@ const TopicItem = (props) => {
     width: "90%",
     margin: "auto",
     height: "100%",
-    from: { height: "20%", width: "70%" },
+    from: { height: "20%", width: "50%" },
     config: {
-      mass: 20,
-      tension: 300,
-      friction: 300,
+      mass: 3,
+      tension: 350,
+      friction: 30,
     },
     border: "1px dotted rgba(28,110,164,0.45)",
     borderRadius: "10px",

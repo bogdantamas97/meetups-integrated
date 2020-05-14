@@ -1,5 +1,6 @@
-import Header from "./Header";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from "universal-cookie";
 import MainLayout from "../../layouts/MainLayout.jsx";
 import {
   Button,
@@ -10,12 +11,12 @@ import {
   withStyles,
   Paper,
 } from "@material-ui/core";
+import Header from "./Header";
 import ListComponent from "../leaderboard/ListComponent.jsx";
-import axios from "axios";
 import { theme } from "../../GlobalTheme/globalTheme";
-import Cookies from "universal-cookie";
+import { POINTS_RECEIVED_URL } from "../../constants/index";
 
-const apiBaseUrl = "http://localhost:3001/pointsReceived";
+const currentUserId = new Cookies().get("token");
 
 const styles = (theme) => ({
   typography: theme.typography.body1,
@@ -61,9 +62,9 @@ const Profile = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios(apiBaseUrl);
+      const result = await axios(POINTS_RECEIVED_URL);
       const hasPoints = result.data.filter(
-        (item) => item.userId === new Cookies().get("token")
+        (item) => item.userId === currentUserId
       )[0];
 
       setLoaded(true);
@@ -71,6 +72,7 @@ const Profile = (props) => {
         setPoints(hasPoints.points);
       }
     }
+
     fetchData();
   }, []);
 

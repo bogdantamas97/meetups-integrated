@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Redirect, Route  } from "react-router-dom";
 import LayoutLogin from "../layouts/LayoutLogin.jsx";
 import { theme, Background } from "../GlobalTheme/globalTheme";
 import {
@@ -11,12 +14,8 @@ import {
 } from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
 import MuiAlert from "@material-ui/lab/Alert";
-import Cookies from "js-cookie";
-import axios from "axios/index";
-import { Redirect } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { DATA_BASE_URL } from "../constants/index";
 
-const apiBaseUrl = "http://localhost:8000";
 const inOneHour = 1 / 24;
 
 const styles = {
@@ -130,7 +129,7 @@ const LoginPage = (props) => {
 
     if (email.length !== 0 && password.length !== 0) {
       if (!invalidEmail(email) && !invalidPassword(password)) {
-        axios.get(apiBaseUrl).then((response) => {
+        axios.get(DATA_BASE_URL).then((response) => {
           if (response.data.filter((user) => user.email === email)[0])
             if (response.data.filter((user) => user.password === password)[0]) {
               Cookies.set(

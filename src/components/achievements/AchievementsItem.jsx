@@ -50,7 +50,7 @@ const styles = {
 };
 
 const AchievementsItem = (props) => {
-  const { classes } = props;
+  const { classes, color, points, title, picturePath,  } = props;
 
   const animation = useSpring({
     height: "100%",
@@ -63,6 +63,7 @@ const AchievementsItem = (props) => {
     },
     border: "1px dotted rgba(28,110,164,0.45)",
     borderRadius: "10px",
+    backgroundColor: color.toString()
   });
 
   return (
@@ -74,12 +75,12 @@ const AchievementsItem = (props) => {
         alignItems="stretch"
       >
         <Grid container className={classes.textContainer}>
-          <Typography className={classes.typography}>{props.title}</Typography>
+          <Typography className={classes.typography}>{title}</Typography>
         </Grid>
         <Grid item className={classes.pointsItem}>
           <Avatar className={classes.points}>
             <Typography className={classes.typography}>
-              {props.points}
+              {points}
             </Typography>
             <Typography
               className={classes.typography}
@@ -90,7 +91,7 @@ const AchievementsItem = (props) => {
           </Avatar>
         </Grid>
         <Grid container className={classes.iconItems}>
-          <img className={classes.iconImg} src={props.picturePath} alt={""} />
+          <img className={classes.iconImg} src={picturePath} alt={""} />
         </Grid>
       </Grid>
     </animated.div>

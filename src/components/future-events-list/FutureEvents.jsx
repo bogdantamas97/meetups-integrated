@@ -1,25 +1,33 @@
 import React from "react";
 import MainLayout from "../../layouts/MainLayout.jsx";
 import { withStyles, ListItem, List } from "@material-ui/core";
+import moment from "moment";
 import axios from "axios";
 import PropTypes from "prop-types";
-import FutureEventItem from "./FutureEventItem.jsx";
 import Cookies from "universal-cookie";
-import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
-import { eventType } from "../../constants/index";
-import moment from "moment";
-import EventDialog from "./EventDialog.jsx";
+
+import FutureEventItem from "./FutureEventItem.jsx";
+import EventDialog from "./EventDialog";
+import { EventsMessage } from "../index";
+import { EVENTS_URL, eventType } from "../../constants/index";
 
 const styles = {
   root: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   header: {
     display: "block",
     height: "30%",
-    width: "100%"
+    width: "100%",
   },
+  styleHeader: {
+    display: "block",
+    height: "15%",
+    width: "100%",
+    maxHeight: 90,
+  },
+  styleContent: { height: "85%", width: "100%" },
   list: {
     height: "98%",
     width: "100%",
@@ -30,8 +38,8 @@ const styles = {
     paddingLeft: "0px",
     paddingRight: "0px",
     paddingTop: "0px",
-    paddingBottom: "0px"
-  }
+    paddingBottom: "0px",
+  },
 };
 
 class FutureEvents extends React.Component {
@@ -43,25 +51,20 @@ class FutureEvents extends React.Component {
     isLoaded: false,
     isOpen: false,
     isLoading: true,
-    isMessageVisible: true
   };
 
   componentDidMount() {
     const userId = new Cookies().get("token");
-    axios("http://localhost:3001/events?_expand=users").then(result => {
+    axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
         userId,
         event: result.data,
-        isLoaded: true
+        isLoaded: true,
       });
     });
   }
 
-  handleOnClick = () => {
-    this.setState({ isMessageVisible: false });
-  };
-
-  checkUser = item => {
+  checkUser = (item) => {
     if (item.waitingListIds.includes(this.state.userId)) {
       return "You are in the waiting list";
     }
@@ -80,16 +83,16 @@ class FutureEvents extends React.Component {
     }
   };
 
-  handleOpenWaitingDialog = eventId => {
-    axios(`http://localhost:3001/events/${eventId}`)
-      .then(result => {
+  handleOpenWaitingDialog = (eventId) => {
+    axios(`EVENTS_URL/${eventId}`)
+      .then((result) => {
         const list = result.data.waitingListIds;
         list.push(this.state.userId);
         this.setState({ list });
       })
       .then(() => {
         axios.patch(
-          `http://localhost:3001/events/${eventId}`,
+          `EVENTS_URL/${eventId}`,
           { waitingListIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -100,21 +103,21 @@ class FutureEvents extends React.Component {
           this.setState({ isOpen: true, dialogType: "waitinglist" });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ isOpen: true, dialogType: "error" });
       });
   };
 
-  handleOpenSubscribeDialog = eventId => {
-    axios(`http://localhost:3001/events/${eventId}`)
-      .then(result => {
+  handleOpenSubscribeDialog = (eventId) => {
+    axios(`EVENTS_URL/${eventId}`)
+      .then((result) => {
         const list = result.data.attendanceIds;
         list.push(this.state.userId);
         this.setState({ list });
       })
       .then(() => {
         axios.patch(
-          `http://localhost:3001/events/${eventId}`,
+          `EVENTS_URL/${eventId}`,
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -124,25 +127,25 @@ class FutureEvents extends React.Component {
         if (!this.state.isLoading) {
           this.setState({
             isOpen: true,
-            dialogType: "subscribe"
+            dialogType: "subscribe",
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ isOpen: true, dialogType: "error" });
       });
   };
 
-  handleOpenUnsubscribeDialog = eventId => {
-    axios(`http://localhost:3001/events/${eventId}`)
-      .then(result => {
+  handleOpenUnsubscribeDialog = (eventId) => {
+    axios(`EVENTS_URL/${eventId}`)
+      .then((result) => {
         let list = result.data.attendanceIds;
         list.splice(list.indexOf(this.state.userId), 1);
         this.setState({ list });
       })
       .then(() => {
         axios.patch(
-          `http://localhost:3001/events/${eventId}`,
+          `EVENTS_URL/${eventId}`,
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -152,18 +155,18 @@ class FutureEvents extends React.Component {
         if (!this.state.isLoading) {
           this.setState({
             isOpen: true,
-            dialogType: "unsubscribe"
+            dialogType: "unsubscribe",
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ isOpen: true, dialogType: "error" });
       });
   };
 
   handleCloseDialog = () => {
     this.setState({ isOpen: false });
-    axios("http://localhost:3001/events?_expand=users").then(result => {
+    axios("EVENTS_URL?_expand=users").then((result) => {
       this.setState({ event: result.data });
     });
   };
@@ -171,29 +174,18 @@ class FutureEvents extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const styleHeader = this.state.isMessageVisible
-      ? { display: "block", height: "15%", width: "100%", maxHeight: 90 }
-      : { display: "none", height: "10%", width: "100%" };
-
-    const styleContent = this.state.isMessageVisible
-      ? { height: "85%", width: "100%" }
-      : { height: "100%", width: "100%" };
     return (
       <MainLayout topBarTitle={"Future Events"}>
         <div className={classes.root}>
-          {this.state.isMessageVisible && (
-            <div style={styleHeader}>
-              <EventsMessage eventTypeMessage={eventType.futureEvents}>
-                <CloseMessageButton onClick={this.handleOnClick} />
-              </EventsMessage>
-            </div>
-          )}
-          <div style={styleContent}>
+          <div className={classes.styleHeader}>
+            <EventsMessage eventTypeMessage={eventType.futureEvents} />
+          </div>
+          <div className={classes.styleContent}>
             <List className={classes.list}>
               {this.state.isLoaded
                 ? this.state.event
-                    .filter(item => item.timestamp > moment().unix())
-                    .map(item => (
+                    .filter((item) => item.timestamp > moment().unix())
+                    .map((item) => (
                       <ListItem key={item.id} className={classes.listItem}>
                         <FutureEventItem
                           lang={item.lang}
@@ -202,9 +194,7 @@ class FutureEvents extends React.Component {
                             .unix(item.timestamp)
                             .format(`DD MMM 'YY`)}
                           time={moment.unix(item.timestamp).format(`hh:mm`)}
-                          secondLine={`${item.type} (${
-                            item.difficulty
-                          }) ~ ${item.duration}`}
+                          secondLine={`${item.type} (${item.difficulty}) ~ ${item.duration}`}
                           action={this.checkUser(item)}
                           handleWaitingListClick={() =>
                             this.handleOpenWaitingDialog(item.id)
@@ -235,7 +225,7 @@ class FutureEvents extends React.Component {
 }
 
 FutureEvents.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(FutureEvents);

@@ -1,17 +1,21 @@
 import React from "react";
-import MainLayout from "../layouts/MainLayout.jsx";
-import { withStyles, ListItem, List } from "@material-ui/core";
-import axios from "axios/index";
-import PropTypes from "prop-types";
-import FutureEventItem from "./future-events-list/FutureEventItem.jsx";
 import Cookies from "universal-cookie";
-import { EventsMessage, CloseMessageButton } from "./EventsMessage.jsx";
-import { eventType } from "../constants/index";
+import PropTypes from "prop-types";
+import axios from "axios";
 import moment from "moment/moment";
-import EventDialog from "./future-events-list/EventDialog.jsx";
-import Paper from "@material-ui/core/Paper/index";
-import Typography from "@material-ui/core/Typography/index";
 import { theme } from "../GlobalTheme/globalTheme";
+import MainLayout from "../layouts/MainLayout.jsx";
+import {
+  withStyles,
+  ListItem,
+  List,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import FutureEventItem from "./future-events-list/FutureEventItem.jsx";
+import { EventsMessage } from "./index";
+import EventDialog from "./future-events-list/EventDialog.jsx";
+import { EVENTS_URL, eventType } from "../constants/index";
 
 const styles = {
   root: {
@@ -23,6 +27,13 @@ const styles = {
     height: "30%",
     width: "100%",
   },
+  styleHeader: {
+    display: "block",
+    height: "15%",
+    width: "100%",
+    maxHeight: 90,
+  },
+  styleContent: { height: "85%", width: "100%" },
   list: {
     height: "98%",
     width: "100%",
@@ -47,7 +58,6 @@ class MyEvents extends React.Component {
     cookies: new Cookies(),
     list: [],
     isLoading: true,
-    isMessageVisible: true,
   };
 
   isUsersEvent = (event) => {
@@ -58,13 +68,11 @@ class MyEvents extends React.Component {
   };
 
   componentDidMount() {
-    const isMessageVisible = !this.state.cookies.get("myEventsMessageClosed");
     const userId = this.state.cookies.get("token");
 
-    axios("http://localhost:3001/events?_expand=users").then((result) => {
+    axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
         userId,
-        isMessageVisible,
         event: result.data.filter(this.isUsersEvent),
         isLoaded: true,
       });
@@ -73,7 +81,6 @@ class MyEvents extends React.Component {
 
   handleOnClick = () => {
     this.setState({ isDisplayed: false });
-    this.state.cookies.set("myEventsMessageClosed", true, { path: "/" });
   };
 
   checkUser = (item) => {
@@ -90,7 +97,7 @@ class MyEvents extends React.Component {
   };
 
   handleOpenUnsubscribeDialog = (eventId) => {
-    axios(`http://localhost:3001/events/${eventId}`)
+    axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.attendanceIds.filter(
           (item) => item !== this.state.userId
@@ -99,7 +106,7 @@ class MyEvents extends React.Component {
       })
       .then(() => {
         axios.patch(
-          `http://localhost:3001/events/${eventId}`,
+          `${EVENTS_URL}/${eventId}`,
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -120,7 +127,7 @@ class MyEvents extends React.Component {
 
   handleCloseDialog = () => {
     this.setState({ isOpen: false });
-    axios("http://localhost:3001/events?_expand=users").then((result) => {
+    axios("${EVENTS_URL}?_expand=users").then((result) => {
       this.setState({ event: result.data.filter(this.isUsersEvent) });
     });
   };
@@ -128,25 +135,13 @@ class MyEvents extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const styleHeader = this.state.isMessageVisible
-      ? { display: "block", height: "15%", width: "100%", maxHeight: 90 }
-      : { display: "none", height: "10%", width: "100%" };
-
-    const styleContent = this.state.isMessageVisible
-      ? { height: "85%", width: "100%" }
-      : { height: "100%", width: "100%" };
-
     return (
       <MainLayout topBarTitle={"My Events"}>
         <div className={classes.root}>
-          {!this.state.cookies.get("myEventsMessageClosed") && (
-            <div style={styleHeader}>
-              <EventsMessage eventTypeMessage={eventType.myEvents}>
-                <CloseMessageButton onClick={this.handleOnClick} />
-              </EventsMessage>
-            </div>
-          )}
-          <div style={styleContent}>
+          <div className={classes.styleHeader}>
+            <EventsMessage eventTypeMessage={eventType.myEvents} />
+          </div>
+          <div className={classes.styleContent}>
             <List className={classes.list}>
               {this.state.isLoaded ? (
                 !this.state.event.length ? (

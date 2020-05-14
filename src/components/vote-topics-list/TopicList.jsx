@@ -1,5 +1,5 @@
 import React from "react";
-import MainLayout from "../../layouts/MainLayout.jsx";
+import Modal from "react-animated-modal";
 import {
   Button,
   Typography,
@@ -9,26 +9,26 @@ import {
   MenuItem,
   TextField,
   Checkbox,
-  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
-import TopicItem from "./TopicItem.jsx";
 import Cookies from "universal-cookie";
+
+import MainLayout from "../../layouts/MainLayout.jsx";
 import {
   eventType,
   TOPIC_TITLE_LIMIT,
   TOPIC_DESCRIPTION_LIMIT,
+  PROPOSED_TOPICS_URL,
 } from "../../constants/index";
-import Modal from "react-animated-modal";
-import { EventsMessage, CloseMessageButton } from "../EventsMessage.jsx";
+import TopicItem from "./TopicItem.jsx";
+import { EventsMessage } from "../index";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { button, theme } from "../../GlobalTheme/globalTheme.js";
 
-const dataBaseUrl = "http://localhost:3001/proposedTopics";
 const contentPlaceholder = `Ex. If it's a programming language, how new is it, what type is it (static/dynamic, interpreted/compiled). Is it good because it's performant or is it good because it's flexible?`;
 const topicTypes = ["Presentation", "Workshop"];
 
@@ -98,7 +98,6 @@ class TopicList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMessageVisible: cookies.get("voteTopicsMessageClosed"),
       open: false,
       event: [{}],
       isLoaded: false,
@@ -165,29 +164,23 @@ class TopicList extends React.Component {
       });
       event.preventDefault();
       axios
-        .post(dataBaseUrl, newTopic, {
+        .post(PROPOSED_TOPICS_URL, newTopic, {
           headers: {
             "Content-Type": "application/json",
           },
         })
         .then(() =>
-          axios.get(dataBaseUrl).then((response) => {
+          axios.get(PROPOSED_TOPICS_URL).then((response) => {
             this.setState({ event: response.data });
           })
         );
     }
   };
-
   componentDidMount() {
-    axios.get("http://localhost:3001/proposedTopics").then((res) => {
+    axios.get(PROPOSED_TOPICS_URL).then((res) => {
       this.setState({ event: res.data, isLoaded: true });
     });
   }
-
-  handleOnClick = () => {
-    cookies.set("voteTopicsMessageClosed", true, { path: "/" });
-    this.setState({ isMessageVisible: false });
-  };
 
   handleOpen = () => this.setState({ open: true });
 
@@ -198,26 +191,17 @@ class TopicList extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const styleHeader = this.state.isMessageVisible
-      ? { display: "block", height: "15%", width: "100%", maxHeight: 90 }
-      : { display: "none", height: "10%", width: "100%" };
-
-    const styleContent = this.state.isMessageVisible
-      ? { height: "85%", width: "100%" }
-      : { height: "100%", width: "100%" };
+    const styleHeader =  { display: "none", height: "10%", width: "100%" };
+    const styleContent = { height: "100%", width: "100%" };
 
     return (
       <MainLayout topBarTitle={"Vote Topics"}>
-        {!cookies.get("voteTopicsMessageClosed") && (
-          <div style={styleHeader}>
-            <EventsMessage eventTypeMessage={eventType.voteTopics}>
-              <CloseMessageButton onClick={this.handleOnClick} />
-            </EventsMessage>
-          </div>
-        )}
+        <div style={styleHeader}>
+          <EventsMessage eventTypeMessage={eventType.voteTopics} />
+        </div>
         <Modal
           visible={this.state.open}
-          style={{margin: "auto"}}
+          style={{ margin: "auto" }}
           closemodal={this.handleClose}
           type="rotateIn"
         >

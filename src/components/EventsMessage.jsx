@@ -24,17 +24,19 @@ const styles = {
   },
 };
 
-export const EventsMessage = (props) => {
-  const [eventType, setEventTypeMessage] = useState(props.eventTypeMessage);
+const EventsMessage = (props) => {
+  const {
+    eventTypeMessage,
+    children,
+    numberOfPastEventsWithoutFeedback
+  } = props;
   const [
-    numberOfPastEventsWithoutFeedback,
-    setMumberOfPastEventsWithoutFeedback,
-  ] = useState(props.numberOfPastEventsWithoutFeedback);
+    numberOfEventsWithoutFeedback,
+    setMumberOfEventsWithoutFeedback,
+  ] = useState(numberOfPastEventsWithoutFeedback);
 
   useEffect(() => {
-    setMumberOfPastEventsWithoutFeedback(
-      props.numberOfPastEventsWithoutFeedback
-    );
+    setMumberOfEventsWithoutFeedback(numberOfPastEventsWithoutFeedback);
   }, []);
 
   return (
@@ -43,7 +45,7 @@ export const EventsMessage = (props) => {
         <ListItem>
           <div style={{ width: "90%" }}>
             {(() => {
-              switch (eventType.toString()) {
+              switch (eventTypeMessage.toString()) {
                 case "future events":
                   return (
                     <Typography style={{ fontSize: 12 }}>
@@ -92,29 +94,10 @@ export const EventsMessage = (props) => {
               }
             })()}
           </div>
-          <div
-            style={{
-              width: "10%",
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-            }}
-          >
-            {props.children}
-          </div>
         </ListItem>
       </Grid>
     </Grid>
   );
 };
 
-export const CloseMessageButton = (props) => (
-  <IconButton
-    key="close"
-    aria-label="Close"
-    color="inherit"
-    onClick={props.onClick}
-  >
-    <CloseIcon style={styles.icons} />
-  </IconButton>
-);
+export default EventsMessage;

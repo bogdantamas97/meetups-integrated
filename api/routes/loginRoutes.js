@@ -29,7 +29,7 @@ Router.post('/insert',(req, res) => {
   });
   
 Router.post('/update',(req, res) => {
-    const sql = "UPDATE login SET username='"+req.query.email+"', firstname='"+req.query.firstname+"', lastname='"+req.query.lastname+"', password='"+req.query.password+"' WHERE id='"+req.query.id+"'";
+    const sql = "UPDATE login SET email='"+req.query.email+"', firstname='"+req.query.firstname+"', lastname='"+req.query.lastname+"', password='"+req.query.password+"', points='"+req.query.points+"' WHERE id='"+req.query.id+"'";
       sqlConnection.query(sql, (err) => {
         if(err) throw err;
         res.redirect('/');

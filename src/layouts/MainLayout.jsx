@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
-import FooterBar from "../components/FooterBar.jsx";
-import Content from "../components/Content";
-import BaseHeader from "../components/BaseHeader";
-import { withStyles } from "@material-ui/core";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { withStyles } from "@material-ui/core";
 
-const apiBaseUrl = "http://localhost:8000";
+import { FooterBar, Content, BaseHeader } from "../components/index";
+import { DATA_BASE_URL } from "../constants/index";
 
 const styles = {
   mainLayout: {
     height: "100vh",
     display: "flex",
     flexDirection: "column",
-    overflow: "hidden"
+    overflow: "hidden",
   },
 };
 
 const MainLayout = (props) => {
   const { classes, avatarInitials, topBarTitle, children } = props;
-  const [ fullName, setFullName ] = useState("");
+  const [fullName, setFullName] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       axios
-        .get(apiBaseUrl)
+        .get(DATA_BASE_URL)
         .then((result) =>
           setFullName(
             result.data.filter(

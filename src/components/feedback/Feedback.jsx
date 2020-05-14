@@ -6,7 +6,7 @@ import {
   Grid,
   withStyles
 } from "@material-ui/core";
-import Category from "./Category";
+import Category from "./Category.jsx";
 import { ReactComponent as Logo } from "../../images/sad.svg";
 import { ReactComponent as Logo2 } from "../../images/moresad.svg";
 import { ReactComponent as Logo3 } from "../../images/third.svg";
@@ -14,6 +14,7 @@ import { ReactComponent as Logo4 } from "../../images/fourth.svg";
 import { ReactComponent as Logo5 } from "../../images/fifth.svg";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import { EVENTS_URL } from "../../constants/index";
 
 const styles = {
   button: {
@@ -50,7 +51,7 @@ const Feedback = props => {
     feedback.userId = userId;
 
     axios
-      .get(`http://localhost:3001/events/${props.eventId}`)
+      .get(`${EVENTS_URL}/${props.eventId}`)
       .then(result => {
         const feedbackList = result.data.feedback;
         feedbackList.push(feedback);
@@ -63,7 +64,7 @@ const Feedback = props => {
   const handleSendFeedback = (feedbackList) => {
     console.log(feedbackList);
     axios.patch(
-      `http://localhost:3001/events/${props.eventId}`,
+      `${EVENTS_URL}/${props.eventId}`,
       { feedback: feedbackList },
       { headers: { "Content-Type": "application/json" } }
     );
