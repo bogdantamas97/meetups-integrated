@@ -1,6 +1,6 @@
 import React from "react";
 import { theme } from "../GlobalTheme/globalTheme";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Achievements from "../components/achievements/Achievements.jsx";
 
 const AchievementsView = () => (

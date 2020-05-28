@@ -5,13 +5,10 @@
       "name": "ECMAScript 6® - noutati si directii",
       "type": "Presentation",
       "lang": "JS",
-      "userId": 9,
       "duration": "1.5h",
-      "difficulty": "A",
+      "difficulty": "Advanced",
       "date": "12 Jun '19",
-      "time": "16:00",
       "attendanceIds": [],
-      "maxPeople": 10,
       "waitingListIds": [],
       "timestamp": 1560355200,
       "feedback": [
@@ -38,17 +35,12 @@
       "name": "ECMAScript 6®",
       "type": "Presentation",
       "lang": "JS",
-      "userId": 12,
       "duration": "1.5h",
-      "difficulty": "A",
+      "difficulty": "Advanced",
       "date": "12 Jun '20",
-      "time": "16:00",
       "attendanceIds": [
-        "_2v43ouuts",
-        "_weyi9l0qi",
-        "_juw7b7a87"
+        "_2v43ouuts"
       ],
-      "maxPeople": 10,
       "waitingListIds": [],
       "timestamp": 1591977600,
       "feedback": []
@@ -58,21 +50,21 @@
     {
       "id": 1,
       "picturePath": "../../images/mug.png",
-      "title": "Comunity/Trainer Mug",
+      "title": "Community/Trainer Mug",
       "description": "Circumfluus aeris obsistitur",
       "points": 10
     },
     {
       "id": 2,
       "picturePath": "../../images/tshirt.png",
-      "title": "Comunity/Trainer T-Shirt",
+      "title": "Community/Trainer T-Shirt",
       "description": "Circumfluus aeris obsistitur",
       "points": 20
     },
     {
       "id": 3,
       "picturePath": "../../images/hoodie.png",
-      "title": "Comunity/Trainer Hoodie",
+      "title": "Community/Trainer Hoodie",
       "description": "Circumfluus aeris obsistitur",
       "points": 30
     },
@@ -186,41 +178,24 @@
   ],
   "proposedTopics": [
     {
-      "userId": "_weyi9l0qi",
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "Latest discoveries on IT industry",
-      "topicContent": "The details will be presented at the workshop",
-      "sumOfVotes": 2,
+      "userId": "_6kl0m1c34",
+      "isUserPresenter": true,
+      "topicType": "Workshop",
+      "topicTitle": "Javascript Presentation",
+      "topicDate": "June 4, 2020 16:30 ",
+      "topicContent": "ECMA 6 Tips & Trics",
+      "topicDuration": "1h",
+      "difficultyType": "Expert",
+      "programmingLanguage": "JS",
+      "timeStamp": 1591275600000,
+      "sumOfVotes": -1,
       "userVotes": [
         {
-          "userId": "_weyi9l0qi",
-          "vote": 1
-        },
-        {
-          "userId": "_juw7b7a87",
-          "vote": 1
+          "userId": "_6kl0m1c34",
+          "vote": -1
         }
       ],
       "id": 1
-    },
-    {
-      "isUserPresenter": false,
-      "topicType": "Presentation",
-      "topicTitle": "Javascript: Tips and tricks",
-      "topicContent": "New thing inside that",
-      "sumOfVotes": -2,
-      "userVotes": [
-        {
-          "userId": "_weyi9l0qi",
-          "vote": -1
-        },
-        {
-          "userId": "_juw7b7a87",
-          "vote": -1
-        }
-      ],
-      "id": 2
     }
   ]
 }

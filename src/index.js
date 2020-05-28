@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import { PrivateRoute } from "./utils/PrivateRoute";
+import { PrivateRoute } from "./utils/index";
 import {
   NotFoundPageView,
   LeaderboardView,
@@ -18,7 +18,6 @@ import {
   TopicListView,
 } from "./views/index";
 
-
 const routing = (
   <Router>
     <Fragment>
@@ -31,7 +30,7 @@ const routing = (
         <PrivateRoute path="/achievements" component={AchievementsView} />
         <PrivateRoute path="/myEvents" component={MyEventsView} />
         <PrivateRoute path="/futureEvents" component={FutureEventsView} />
-        <PrivateRoute path="/pastEvents" component={PastEventsView} />        
+        <PrivateRoute path="/pastEvents" component={PastEventsView} />
         <PrivateRoute path="/voteTopics" component={TopicListView} />
         <PrivateRoute path="/leaderboard" component={LeaderboardView} />
         <PrivateRoute path="/profile" component={ProfileView} />

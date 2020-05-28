@@ -6,7 +6,6 @@ import {
   withStyles,
   ListItem,
   List,
-  MenuItem,
   TextField,
   Checkbox,
   DialogActions,
@@ -16,21 +15,24 @@ import {
 import axios from "axios";
 import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import MainLayout from "../../layouts/MainLayout.jsx";
 import {
   eventType,
+  contentPlaceholder,
+  topicTypes,
+  topicDurations,
+  programmingLanguages,
+  difficultyTypes,
   TOPIC_TITLE_LIMIT,
   TOPIC_DESCRIPTION_LIMIT,
   PROPOSED_TOPICS_URL,
 } from "../../constants/index";
 import TopicItem from "./TopicItem.jsx";
+import { getDateFormat, TopicDatePicker, Selector } from "../../utils/index";
 import { EventsMessage } from "../index";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { button, theme } from "../../GlobalTheme/globalTheme.js";
-
-const contentPlaceholder = `Ex. If it's a programming language, how new is it, what type is it (static/dynamic, interpreted/compiled). Is it good because it's performant or is it good because it's flexible?`;
-const topicTypes = ["Presentation", "Workshop"];
 
 const styles = {
   typography: theme.typography,
@@ -58,25 +60,27 @@ const styles = {
     paddingBottom: "0px",
   },
   mainTitle: {
-    fontSize: "30px",
+    fontSize: "20px",
     fontStyle: "bold",
+    marginBottom: "auto",
   },
   subTitle: {
+    fontSize: "15px",
     fontStyle: "italic",
+    marginBottom: "auto",
   },
-  selectorLabel: {
-    fontFamily: "Georgia",
-    width: "50%",
+  row: {
     display: "flex",
-    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: "auto",
   },
-  selectorContent: {
-    width: "50%",
+  defaultContent: {
+    width: "40%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
   },
-  checkboxLabel: {
+  label: {
     fontFamily: "Georgia",
     width: "80%",
     display: "flex",
@@ -92,7 +96,6 @@ const styles = {
     fontFamily: "Arial",
   },
 };
-const cookies = new Cookies();
 
 class TopicList extends React.Component {
   constructor(props) {
@@ -102,10 +105,13 @@ class TopicList extends React.Component {
       event: [{}],
       isLoaded: false,
       isChecked: false,
-      isOpen: props.open,
       topicType: "Presentation",
       topicTitle: "",
       topicContent: "",
+      topicDate: new Date(),
+      topicDuration: "1h",
+      programmingLanguage: "JS",
+      difficultyType: "Begginner",
       charsLeftTitleBox: 100,
       charsLeftDetailBox: 300,
     };
@@ -121,7 +127,13 @@ class TopicList extends React.Component {
     return true;
   };
 
-  handleSelector = (name) => (event) => {
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => this.setState({ open: false });
+
+  handleChange = (name) => (event) => {
     this.setState({ [name]: event.target.value });
   };
 
@@ -142,26 +154,38 @@ class TopicList extends React.Component {
   };
 
   handleSend = (event) => {
-    if (this.check()) {
+    const isTheFormValid = this.check();
+
+    if (isTheFormValid) {
       const newTopic = {
         userId: new Cookies().get("token"),
         isUserPresenter: this.state.isChecked,
         topicType: this.state.topicType,
         topicTitle: this.state.topicTitle,
+        topicDate: getDateFormat(this.state.topicDate),
         topicContent: this.state.topicContent,
+        topicDuration: this.state.topicDuration,
+        difficultyType: this.state.difficultyType,
+        programmingLanguage: this.state.programmingLanguage,
+        timeStamp: this.state.topicDate.getTime(),
         sumOfVotes: 0,
         userVotes: [],
       };
+
       this.setState({
         isChecked: false,
         topicType: "Presentation",
         topicTitle: "",
         topicContent: "",
-        isOpen: false,
+        topicDate: new Date(),
+        programmingLanguage: "JS",
+        topicDuration: "1h",
+        difficultyType: "Begginner",
         charsLeftTitleBox: 100,
         charsLeftDetailBox: 300,
         open: false,
       });
+
       event.preventDefault();
       axios
         .post(PROPOSED_TOPICS_URL, newTopic, {
@@ -178,30 +202,29 @@ class TopicList extends React.Component {
   };
   componentDidMount() {
     axios.get(PROPOSED_TOPICS_URL).then((res) => {
-      this.setState({ event: res.data, isLoaded: true });
+      const validTopics = res.data.filter((item) => {
+        if (item.timeStamp < new Date().getTime()) {
+          axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
+        } else {
+          if (item.sumOfVotes >= 10) {
+            //add as an event
+          } else return item;
+        }
+      });
+      this.setState({ event: validTopics, isLoaded: true });
     });
   }
-
-  handleOpen = () => this.setState({ open: true });
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     const { classes } = this.props;
 
-    const styleHeader =  { display: "none", height: "10%", width: "100%" };
+    const styleHeader = { display: "none", height: "10%", width: "100%" };
     const styleContent = { height: "100%", width: "100%" };
 
     return (
-      <MainLayout topBarTitle={"Vote Topics"}>
-        <div style={styleHeader}>
-          <EventsMessage eventTypeMessage={eventType.voteTopics} />
-        </div>
+      <div>
         <Modal
           visible={this.state.open}
-          style={{ margin: "auto" }}
           closemodal={this.handleClose}
           type="rotateIn"
         >
@@ -213,34 +236,8 @@ class TopicList extends React.Component {
             </p>
           </DialogTitle>
           <DialogContent>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <p className={classes.selectorLabel}>Type</p>
-
-              <div className={classes.selectorContent}>
-                <TextField
-                  select
-                  onChange={this.handleSelector("topicType")}
-                  value={this.state.topicType}
-                  margin="normal"
-                >
-                  {topicTypes.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                  >
-                </TextField>
-              </div>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "0px",
-              }}
-            >
-              <p className={classes.checkboxLabel}>You want to present this?</p>
+            <div className={classes.row}>
+              <p className={classes.label}>Will you present this?</p>
               <div className={classes.checkboxContent}>
                 <Checkbox
                   checked={this.state.isChecked}
@@ -250,7 +247,44 @@ class TopicList extends React.Component {
                 />
               </div>
             </div>
-            <ValidatorForm ref="form" onError={(errors) => console.log(errors)}>
+            <Selector
+              label="Type"
+              handleChange={this.handleChange("topicType")}
+              currentValue={this.state.topicType}
+              optionsArray={topicTypes}
+            />
+            <Selector
+              label="Difficulty"
+              handleChange={this.handleChange("difficultyType")}
+              currentValue={this.state.difficultyType}
+              optionsArray={difficultyTypes}
+            />
+
+            <div className={classes.row}>
+              <p className={classes.label}>Date</p>
+              <TopicDatePicker
+                topicDate={this.state.topicDate}
+                handleChangeDate={(date) => this.setState({ topicDate: date })}
+                className={classes.defaultContent}
+              />
+            </div>
+            <Selector
+              label="Duration"
+              handleChange={this.handleChange("topicDuration")}
+              currentValue={this.state.topicDuration}
+              optionsArray={topicDurations}
+            />
+            <Selector
+              label="Programming Language"
+              handleChange={this.handleChange("programmingLanguage")}
+              currentValue={this.state.programmingLanguage}
+              optionsArray={programmingLanguages}
+            />
+            <ValidatorForm
+              ref="form"
+              onSubmit={() => console.log("")}
+              onError={(errors) => console.log(errors)}
+            >
               <TextValidator
                 label="Topic title"
                 fullWidth
@@ -268,13 +302,8 @@ class TopicList extends React.Component {
               />
 
               <div>
-                <p className={classes.detailsTitle}>
-                  Add here some more details about the topic, why is this topic
-                  important?
-                </p>
-
                 <TextValidator
-                  label="Details"
+                  label="Topic details"
                   fullWidth
                   onChange={this.handleChangeContent}
                   value={this.state.topicContent}
@@ -310,46 +339,51 @@ class TopicList extends React.Component {
             </ValidatorForm>
           </DialogContent>
         </Modal>
-        <div style={styleContent}>
-          <Button
-            variant="contained"
-            className={classes.button}
-            onClick={this.handleOpen}
-          >
-            <Typography
-              style={{
-                color: theme.palette.primary.contrastText,
-                fontSize: theme.typography.subheading.fontSize,
-              }}
+        <MainLayout topBarTitle={"Vote Topics"}>
+          <div style={styleHeader}>
+            <EventsMessage eventTypeMessage={eventType.voteTopics} />
+          </div>
+          <div style={styleContent}>
+            <Button
+              variant="contained"
+              className={classes.button}
+              onClick={this.handleOpen}
             >
-              {" "}
-              Propose a topic!
-            </Typography>
-          </Button>
-          <List className={classes.list}>
-            {this.state.isLoaded
-              ? this.state.event
-                  .sort((a, b) => a.sumOfVotes - b.sumOfVotes)
-                  .reverse()
-                  .map((item) => (
-                    <ListItem
-                      key={item.sumOfVotes}
-                      className={classes.listItem}
-                    >
-                      <TopicItem
-                        userId={new Cookies().get("token")}
-                        id={item.id}
-                        title={item.topicTitle}
-                        content={item.topicContent}
-                        userVotes={item.userVotes}
-                        sumOfVotes={item.sumOfVotes}
-                      />
-                    </ListItem>
-                  ))
-              : undefined}
-          </List>
-        </div>
-      </MainLayout>
+              <Typography
+                style={{
+                  color: theme.palette.primary.contrastText,
+                  fontSize: theme.typography.subheading.fontSize,
+                }}
+              >
+                {" "}
+                Propose a topic!
+              </Typography>
+            </Button>
+            <List className={classes.list}>
+              {this.state.isLoaded
+                ? this.state.event
+                    .sort((a, b) => a.sumOfVotes - b.sumOfVotes)
+                    .reverse()
+                    .map((item) => (
+                      <ListItem
+                        key={item.sumOfVotes}
+                        className={classes.listItem}
+                      >
+                        <TopicItem
+                          userId={new Cookies().get("token")}
+                          id={item.id}
+                          title={item.topicTitle}
+                          content={item.topicContent}
+                          userVotes={item.userVotes}
+                          sumOfVotes={item.sumOfVotes}
+                        />
+                      </ListItem>
+                    ))
+                : undefined}
+            </List>
+          </div>
+        </MainLayout>
+      </div>
     );
   }
 }

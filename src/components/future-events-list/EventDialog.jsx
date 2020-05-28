@@ -13,7 +13,7 @@ import { blue, grey } from "@material-ui/core/colors";
 const styles = (theme) => ({
   typography: theme.typography,
   dialogContent: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
   },
   dialogButton: {
     color: blue[300],

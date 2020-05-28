@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout.jsx";
-import {
-  withStyles,
-  Typography,
-  ListItem,
-  List,
-  Snackbar,
-  Slide,
-} from "@material-ui/core";
+import { withStyles, Typography, ListItem, List } from "@material-ui/core";
 import { theme } from "../../GlobalTheme/globalTheme";
 import ListComponent from "./ListComponent.jsx";
 import LeaderboardPic from "../../images/leaderboardPic.png";
@@ -36,7 +29,7 @@ const styles = {
   List: {
     width: "100%",
     height: "60%",
-    overflowY: "scroll"
+    overflowY: "scroll",
   },
   ListItem: {
     height: "20%",
@@ -66,7 +59,7 @@ const Leaderboard = (props) => {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(DATA_BASE_URL);
-      setInfo(result.data.sort((a,b) => a.points > b.points ? -1 : 1));
+      setInfo(result.data.sort((a, b) => (a.points > b.points ? -1 : 1)));
       changeLoad(true);
     }
     fetchData();
@@ -74,7 +67,7 @@ const Leaderboard = (props) => {
 
   const loadMore = async () => {
     setNumberOfItems(numberOfItems + 5);
-  }
+  };
 
   return (
     <MainLayout>
@@ -101,10 +94,7 @@ const Leaderboard = (props) => {
           </List>
           <div className={classes.loadMore}>
             <Button className={classes.button}>
-              <Typography
-                className={classes.typography}
-                onClick={loadMore}
-              >
+              <Typography className={classes.typography} onClick={loadMore}>
                 Load more
               </Typography>
             </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import LoginPage from "../components/LoginPage.jsx"
 import { theme } from "../GlobalTheme/globalTheme";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 const LoginView = props =>(
     <MuiThemeProvider theme={theme}>

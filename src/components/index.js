@@ -1,7 +1,6 @@
 import About from "./About";
 import BaseHeader from "./BaseHeader";
 import Content from "./Content";
-import DifficultyBar from "./DifficultyBar";
 import EventsMessage from "./EventsMessage";
 import FooterBar from "./FooterBar";
 import LoginPage from "./LoginPage";
@@ -20,7 +19,6 @@ export {
   About,
   BaseHeader,
   Content,
-  DifficultyBar,
   EventsMessage,
   FooterBar,
   LoginPage,

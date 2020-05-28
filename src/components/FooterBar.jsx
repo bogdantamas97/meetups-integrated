@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { BottomNavigation, Paper, withStyles } from "@material-ui/core";
 
 const styles = {

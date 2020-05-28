@@ -127,7 +127,7 @@ class MyEvents extends React.Component {
 
   handleCloseDialog = () => {
     this.setState({ isOpen: false });
-    axios("${EVENTS_URL}?_expand=users").then((result) => {
+    axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({ event: result.data.filter(this.isUsersEvent) });
     });
   };

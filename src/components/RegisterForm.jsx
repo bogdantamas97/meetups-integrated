@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Route } from "react-router-dom";
+import axios from "axios";
 import {
   Button,
   FormControl,
@@ -6,15 +8,14 @@ import {
   Snackbar,
   withStyles,
 } from "@material-ui/core";
-import { button, theme } from "../GlobalTheme/globalTheme";
-import { Route } from "react-router-dom";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
-import MuiAlert from "@material-ui/lab/Alert";
-import axios from "axios";
-import LayoutLogin from "../layouts/LayoutLogin.jsx";
-import { Background } from "../GlobalTheme/globalTheme";
 import red from "@material-ui/core/colors/red";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+import MuiAlert from "@material-ui/lab/Alert";
+
+import { Background, button, theme } from "../GlobalTheme/globalTheme";
+import LayoutLogin from "../layouts/LayoutLogin.jsx";
+import { EMAIL_REGEX } from "../constants/index";
 
 const apiBaseUrl = "http://localhost:8000/";
 
@@ -101,7 +102,6 @@ const Alert = (props) => (
 
 const RegisterForm = (props) => {
   const { classes } = props;
-  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   // fields
   const [email, setEmail] = useState("");
@@ -150,7 +150,7 @@ const RegisterForm = (props) => {
   };
 
   const invalidEmail = (email) => {
-    if (email === "" || !regex.test(email)) {
+    if (email === "" || !EMAIL_REGEX.test(email)) {
       setEmailError(true);
       return true;
     }
@@ -217,11 +217,11 @@ const RegisterForm = (props) => {
     );
 
     const isFormInvalid =
-    invalidEmail(email) ||
-    invalidFirstName(firstName) ||
-    invalidLastName(lastName) ||
-    invalidPassword(password) ||
-    invalidPasswordConfirmation(passwordConfirmation);
+      invalidEmail(email) ||
+      invalidFirstName(firstName) ||
+      invalidLastName(lastName) ||
+      invalidPassword(password) ||
+      invalidPasswordConfirmation(passwordConfirmation);
 
     // register an user
     if (!isFormInvalid) {

@@ -7,7 +7,7 @@ import Cookies from "universal-cookie";
 import moment from "moment";
 
 import PastEventItem from "./PastEventItem.jsx";
-import { eventType } from "../../constants/index";
+import { EVENTS_URL, eventType } from "../../constants/index";
 import { EventsMessage, Feedback } from "../index.js";
 
 const styles = {
@@ -60,7 +60,7 @@ class PastEvents extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("EVENTS_URL?_expand=users").then((res) => {
+    axios.get(`${EVENTS_URL}?_expand=users`).then((res) => {
       const event = res.data;
       const buttonList = [];
       const events = [];

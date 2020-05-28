@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
 import { useSpring, animated } from "react-spring";
-import { PROPOSED_TOPICS_URL }from '../../constants/index';
+import { PROPOSED_TOPICS_URL } from "../../constants/index";
 
 const styles = {
   container: {
@@ -70,13 +70,13 @@ const TopicItem = (props) => {
   const [bottomColor, setBottomColor] = useState("#484848");
   const [sumOfVotes, setSumOfVotes] = useState(0);
   const [vote, setVote] = useState(0);
-  const [votersList, setVotersList] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       let initialVote = 0;
       if (userVotes.filter((item) => item.userId === userId)[0]) {
-        initialVote = userVotes.filter((item) => item.userId === userId)[0].vote;
+        initialVote = userVotes.filter((item) => item.userId === userId)[0]
+          .vote;
         setVote(initialVote);
       }
       if (userVotes.map((item) => item.vote).length > 0) {
@@ -119,35 +119,31 @@ const TopicItem = (props) => {
     voters.userId = userId;
     voters.vote = vote;
 
-    axios
-      .get(`${PROPOSED_TOPICS_URL}/${id}`)
-      .then((result) => {
-        const listOfVoters = result.data.userVotes;
-        let sumVotes = 0;
-        let hasVoted = false;
-        for (let key in listOfVoters) {
-          if (listOfVoters[key].userId === voters.userId) {
-            listOfVoters[key].vote = voters.vote;
-            hasVoted = true;
-          }
+    axios.get(`${PROPOSED_TOPICS_URL}/${id}`).then((result) => {
+      const listOfVoters = result.data.userVotes;
+      let sumVotes = 0;
+      let hasVoted = false;
+      for (let key in listOfVoters) {
+        if (listOfVoters[key].userId === voters.userId) {
+          listOfVoters[key].vote = voters.vote;
+          hasVoted = true;
         }
-        if (hasVoted === false) {
-          listOfVoters.push(voters);
-        }
+      }
+      if (hasVoted === false) {
+        listOfVoters.push(voters);
+      }
 
-        if (listOfVoters.map((item) => item.vote).length > 0) {
-          sumVotes = listOfVoters
-              .map((item) => item.vote)
-              .reduce((a, b) => a + b);
-        }
-        setVotersList(listOfVoters);
-        setSumOfVotes(sumVotes);
-        sendVote(listOfVoters, sumVotes);
-      })
+      if (listOfVoters.map((item) => item.vote).length > 0) {
+        sumVotes = listOfVoters
+          .map((item) => item.vote)
+          .reduce((a, b) => a + b);
+      }
+      setSumOfVotes(sumVotes);
+      sendVote(listOfVoters, sumVotes);
+    });
   };
 
   const sendVote = (listOfVoters, sumVotes) => {
-    console.log('sendingVote', userVotes, sumOfVotes);
     axios.patch(
       `${PROPOSED_TOPICS_URL}/${id}`,
       {
@@ -156,7 +152,7 @@ const TopicItem = (props) => {
       },
       { headers: { "Content-Type": "application/json" } }
     );
-  }
+  };
 
   const animation = useSpring({
     width: "90%",
@@ -172,9 +168,7 @@ const TopicItem = (props) => {
     borderRadius: "10px",
   });
 
-
   return (
-
     <animated.div style={animation}>
       <Grid
         container
@@ -184,9 +178,7 @@ const TopicItem = (props) => {
       >
         <Grid item className={classes.itemOne}>
           <Avatar className={classes.avatar}>
-            <Typography className={classes.typography}>
-              {sumOfVotes}
-            </Typography>
+            <Typography className={classes.typography}>{sumOfVotes}</Typography>
           </Avatar>
         </Grid>
         <Grid item style={{ width: "calc(100% - 170px)" }}>

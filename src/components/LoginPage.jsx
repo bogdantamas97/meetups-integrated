@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Redirect, Route  } from "react-router-dom";
-import LayoutLogin from "../layouts/LayoutLogin.jsx";
-import { theme, Background } from "../GlobalTheme/globalTheme";
+import { Redirect, Route } from "react-router-dom";
 import {
   Button,
   Typography,
@@ -14,7 +12,10 @@ import {
 } from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
 import MuiAlert from "@material-ui/lab/Alert";
-import { DATA_BASE_URL } from "../constants/index";
+
+import LayoutLogin from "../layouts/LayoutLogin.jsx";
+import { theme, Background } from "../GlobalTheme/globalTheme";
+import { EMAIL_REGEX, DATA_BASE_URL } from "../constants/index";
 
 const inOneHour = 1 / 24;
 
@@ -79,8 +80,6 @@ const styles = {
 const Alert = (props) => <MuiAlert elevation={5} variant="filled" {...props} />;
 
 const LoginPage = (props) => {
-
-  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const { classes } = props;
 
   // fields
@@ -100,8 +99,8 @@ const LoginPage = (props) => {
   const [isLoggedIn, setLoggedIn] = useState(!!Cookies.get("token"));
 
   const invalidEmail = (email) => {
-    console.log()
-    if (email === "" || !regex.test(email)) return true;
+    console.log();
+    if (email === "" || !EMAIL_REGEX.test(email)) return true;
     return false;
   };
 
@@ -113,15 +112,14 @@ const LoginPage = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  const onKeyEnterPressed = event => {
+
+  const onKeyEnterPressed = (event) => {
     if (event.keyCode === 13) {
       handleSubmit();
     }
-  }
+  };
 
   const handleSubmit = () => {
-
     setEmailError(invalidEmail(email));
     setPasswordError(invalidPassword(password));
 
@@ -165,7 +163,11 @@ const LoginPage = (props) => {
   } else
     return (
       <LayoutLogin backgroundStyle={Background}>
-        <FormControl id="the_form" className={classes.formStyle} onSubmit={handleSubmit}>
+        <FormControl
+          id="the_form"
+          className={classes.formStyle}
+          onSubmit={handleSubmit}
+        >
           <TextField
             className={classes.emailInput}
             onChange={(event) => {

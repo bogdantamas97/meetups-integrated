@@ -9,7 +9,11 @@ import Cookies from "universal-cookie";
 import FutureEventItem from "./FutureEventItem.jsx";
 import EventDialog from "./EventDialog";
 import { EventsMessage } from "../index";
-import { EVENTS_URL, eventType } from "../../constants/index";
+import {
+  MAX_ATTENDANTS_ON_EVENT,
+  EVENTS_URL,
+  eventType,
+} from "../../constants/index";
 
 const styles = {
   root: {
@@ -69,7 +73,7 @@ class FutureEvents extends React.Component {
       return "You are in the waiting list";
     }
 
-    if (item.attendanceIds.length >= item.maxPeople) {
+    if (item.attendanceIds.length >= MAX_ATTENDANTS_ON_EVENT) {
       return "Waiting List";
     }
 
@@ -84,7 +88,7 @@ class FutureEvents extends React.Component {
   };
 
   handleOpenWaitingDialog = (eventId) => {
-    axios(`EVENTS_URL/${eventId}`)
+    axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.waitingListIds;
         list.push(this.state.userId);
@@ -92,7 +96,7 @@ class FutureEvents extends React.Component {
       })
       .then(() => {
         axios.patch(
-          `EVENTS_URL/${eventId}`,
+          `${EVENTS_URL}/${eventId}`,
           { waitingListIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -109,7 +113,7 @@ class FutureEvents extends React.Component {
   };
 
   handleOpenSubscribeDialog = (eventId) => {
-    axios(`EVENTS_URL/${eventId}`)
+    axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.attendanceIds;
         list.push(this.state.userId);
@@ -117,7 +121,7 @@ class FutureEvents extends React.Component {
       })
       .then(() => {
         axios.patch(
-          `EVENTS_URL/${eventId}`,
+          `${EVENTS_URL}/${eventId}`,
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -137,7 +141,7 @@ class FutureEvents extends React.Component {
   };
 
   handleOpenUnsubscribeDialog = (eventId) => {
-    axios(`EVENTS_URL/${eventId}`)
+    axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         let list = result.data.attendanceIds;
         list.splice(list.indexOf(this.state.userId), 1);
@@ -145,7 +149,7 @@ class FutureEvents extends React.Component {
       })
       .then(() => {
         axios.patch(
-          `EVENTS_URL/${eventId}`,
+          `${EVENTS_URL}/${eventId}`,
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -166,7 +170,7 @@ class FutureEvents extends React.Component {
 
   handleCloseDialog = () => {
     this.setState({ isOpen: false });
-    axios("EVENTS_URL?_expand=users").then((result) => {
+    axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({ event: result.data });
     });
   };

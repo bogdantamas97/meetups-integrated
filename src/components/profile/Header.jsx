@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
 import axios from "axios";
@@ -23,8 +23,8 @@ const styles = {
   },
   spacing: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
   link: {
     textDecoration: "none",
@@ -67,22 +67,22 @@ const Header = (props) => {
   async function updatePoints(sumOfPoints) {
     const result = await axios(DATA_BASE_URL);
     const userData = result.data.find((item) => item.id === currentUserId);
-    if(userData){
-    axios.post(
-      DATA_BASE_URL +
-        "/update?firstname=" +
-        userData.firstname +
-        "&lastname=" +
-        userData.lastname +
-        "&email=" +
-        userData.email +
-        "&password=" +
-        userData.password +
-        "&id=" +
-        userData.id +
-        "&points=" +
-        sumOfPoints
-    );
+    if (userData) {
+      axios.post(
+        DATA_BASE_URL +
+          "/update?firstname=" +
+          userData.firstname +
+          "&lastname=" +
+          userData.lastname +
+          "&email=" +
+          userData.email +
+          "&password=" +
+          userData.password +
+          "&id=" +
+          userData.id +
+          "&points=" +
+          sumOfPoints
+      );
     }
   }
 

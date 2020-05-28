@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { IconButton, Typography } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
+import React from "react";
+import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import ListItem from "@material-ui/core/ListItem";
 
@@ -25,19 +24,7 @@ const styles = {
 };
 
 const EventsMessage = (props) => {
-  const {
-    eventTypeMessage,
-    children,
-    numberOfPastEventsWithoutFeedback
-  } = props;
-  const [
-    numberOfEventsWithoutFeedback,
-    setMumberOfEventsWithoutFeedback,
-  ] = useState(numberOfPastEventsWithoutFeedback);
-
-  useEffect(() => {
-    setMumberOfEventsWithoutFeedback(numberOfPastEventsWithoutFeedback);
-  }, []);
+  const { eventTypeMessage, numberOfPastEventsWithoutFeedback } = props;
 
   return (
     <Grid>
