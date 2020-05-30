@@ -6,7 +6,6 @@ import {
   withStyles,
   ListItem,
   List,
-  TextField,
   Checkbox,
   DialogActions,
   DialogContent,
@@ -28,9 +27,15 @@ import {
   TOPIC_TITLE_LIMIT,
   TOPIC_DESCRIPTION_LIMIT,
   PROPOSED_TOPICS_URL,
+  EVENTS_URL,
 } from "../../constants/index";
 import TopicItem from "./TopicItem.jsx";
-import { getDateFormat, TopicDatePicker, Selector } from "../../utils/index";
+import {
+  NewEvent,
+  getDateFormat,
+  TopicDatePicker,
+  Selector,
+} from "../../utils/index";
 import { EventsMessage } from "../index";
 import { button, theme } from "../../GlobalTheme/globalTheme.js";
 
@@ -200,6 +205,7 @@ class TopicList extends React.Component {
         );
     }
   };
+
   componentDidMount() {
     axios.get(PROPOSED_TOPICS_URL).then((res) => {
       const validTopics = res.data.filter((item) => {
@@ -207,9 +213,16 @@ class TopicList extends React.Component {
           axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
         } else {
           if (item.sumOfVotes >= 10) {
-            //add as an event
-          } else return item;
+            axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
+            const newEvent = new NewEvent(item);
+            axios.get(EVENTS_URL).then((result) => {
+              const { data } = result;
+              newEvent.id = data.length + 1;
+              axios.post(EVENTS_URL, newEvent);
+            });
+          }
         }
+        return item;
       });
       this.setState({ event: validTopics, isLoaded: true });
     });

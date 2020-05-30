@@ -44,6 +44,20 @@
       "waitingListIds": [],
       "timestamp": 1591977600,
       "feedback": []
+    },
+    {
+      "name": "Javascript Presentation",
+      "type": "Workshop",
+      "date": "June 4, 2020 16:30 ",
+      "lang": "JS",
+      "duration": "1h",
+      "difficulty": "Expert",
+      "timestamp": 1591275600000,
+      "attendanceIds": [],
+      "waitingListIds": [],
+      "feedback": [],
+      "userId": "_6kl0m1c34",
+      "id": 3
     }
   ],
   "achievements": [
@@ -176,26 +190,5 @@
       ]
     }
   ],
-  "proposedTopics": [
-    {
-      "userId": "_6kl0m1c34",
-      "isUserPresenter": true,
-      "topicType": "Workshop",
-      "topicTitle": "Javascript Presentation",
-      "topicDate": "June 4, 2020 16:30 ",
-      "topicContent": "ECMA 6 Tips & Trics",
-      "topicDuration": "1h",
-      "difficultyType": "Expert",
-      "programmingLanguage": "JS",
-      "timeStamp": 1591275600000,
-      "sumOfVotes": -1,
-      "userVotes": [
-        {
-          "userId": "_6kl0m1c34",
-          "vote": -1
-        }
-      ],
-      "id": 1
-    }
-  ]
+  "proposedTopics": []
 }
