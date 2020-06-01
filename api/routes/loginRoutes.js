@@ -2,7 +2,6 @@ const express = require('../node_modules/express');
 const Router = express.Router();
 const sqlConnection = require('../sqlConnection');
 const idGenerator = require('../functions/idGenerator');
-
 Router.get("/", (req, res) => {
     sqlConnection.query("SELECT * from login", (err, rows) => {
         if(!err){

@@ -129,11 +129,15 @@ const LoginPage = (props) => {
       if (!invalidEmail(email) && !invalidPassword(password)) {
         axios.get(DATA_BASE_URL).then((response) => {
           if (response.data.filter((user) => user.email === email)[0])
-            if (response.data.filter((user) => user.password === password)[0]) {
+            if (
+              response.data.filter(
+                (user) =>
+                  Buffer.from(user.password, "base64").toString() === password
+              )[0]
+            ) {
               Cookies.set(
                 "token",
-                response.data.filter((user) => user.password === password)[0]
-                  .id,
+                response.data.filter((user) => user.email === email)[0].id,
                 { expires: inOneHour }
               );
               setLoggedIn(true);

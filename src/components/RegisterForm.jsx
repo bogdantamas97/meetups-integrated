@@ -157,6 +157,8 @@ const RegisterForm = (props) => {
 
     async function fetchData() {
       const result = await axios(apiBaseUrl);
+      console.log(email, result.data);
+
       if (result.data.find((item) => item.email === email)) {
         setSnackbarTitle("Email already exists!");
         setSnackbarType("error");
@@ -240,7 +242,7 @@ const RegisterForm = (props) => {
             "&email=" +
             email +
             "&password=" +
-            password
+            Buffer.from(password).toString('base64')
         )
         .catch(() => {
           setSnackbarTitle("Your registration failed");
