@@ -1,8 +1,8 @@
 import React from "react";
 import { theme } from "../GlobalTheme/globalTheme";
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import ErrorPage from "../images/errorImage.png";
-import {withStyles} from "@material-ui/core";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+import { errorImage as ErrorPage } from "../images/index";
+import { withStyles } from "@material-ui/core";
 
 const styles = {
   image: {

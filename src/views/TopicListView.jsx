@@ -1,5 +1,5 @@
 import React from "react";
-import TopicList from "../components/vote-topics-list/TopicList";
+import TopicList from "../components/voteTopics/TopicList";
 import { theme } from "../GlobalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 

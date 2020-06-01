@@ -1,8 +1,6 @@
 import React from "react";
-import { Typography, withStyles } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
 import { useSpring, animated } from "react-spring";
+import { Typography, withStyles, Grid, Avatar } from "@material-ui/core";
 
 const styles = {
   container: {
@@ -50,7 +48,7 @@ const styles = {
 };
 
 const AchievementsItem = (props) => {
-  const { classes, color, points, title, picturePath,  } = props;
+  const { classes, color, points, title, picturePath } = props;
 
   const animation = useSpring({
     height: "100%",
@@ -63,7 +61,7 @@ const AchievementsItem = (props) => {
     },
     border: "1px dotted rgba(28,110,164,0.45)",
     borderRadius: "10px",
-    backgroundColor: color.toString()
+    backgroundColor: color.toString(),
   });
 
   return (
@@ -79,9 +77,7 @@ const AchievementsItem = (props) => {
         </Grid>
         <Grid item className={classes.pointsItem}>
           <Avatar className={classes.points}>
-            <Typography className={classes.typography}>
-              {points}
-            </Typography>
+            <Typography className={classes.typography}>{points}</Typography>
             <Typography
               className={classes.typography}
               style={{ fontSize: "x-small" }}

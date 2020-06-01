@@ -1,4 +1,4 @@
-import { eventType, MAX_ATTENDANTS_ON_EVENT } from "./eventConstants";
+import { EVENT_TYPE, MAX_ATTENDANTS_ON_EVENT } from "./eventConstants";
 import {
   EMAIL_REGEX,
   EMAIL_ALREADY_EXISTS,
@@ -6,7 +6,7 @@ import {
   REGISTRATION_FAILED,
   LOGIN_SUCCESFULLY,
   LOGIN_FAILED,
-} from "./sigingConstants";
+} from "./signingConstantss";
 import {
   TOPIC_TITLE_LIMIT,
   TOPIC_DESCRIPTION_LIMIT,
@@ -20,20 +20,20 @@ import {
 } from "./databaseConstants";
 
 import {
-  contentPlaceholder,
-  topicTypes,
-  difficultyTypes,
-  programmingLanguages,
-  topicDurations,
+  CONTENT_PLACEHOLDER,
+  TOPIC_TYPES,
+  DIFFICULTY_TYPES,
+  PROGRAMMING_LANGUAGES,
+  TOPIC_DURATIONS,
 } from "./topicConstants";
 
 export {
-  eventType,
-  contentPlaceholder,
-  topicTypes,
-  topicDurations,
-  difficultyTypes,
-  programmingLanguages,
+  EVENT_TYPE,
+  CONTENT_PLACEHOLDER,
+  TOPIC_TYPES,
+  TOPIC_DURATIONS,
+  DIFFICULTY_TYPES,
+  PROGRAMMING_LANGUAGES,
   EMAIL_REGEX,
   EMAIL_ALREADY_EXISTS,
   REGISTRATION_SUCCESSFULLY,

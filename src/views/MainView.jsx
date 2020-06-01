@@ -1,23 +1,24 @@
 import React, { Component, Fragment } from "react";
-import LayoutLogin from "../layouts/LayoutLogin.jsx";
-import { Button, withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { ArobsBackgroundCenter } from "../GlobalTheme/globalTheme";
 import { Link } from "react-router-dom";
+import { Button, withStyles } from "@material-ui/core";
+
+import { LayoutLogin } from "../layouts/index";
+import { ArobsBackgroundCenter } from "../GlobalTheme/globalTheme";
 
 const styles = {
   buttonStyle: {
     color: "#1B4597",
     marginTop: 5 + "px",
     minWidth: 120 + "px",
-    borderRadius: 20 + "px"
+    borderRadius: 20 + "px",
   },
   topButton: {
-    marginTop: 20 + "px"
+    marginTop: 20 + "px",
   },
   linkCss: {
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 };
 
 class MainView extends Component {
@@ -47,7 +48,7 @@ class MainView extends Component {
 }
 
 MainView.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(MainView);

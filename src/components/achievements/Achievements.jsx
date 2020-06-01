@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
 import { withStyles } from "@material-ui/core";
-import MainLayout from "../../layouts/MainLayout.jsx";
-import AchievementsBoxImg from "../../images/surpriseBox.png";
+
+import { MainLayout } from "../../layouts/index";
+import { surpriseBox as AchievementsBoxImg} from "../../images/index";
 import AchievementsItem from "./AchievementsItem";
 import { DATA_BASE_URL, ACHIEVEMENTS_URL } from "../../constants/index";
-import Cookies from "universal-cookie";
 
 const styles = {
   achievementsContainer: {
@@ -36,6 +37,7 @@ const currentUserId = new Cookies().get("token");
 
 const Achievements = (props) => {
   const { classes } = props;
+
   const [currentPoints, setCurrentPoints] = useState(0);
   const [achievements, setAchievements] = useState([]);
 
@@ -50,7 +52,9 @@ const Achievements = (props) => {
 
   const getCurrentPoints = async () => {
     const result = await axios(DATA_BASE_URL);
-    setCurrentPoints(result.data.find((item) => item.id === currentUserId).points);
+    setCurrentPoints(
+      result.data.find((item) => item.id === currentUserId).points
+    );
   };
 
   return (

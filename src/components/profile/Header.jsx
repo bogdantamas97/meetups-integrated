@@ -1,11 +1,12 @@
 import React, { useEffect, Fragment } from "react";
-import PropTypes from "prop-types";
-import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
-import axios from "axios";
-import { green, grey } from "@material-ui/core/colors";
 import { Link } from "react-router-dom";
-import { theme } from "../../GlobalTheme/globalTheme";
 import Cookies from "universal-cookie";
+import PropTypes from "prop-types";
+import axios from "axios";
+import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
+import { green, grey } from "@material-ui/core/colors";
+
+import { theme } from "../../GlobalTheme/globalTheme";
 import {
   DATA_BASE_URL,
   ACHIEVEMENTS_URL,

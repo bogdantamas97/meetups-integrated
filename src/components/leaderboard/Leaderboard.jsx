@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import MainLayout from "../../layouts/MainLayout.jsx";
-import { withStyles, Typography, ListItem, List } from "@material-ui/core";
+import axios from "axios";
+import {
+  Button,
+  ListItem,
+  List,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
 import { theme } from "../../GlobalTheme/globalTheme";
 import ListComponent from "./ListComponent.jsx";
-import LeaderboardPic from "../../images/leaderboardPic.png";
-import axios from "axios";
-import Button from "@material-ui/core/Button";
+
+import { leaderboardPic } from "../../images/index";
+import { MainLayout } from "../../layouts/index";
 import { DATA_BASE_URL } from "../../constants/index";
 
 const styles = {
@@ -76,7 +82,7 @@ const Leaderboard = (props) => {
           <img
             alt="Trophie with medal"
             className={classes.image}
-            src={LeaderboardPic}
+            src={leaderboardPic}
           />
         </div>
         <div className={classes.content}>

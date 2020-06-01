@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "../components/RegisterForm"
+import RegisterForm from "../components/signing/RegisterForm"
 import { theme } from "../GlobalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 

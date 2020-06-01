@@ -1,19 +1,19 @@
-import About from "./About";
-import BaseHeader from "./BaseHeader";
-import Content from "./Content";
-import EventsMessage from "./EventsMessage";
-import FooterBar from "./FooterBar";
-import LoginPage from "./LoginPage";
-import MyEvents from "./MyEvents";
-import RegisterForm from "./RegisterForm";
+import About from "./infoAndNavigation/About";
+import BaseHeader from "./fullPage/BaseHeader";
+import Content from "./fullPage/Content";
+import EventsMessage from "./infoAndNavigation/EventsMessage";
+import FooterBar from "./fullPage/FooterBar";
+import LoginPage from "./signing/LoginPage";
+import MyEvents from "./myEvents/MyEvents";
+import RegisterForm from "./signing/RegisterForm";
 import TemporaryDrawer from "./TemporaryDrawer";
 import Achievemnts from "./achievements/Achievements";
 import Feedback from "./feedback/Feedback"
-import FutureEvents from "./future-events-list/FutureEvents";
+import FutureEvents from "./futureEvents/FutureEvents";
 import LeaderBoard from "./leaderboard/Leaderboard";
-import PastEvents from "./past-events-list/PastEvents";
+import PastEvents from "./pastEvents/PastEvents";
 import Profile from "./profile/Profile";
-import TopicList from "./vote-topics-list/TopicList";
+import TopicList from "./voteTopics/TopicList";
 
 export {
   About,

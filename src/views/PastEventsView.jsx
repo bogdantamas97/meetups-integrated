@@ -1,5 +1,5 @@
 import React from "react";
-import PastEvents from "../components/past-events-list/PastEvents.jsx";
+import PastEvents from "../components/pastEvents/PastEvents.jsx";
 import { theme } from "../GlobalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 

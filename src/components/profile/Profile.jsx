@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import MainLayout from "../../layouts/MainLayout.jsx";
+import { MainLayout } from "../../layouts/index";
 import {
   Button,
   CircularProgress,

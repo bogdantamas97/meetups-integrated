@@ -1,5 +1,5 @@
 import React from "react";
-import FutureEvents from "../components/future-events-list/FutureEvents.jsx";
+import FutureEvents from "../components/futureEvents/FutureEvents.jsx";
 import { theme } from "../GlobalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 

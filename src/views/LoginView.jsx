@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPage from "../components/LoginPage.jsx"
+import LoginPage from "../components/signing/LoginPage.jsx"
 import { theme } from "../GlobalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 

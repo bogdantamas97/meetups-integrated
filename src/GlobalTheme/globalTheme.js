@@ -1,4 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles/index";
+import { background } from '../images/index';
 import { green } from "@material-ui/core/colors";
 
 const palette = {
@@ -123,8 +124,6 @@ const typography = {
     fontWeight: 400
   }
 };
-
-export const background="https://images.pexels.com/photos/355887/pexels-photo-355887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
 export const button = {
   color: "#fff",

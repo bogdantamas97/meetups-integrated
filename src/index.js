@@ -26,7 +26,7 @@ const routing = (
         <Route path="/login" component={LoginView} />
         <Route path="/about" component={AboutView} />
         <Route exact path="/register" component={RegisterView} />
-
+        
         <PrivateRoute path="/achievements" component={AchievementsView} />
         <PrivateRoute path="/myEvents" component={MyEventsView} />
         <PrivateRoute path="/futureEvents" component={FutureEventsView} />
