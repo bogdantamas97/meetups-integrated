@@ -38,14 +38,14 @@ const styles = (theme) => ({
 const Transition = (props) => <Slide direction="down" {...props} />;
 
 const EventDialog = (props) => {
-  const { classes } = props;
+  const { classes, dialogType, handleClose, isOpen } = props;
 
   const [titleMessage, setTitleMessage] = useState("");
   const [coloredWord, setColoredWord] = useState("");
   const [contentMessage, setContentMessage] = useState("");
 
   useEffect(() => {
-    switch (props.dialogType) {
+    switch (dialogType) {
       case "subscribe":
         setTitleMessage("You have been ");
         setColoredWord("subscribed");
@@ -79,16 +79,16 @@ const EventDialog = (props) => {
   return (
     <div>
       <Dialog
-        onClose={props.handleClose}
+        onClose={handleClose}
         TransitionComponent={Transition}
         keepMounted
         aria-labelledby="customized-dialog-title"
-        open={props.isOpen}
+        open={isOpen}
       >
         <DialogTitle
           id="customized-dialog-title"
           className={classes.title}
-          onClose={props.handleClose}
+          onClose={handleClose}
         >
           {titleMessage}
           <span className={classes.highlightedWord}>{coloredWord}</span>!
@@ -97,7 +97,7 @@ const EventDialog = (props) => {
           <Typography>{contentMessage}</Typography>
         </DialogContent>
         <DialogActions className={classes.dialogButton}>
-          <Button onClick={props.handleClose} color="primary">
+          <Button onClick={handleClose} color="primary">
             Ok
           </Button>
         </DialogActions>

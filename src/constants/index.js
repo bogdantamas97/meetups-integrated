@@ -6,7 +6,8 @@ import {
   REGISTRATION_FAILED,
   LOGIN_SUCCESFULLY,
   LOGIN_FAILED,
-} from "./signingConstantss";
+  IN_ONE_HOUR,
+} from "./signingConstants";
 import {
   TOPIC_TITLE_LIMIT,
   TOPIC_DESCRIPTION_LIMIT,
@@ -41,6 +42,7 @@ export {
   LOGIN_SUCCESFULLY,
   LOGIN_FAILED,
   TOPIC_TITLE_LIMIT,
+  IN_ONE_HOUR,
   TOPIC_DESCRIPTION_LIMIT,
   DATA_BASE_URL,
   EVENTS_URL,

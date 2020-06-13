@@ -9,7 +9,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-import { eventTitle, eventSubtitle } from "../../GlobalTheme/globalTheme";
+import { eventTitle, eventSubtitle } from "../../globalTheme/globalTheme";
 
 const styles = {
   content: {
@@ -32,7 +32,7 @@ const styles = {
   },
   itemBottom: {
     height: 5,
-    fontSize: 8 + "px",
+    fontSize: "8px",
   },
   avatar: {
     width: 50,
@@ -62,21 +62,21 @@ const styles = {
     marginTop: -6,
   },
   buttonStyle: {
-    borderRadius: 20 + "px",
-    height: 20 + "px",
-    width: 175 + "px",
-    fontSize: 11 + "px",
-    marginTop: 3 + "px",
-    marginBotton: 30 + "px",
+    borderRadius: "20px",
+    height: "20px",
+    width: "175px",
+    fontSize: "11px",
+    marginTop: "3px",
+    marginBotton: "30px",
     boxShadow: ["none"],
     shadows: ["none"],
     backgroundColor: "#7cff89",
   },
   typographyButton: {
-    marginTop: -5 + "px",
+    marginTop: "-5px",
     color: "#282828",
     textTransform: ["none"],
-    fontSize: 12 + "px",
+    fontSize: "12px",
     fontWeight: 600,
   },
 };

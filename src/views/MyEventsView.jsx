@@ -1,5 +1,5 @@
 import React from "react";
-import { theme } from "../GlobalTheme/globalTheme";
+import { theme } from "../globalTheme/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import MyEvents from "../components/myEvents/MyEvents.jsx";
 

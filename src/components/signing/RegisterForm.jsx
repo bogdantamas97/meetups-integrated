@@ -6,14 +6,15 @@ import {
   FormControl,
   TextField,
   Snackbar,
+  Tooltip,
   ThemeProvider as MuiThemeProvider,
   withStyles,
 } from "@material-ui/core";
-import red from "@material-ui/core/colors/red";
+import { red } from "@material-ui/core/colors";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import MuiAlert from "@material-ui/lab/Alert";
 
-import { Background, button, theme } from "../../GlobalTheme/globalTheme";
+import { Background, button, theme } from "../../globalTheme/globalTheme";
+import { Alert } from "../../utils";
 import { LayoutLogin } from "../../layouts/index";
 import { DATA_BASE_URL, EMAIL_REGEX } from "../../constants/index";
 
@@ -66,24 +67,14 @@ const styles = {
   cssFocused: {
     color: "white",
   },
-  cssUnderline: {
-    "&:after": {
-      borderBottomColor: "white",
-    },
-  },
   notchedOutline: {
     borderWidth: "2px",
     borderColor: "white !important",
   },
-  helperText: {
-    fontStyle: "italic",
-    color: "red",
-  },
   arrowBackIcon: {
     color: "white",
     width: 80,
-    height: 70,
-    display: "absolute",
+    height: 50,
     "&:hover": {
       backgroundColor: "gray",
     },
@@ -93,10 +84,6 @@ button.width = "100%";
 button.height = "70px";
 button.marginTop = 40;
 button.maxWidth = 400;
-
-const Alert = (props) => (
-  <MuiAlert elevation={10} variant="filled" {...props} />
-);
 
 const RegisterForm = (props) => {
   const { classes } = props;
@@ -155,7 +142,6 @@ const RegisterForm = (props) => {
 
     async function fetchData() {
       const result = await axios(DATA_BASE_URL);
-      console.log(email, result.data);
 
       if (result.data.find((item) => item.email === email)) {
         setSnackbarTitle("Email already exists!");
@@ -260,10 +246,12 @@ const RegisterForm = (props) => {
       <LayoutLogin backgroundStyle={Background}>
         <Route
           render={({ history }) => (
-            <ArrowBackIcon
-              className={classes.arrowBackIcon}
-              onClick={() => history.push("/")}
-            />
+            <Tooltip title="Back to login">
+              <ArrowBackIcon
+                className={classes.arrowBackIcon}
+                onClick={() => history.push("/")}
+              />
+            </Tooltip>
           )}
         />
         <FormControl className={classes.formStyle} onSubmit={handleSubmit}>
@@ -411,7 +399,7 @@ const RegisterForm = (props) => {
             Clear Fields
           </Button>
           <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={5000}>
-            <Alert onClose={handleClose} severity={snackbarType}>
+            <Alert elevation={10} onClose={handleClose} severity={snackbarType}>
               {snackbarTitle}
             </Alert>
           </Snackbar>

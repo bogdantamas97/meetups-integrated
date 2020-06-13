@@ -11,13 +11,10 @@ import {
   withStyles,
 } from "@material-ui/core";
 import green from "@material-ui/core/colors/green";
-import MuiAlert from "@material-ui/lab/Alert";
-
 import { LayoutLogin } from "../../layouts/index";
-import { theme, Background } from "../../GlobalTheme/globalTheme";
-import { EMAIL_REGEX, DATA_BASE_URL } from "../../constants/index";
-
-const inOneHour = 1 / 24;
+import { theme, Background } from "../../globalTheme/globalTheme";
+import { Alert } from "../../utils";
+import { EMAIL_REGEX, DATA_BASE_URL, IN_ONE_HOUR } from "../../constants/index";
 
 const styles = {
   loginButton: {
@@ -77,8 +74,6 @@ const styles = {
   },
 };
 
-const Alert = (props) => <MuiAlert elevation={5} variant="filled" {...props} />;
-
 const LoginPage = (props) => {
   const { classes } = props;
 
@@ -109,9 +104,12 @@ const LoginPage = (props) => {
     return false;
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const setSnackbar = (title, type) => {
+    setSnackbarTitle(title);
+    setSnackbarType(type);
   };
+
+  const handleClose = () => setOpen(false);
 
   const onKeyEnterPressed = (event) => {
     if (event.keyCode === 13) {
@@ -128,37 +126,35 @@ const LoginPage = (props) => {
     if (email.length !== 0 && password.length !== 0) {
       if (!invalidEmail(email) && !invalidPassword(password)) {
         axios.get(DATA_BASE_URL).then((response) => {
-          if (response.data.filter((user) => user.email === email)[0])
-            if (
-              response.data.filter(
-                (user) =>
-                  Buffer.from(user.password, "base64").toString() === password
-              )[0]
-            ) {
+          const isTheEmailRegistered = response.data.filter(
+            (user) => user.email === email
+          )[0];
+          const isThePasswordCorrect = response.data.filter(
+            (user) =>
+              Buffer.from(user.password, "base64").toString() === password
+          )[0];
+
+          if (isTheEmailRegistered) {
+            if (isThePasswordCorrect) {
               Cookies.set(
                 "token",
                 response.data.filter((user) => user.email === email)[0].id,
-                { expires: inOneHour }
+                { expires: IN_ONE_HOUR }
               );
               setLoggedIn(true);
-              setSnackbarTitle("Login succesfully!");
-              setSnackbarType("success");
+              setSnackbar("Login succesfully!", "success");
             } else {
-              setSnackbarTitle("Wrong password!");
-              setSnackbarType("error");
+              setSnackbar("Wrong password!", "error");
             }
-          else {
-            setSnackbarTitle("Email is not registered!");
-            setSnackbarType("error");
+          } else {
+            setSnackbar("Email is not registered!", "error");
           }
         });
       } else {
-        setSnackbarTitle("Invalid data");
-        setSnackbarType("error");
+        setSnackbar("Invalid data!", "error");
       }
     } else {
-      setSnackbarTitle("All fields are required!");
-      setSnackbarType("error");
+      setSnackbar("All fields are required!", "error");
     }
   };
 
@@ -254,7 +250,7 @@ const LoginPage = (props) => {
             }}
           />
           <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={5000}>
-            <Alert onClose={handleClose} severity={snackbarType}>
+            <Alert elevation={5} onClose={handleClose} severity={snackbarType}>
               {snackbarTitle}
             </Alert>
           </Snackbar>

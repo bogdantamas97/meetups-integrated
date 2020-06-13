@@ -10,7 +10,6 @@ import {
 
 import TemporaryDrawer from "../TemporaryDrawer.jsx";
 
-
 const styles = () => ({
   topBar: {
     flexGrow: 1,
@@ -24,9 +23,12 @@ const styles = () => ({
 });
 
 const getInitials = (fullName) => {
-  let initials = fullName.match(/\b\w/g) || [];
-  initials = ((initials.shift() || "") + (initials.pop() || "")).toUpperCase();
-  return initials;
+  if (fullName) {
+    return fullName
+      .toUpperCase()
+      .match(/(\b[A-Z](?!\s))/g)
+      .join("");
+  }
 };
 
 const BaseHeader = (props) => {

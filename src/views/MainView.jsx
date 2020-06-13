@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Button, withStyles } from "@material-ui/core";
 
 import { LayoutLogin } from "../layouts/index";
-import { ArobsBackgroundCenter } from "../GlobalTheme/globalTheme";
 
 const styles = {
   buttonStyle: {
@@ -25,7 +24,7 @@ class MainView extends Component {
   render() {
     return (
       <Fragment>
-        <LayoutLogin backgroundStyle={ArobsBackgroundCenter}>
+        <LayoutLogin>
           <Link to="/register" style={styles.linkCss}>
             <Button variant="contained" style={styles.buttonStyle}>
               Register

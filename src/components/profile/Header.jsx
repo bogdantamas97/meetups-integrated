@@ -6,7 +6,7 @@ import axios from "axios";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
 import { green, grey } from "@material-ui/core/colors";
 
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import {
   DATA_BASE_URL,
   ACHIEVEMENTS_URL,
@@ -68,27 +68,30 @@ const Header = (props) => {
   async function updatePoints(sumOfPoints) {
     const result = await axios(DATA_BASE_URL);
     const userData = result.data.find((item) => item.id === currentUserId);
+
     if (userData) {
+      const { firstname, lastname, email, password, id } = userData;
       axios.post(
         DATA_BASE_URL +
           "/update?firstname=" +
-          userData.firstname +
+          firstname +
           "&lastname=" +
-          userData.lastname +
+          lastname +
           "&email=" +
-          userData.email +
+          email +
           "&password=" +
-          userData.password +
+          password +
           "&id=" +
-          userData.id +
+          id +
           "&points=" +
           sumOfPoints
       );
     }
   }
 
-  const nextAchievement = () => {
-    const data = allPoints.filter((item) => points < item.points)[0];
+  const nextAchievement = (myPoints, allPoints) => {
+    const data = allPoints.filter((item) => myPoints < item.points)[0];
+    const { points, title } = data;
 
     return (
       <Fragment>
@@ -96,11 +99,11 @@ const Header = (props) => {
           <Fragment>
             <div style={{ marginTop: "10px" }}>
               <Typography style={styles.achivNext} align="right">
-                Next Achievement: {`${data.points} points`}
+                Next Achievement: {`${points} points`}
               </Typography>
             </div>
             <Typography style={{ color: green[500] }} align="right">
-              {data.title}
+              {title}
             </Typography>
           </Fragment>
         ) : (
@@ -123,7 +126,7 @@ const Header = (props) => {
                 {points} Points
               </Typography>
             </div>
-            {nextAchievement()}
+            {nextAchievement(points, allPoints)}
             <Grid
               container
               justify="space-evenly"
@@ -142,7 +145,7 @@ const Header = (props) => {
             </Grid>
           </React.Fragment>
         ) : (
-          "Loading"
+          "Loading..."
         )}
       </Paper>
     </div>

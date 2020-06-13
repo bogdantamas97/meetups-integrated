@@ -1,5 +1,5 @@
 {
-  "name": "licenta_Tamas_Bogdan",
+  "name": "lintTB",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "cloc": "^2.5.0",
     "js-cookie": "^2.2.1",
     "json-server": "^0.16.1",
+    "lint": "^0.7.0",
     "lodash": "^4.17.15",
     "material-ui": "^0.20.2",
     "material-ui-pickers": "^2.2.4",
@@ -48,5 +49,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "main": "index.js",
+  "repository": "https://github.com/bogdantamas97/Licenta.git",
+  "license": "MIT"
 }

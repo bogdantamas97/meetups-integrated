@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import moment from "moment/moment";
 
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import { MainLayout } from "../../layouts/index";
 import {
   withStyles,
@@ -49,6 +49,7 @@ const styles = {
   },
 };
 
+const CURRENT_USER_ID = new Cookies().get("token");
 class MyEvents extends React.Component {
   state = {
     isDisplayed: true,
@@ -61,19 +62,14 @@ class MyEvents extends React.Component {
     isLoading: true,
   };
 
-  isUsersEvent = (event) => {
-    const id = this.state.cookies.get("token");
-    return (
-      event.attendanceIds.includes(id) || event.waitingListIds.includes(id)
-    );
-  };
+  isUsersEvent = (event) =>
+    event.attendanceIds.includes(CURRENT_USER_ID) ||
+    event.waitingListIds.includes(CURRENT_USER_ID);
 
   componentDidMount() {
-    const userId = this.state.cookies.get("token");
-
     axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
-        userId,
+        userId: CURRENT_USER_ID,
         event: result.data.filter(this.isUsersEvent),
         isLoaded: true,
       });
@@ -85,14 +81,15 @@ class MyEvents extends React.Component {
   };
 
   checkUser = (item) => {
-    if (item.waitingListIds.includes(this.state.userId)) {
+    const { userId, attendanceIds, waitingListIds } = item;
+    if (waitingListIds.includes(this.state.userId)) {
       return "You are in the waiting list";
     }
 
-    if (item.userId === this.state.userId) {
+    if (userId === this.state.userId) {
       return "You are the speaker";
     }
-    if (item.attendanceIds.includes(this.state.userId)) {
+    if (attendanceIds.includes(this.state.userId)) {
       return "Unsubscribe";
     }
   };
@@ -140,7 +137,7 @@ class MyEvents extends React.Component {
       <MainLayout topBarTitle={"My Events"}>
         <div className={classes.root}>
           <div className={classes.styleHeader}>
-            <EventsMessage EVENT_TYPEMessage={EVENT_TYPE.MY_EVENTS} />
+            <EventsMessage eventTypeMessage={EVENT_TYPE.MY_EVENTS} />
           </div>
           <div className={classes.styleContent}>
             <List className={classes.list}>

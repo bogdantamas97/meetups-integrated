@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import { MainLayout } from "../../layouts/index";
 
 const styles = {
@@ -23,13 +23,19 @@ const styles = {
     listStyleType: "none",
     lineHeight: 1.5,
   },
+  mainGrid: {
+    width: "80%",
+    height: "80%",
+  },
+  secondaryGrid: {
+    marginLeft: "5%",
+  },
 };
 
-const About = () => (
+const About = (props) => (
   <MainLayout topBarTitle=" About">
-    <Grid style={{ width: "80%", height: "80%" }}>
-      <div style={{ height: "2vh" }} />
-      <Grid style={{ marginLeft: "5%" }}>
+    <Grid style={styles.mainGrid}>
+      <Grid style={styles.secondaryGrid}>
         <Typography style={theme.typography.h6}>Rules</Typography>
       </Grid>
       <Paper style={styles.AppRuleList}>

@@ -21,7 +21,7 @@ const FooterBar = (props) => {
   return (
     <Fragment>
       <Paper className={classes.paper}>
-        <BottomNavigation></BottomNavigation>
+        <BottomNavigation />
       </Paper>
     </Fragment>
   );

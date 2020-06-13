@@ -15,6 +15,7 @@ const styles = {
   },
 };
 
+const CURRENT_USER_ID = Cookies.get("token");
 const MainLayout = (props) => {
   const { classes, avatarInitials, topBarTitle, children } = props;
   const [fullName, setFullName] = useState("");
@@ -25,13 +26,11 @@ const MainLayout = (props) => {
         .get(DATA_BASE_URL)
         .then((result) =>
           setFullName(
-            result.data.filter(
-              (element) => element.id === Cookies.get("token")
-            )[0].firstname +
+            result.data.filter((element) => element.id === CURRENT_USER_ID)[0]
+              .firstname +
               " " +
-              result.data.filter(
-                (element) => element.id === Cookies.get("token")
-              )[0].lastname
+              result.data.filter((element) => element.id === CURRENT_USER_ID)[0]
+                .lastname
           )
         )
         .catch(() => {

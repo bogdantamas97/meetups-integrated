@@ -13,10 +13,8 @@ import {
 } from "@material-ui/core";
 import Header from "./Header";
 import ListComponent from "../leaderboard/ListComponent.jsx";
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import { POINTS_RECEIVED_URL } from "../../constants/index";
-
-const currentUserId = new Cookies().get("token");
 
 const styles = (theme) => ({
   typography: theme.typography.body1,
@@ -64,7 +62,7 @@ const Profile = (props) => {
     async function fetchData() {
       const result = await axios(POINTS_RECEIVED_URL);
       const hasPoints = result.data.filter(
-        (item) => item.userId === currentUserId
+        (item) => item.userId === new Cookies().get("token")
       )[0];
 
       setLoaded(true);

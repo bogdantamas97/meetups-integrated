@@ -19,6 +19,9 @@ import Category from "./Category.jsx";
 import { EVENTS_URL } from "../../constants/index";
 
 const styles = {
+  title: {
+    margin: "auto",
+  },
   button: {
     width: "30%",
   },
@@ -41,6 +44,7 @@ const Feedback = (props) => {
 
   const handleClickSend = () => {
     const feedback = {};
+
     feedback.clarity = clarity;
     feedback.originality = originality;
     feedback.complexity = complexity;
@@ -58,7 +62,6 @@ const Feedback = (props) => {
   };
 
   const handleSendFeedback = (feedbackList) => {
-    console.log(feedbackList);
     axios.patch(
       `${EVENTS_URL}/${props.eventId}`,
       { feedback: feedbackList },
@@ -68,7 +71,7 @@ const Feedback = (props) => {
 
   return (
     <Dialog maxWidth="xs" fullWidth={true} open={props.isOpen}>
-      <DialogTitle>Feedback for:{eventName}</DialogTitle>
+      <DialogTitle className={classes.title}>{eventName}</DialogTitle>
       <DialogContent>
         <Grid container justify="space-evenly" className={classes.logos}>
           <Logo2 />
@@ -101,7 +104,7 @@ const Feedback = (props) => {
         <Category
           value={cursive}
           handleChange={(event) => setCursive(event.target.value)}
-          category={"Cursive flow,good pace"}
+          category={"Cursive flow, good pace"}
         />
 
         <Grid container justify="space-evenly" style={{ marginTop: "150px" }}>

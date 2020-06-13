@@ -8,10 +8,6 @@ const styles = {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    border: "1px solid #b8bdc4",
-    borderLeftStyle: "none",
-    borderRightStyle: "none",
-    borderTopStyle: "none",
   },
   pointsItem: {
     display: "flex",

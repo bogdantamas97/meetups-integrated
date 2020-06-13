@@ -3,9 +3,9 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { withStyles } from "@material-ui/core";
 
+import AchievementsItem from "./AchievementsItem";
 import { MainLayout } from "../../layouts/index";
 import { surpriseBox as AchievementsBoxImg} from "../../images/index";
-import AchievementsItem from "./AchievementsItem";
 import { DATA_BASE_URL, ACHIEVEMENTS_URL } from "../../constants/index";
 
 const styles = {
@@ -33,7 +33,7 @@ const styles = {
   },
 };
 
-const currentUserId = new Cookies().get("token");
+const CURRENT_USER_ID = new Cookies().get("token");
 
 const Achievements = (props) => {
   const { classes } = props;
@@ -53,7 +53,7 @@ const Achievements = (props) => {
   const getCurrentPoints = async () => {
     const result = await axios(DATA_BASE_URL);
     setCurrentPoints(
-      result.data.find((item) => item.id === currentUserId).points
+      result.data.find((item) => item.id === CURRENT_USER_ID).points
     );
   };
 

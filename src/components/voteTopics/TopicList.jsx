@@ -37,7 +37,7 @@ import {
   Selector,
 } from "../../utils/index";
 import { EventsMessage } from "../index";
-import { button, theme } from "../../GlobalTheme/globalTheme.js";
+import { button, theme } from "../../globalTheme/globalTheme.js";
 
 const styles = {
   typography: theme.typography,
@@ -354,7 +354,7 @@ class TopicList extends React.Component {
         </Modal>
         <MainLayout topBarTitle={"Vote Topics"}>
           <div style={styleHeader}>
-            <EventsMessage EVENT_TYPEMessage={EVENT_TYPE.VOTE_TOPICS} />
+            <EventsMessage eventTypeMessage={EVENT_TYPE.VOTE_TOPICS} />
           </div>
           <div style={styleContent}>
             <Button

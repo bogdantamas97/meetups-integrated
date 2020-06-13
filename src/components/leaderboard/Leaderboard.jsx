@@ -7,7 +7,7 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import ListComponent from "./ListComponent.jsx";
 
 import { leaderboardPic } from "../../images/index";
@@ -71,9 +71,7 @@ const Leaderboard = (props) => {
     fetchData();
   }, []);
 
-  const loadMore = async () => {
-    setNumberOfItems(numberOfItems + 5);
-  };
+  const loadMore = () => setNumberOfItems(numberOfItems + 5);
 
   return (
     <MainLayout>

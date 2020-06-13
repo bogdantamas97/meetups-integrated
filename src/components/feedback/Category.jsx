@@ -1,10 +1,17 @@
 import React from "react";
 import { RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 
-const Category = props => {
+const Category = (props) => {
   return (
     <RadioGroup row value={props.value} onChange={props.handleChange}>
-      <p style={{ width: "47%", fontSize: "12px" }}>{props.category}</p>
+      <p
+        style={{
+          width: "47%",
+          fontSize: "12px",
+        }}
+      >
+        {props.category}
+      </p>
 
       <FormControlLabel
         value={"1"}

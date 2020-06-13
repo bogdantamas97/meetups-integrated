@@ -69,18 +69,19 @@ class FutureEvents extends React.Component {
   }
 
   checkUser = (item) => {
-    if (item.waitingListIds.includes(this.state.userId)) {
+    const { waitingListIds, userId, attendanceIds } = item;
+    if (waitingListIds.includes(this.state.userId)) {
       return "You are in the waiting list";
     }
 
-    if (item.attendanceIds.length >= MAX_ATTENDANTS_ON_EVENT) {
+    if (attendanceIds.length >= MAX_ATTENDANTS_ON_EVENT) {
       return "Waiting List";
     }
 
-    if (item.usersId === this.state.userId) {
+    if (userId === this.state.userId) {
       return "You are the speaker";
     }
-    if (!item.attendanceIds.includes(this.state.userId)) {
+    if (!attendanceIds.includes(this.state.userId)) {
       return "Subscribe";
     } else {
       return "Unsubscribe";
@@ -182,7 +183,7 @@ class FutureEvents extends React.Component {
       <MainLayout topBarTitle={"Future Events"}>
         <div className={classes.root}>
           <div className={classes.styleHeader}>
-            <EventsMessage EVENT_TYPEMessage={EVENT_TYPE.FUTURE_EVENTS} />
+            <EventsMessage eventTypeMessage={EVENT_TYPE.FUTURE_EVENTS} />
           </div>
           <div className={classes.styleContent}>
             <List className={classes.list}>

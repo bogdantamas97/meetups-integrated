@@ -7,6 +7,8 @@ const REGISTRATION_FAILED = "Your registration failed";
 const LOGIN_SUCCESFULLY = "You're now logged in";
 const LOGIN_FAILED = "Wrong username and password";
 
+const IN_ONE_HOUR = 1 / 24;
+
 export {
   EMAIL_REGEX,
   EMAIL_ALREADY_EXISTS,
@@ -14,4 +16,5 @@ export {
   REGISTRATION_FAILED,
   LOGIN_SUCCESFULLY,
   LOGIN_FAILED,
+  IN_ONE_HOUR,
 };

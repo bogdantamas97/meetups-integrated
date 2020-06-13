@@ -6,16 +6,11 @@ import {
   eventTitle,
   eventSubtitle,
   eventBottom,
-} from "../../GlobalTheme/globalTheme";
+} from "../../globalTheme/globalTheme";
 import { Avatar, Grid, Typography, withStyles } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 
 const styles = {
-  content: {
-    width: "100%",
-    height: "100%",
-    borderBottom: "1px solid #c0c3c6",
-  },
   container: {
     width: "100%",
     height: "100%",
@@ -68,10 +63,20 @@ const styles = {
 };
 
 const FutureEventItem = (props) => {
-  const { classes } = props;
+  const {
+    action,
+    classes,
+    date,
+    handleSubscribeClick,
+    handleWaitingListClick,
+    handleUnsubscribeClick,
+    lang,
+    name,
+    time,
+    secondLine,
+  } = props;
 
   const [width, updateWidth] = useState(0);
-  //   let fontTitle, fontSubtitle, fontBottom;
 
   const fontTitle = () => {
     while (width < 1024) return 10 + width / 140;
@@ -93,16 +98,16 @@ const FutureEventItem = (props) => {
   };
 
   const checkSubscribe = () => {
-    if (props.action === "Subscribe") return true;
+    if (action === "Subscribe") return true;
     return false;
   };
 
   const checkWaitingList = () => {
-    if (props.action === "Waiting List") return true;
+    if (action === "Waiting List") return true;
     return false;
   };
   const checkUnsubscribe = () => {
-    if (props.action === "Unsubscribe") return true;
+    if (action === "Unsubscribe") return true;
     return false;
   };
 
@@ -138,7 +143,7 @@ const FutureEventItem = (props) => {
       >
         <Grid item className={classes.itemOne}>
           <Avatar className={classes.avatar}>
-            <Typography className={classes.typography}>{props.lang}</Typography>
+            <Typography className={classes.typography}>{lang}</Typography>
           </Avatar>
         </Grid>
         <Grid item style={{ width: "calc(100% - 170px)", height: 73 }}>
@@ -161,7 +166,7 @@ const FutureEventItem = (props) => {
                   fontWeight: eventTitle.fontWeight,
                 }}
               >
-                {props.name}
+                {name}
               </Typography>
             </Grid>
             <Grid item className={classes.itemMiddle}>
@@ -173,7 +178,7 @@ const FutureEventItem = (props) => {
                   fontWeight: eventSubtitle.fontWeight,
                 }}
               >
-                {props.secondLine}
+                {secondLine}
               </Typography>
             </Grid>
             <Grid item className={classes.itemBottom}>
@@ -186,15 +191,15 @@ const FutureEventItem = (props) => {
                 }}
                 onClick={
                   checkSubscribe()
-                    ? props.handleSubscribeClick
+                    ? handleSubscribeClick
                     : checkWaitingList()
-                    ? props.handleWaitingListClick
+                    ? handleWaitingListClick
                     : checkUnsubscribe()
-                    ? props.handleUnsubscribeClick
+                    ? handleUnsubscribeClick
                     : () => {}
                 }
               >
-                <div className={classes.hoverButton}>{props.action}</div>
+                <div className={classes.hoverButton}>{action}</div>
               </Typography>
             </Grid>
           </Grid>
@@ -207,10 +212,10 @@ const FutureEventItem = (props) => {
         >
           <div className={classes.timeFrame}>
             <Typography className={classes.typographyThreeTop}>
-              {props.date}
+              {date}
             </Typography>
             <Typography className={classes.typographyThreeBottom}>
-              {props.time}
+              {time}
             </Typography>
           </div>
         </Grid>

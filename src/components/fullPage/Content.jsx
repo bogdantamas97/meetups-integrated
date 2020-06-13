@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core";
 
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 
 const styles = {
   content: {

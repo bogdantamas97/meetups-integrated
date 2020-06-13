@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { theme } from "../../GlobalTheme/globalTheme";
+import { theme } from "../../globalTheme/globalTheme";
 import { Grid, Paper, Typography, withStyles } from "@material-ui/core";
 
 const styles = {
@@ -25,7 +25,7 @@ const styles = {
 };
 
 const ListComponent = (props) => {
-  const { classes } = props;
+  const { classes, name, points } = props;
 
   return (
     <div style={{ margin: "auto", width: "50%", height: "100%" }}>
@@ -38,12 +38,12 @@ const ListComponent = (props) => {
         >
           <Grid item className={classes.itemOne}>
             <Typography style={{ color: theme.palette.primary.light }}>
-              {props.name}
+              {name}
             </Typography>
           </Grid>
           <Grid item className={classes.itemTwo}>
             <Typography style={{ color: theme.palette.primary.light }}>
-              {props.points}
+              {points}
             </Typography>
           </Grid>
         </Grid>
