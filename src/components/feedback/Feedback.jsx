@@ -18,20 +18,7 @@ import { ReactComponent as Logo5 } from "../../images/fifth.svg";
 import Category from "./Category.jsx";
 import { EVENTS_URL } from "../../constants/index";
 
-const styles = {
-  title: {
-    margin: "auto",
-  },
-  button: {
-    width: "30%",
-  },
-  logos: {
-    width: "58%",
-    marginLeft: "43%",
-    marginTop: "100px",
-    marginBottom: "10px",
-  },
-};
+import { feedbackStyles } from '../../styles';
 
 const Feedback = (props) => {
   const { classes, eventName, eventId, userId, closeFeedbackDialog } = props;
@@ -112,7 +99,7 @@ const Feedback = (props) => {
             variant="contained"
             color="primary"
             onClick={props.handleClickCancel}
-            style={styles.button}
+            style={feedbackStyles.button}
           >
             Cancel
           </Button>
@@ -120,7 +107,7 @@ const Feedback = (props) => {
             variant="contained"
             color="primary"
             onClick={handleClickSend}
-            style={styles.button}
+            style={feedbackStyles.button}
           >
             Send
           </Button>
@@ -130,4 +117,4 @@ const Feedback = (props) => {
   );
 };
 
-export default withStyles(styles)(Feedback);
+export default withStyles(feedbackStyles)(Feedback);

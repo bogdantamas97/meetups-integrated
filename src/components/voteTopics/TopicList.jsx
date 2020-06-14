@@ -15,6 +15,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Cookies from "universal-cookie";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { topicStyles } from "../../styles";
 
 import { MainLayout } from "../../layouts/index";
 import {
@@ -37,70 +38,7 @@ import {
   Selector,
 } from "../../utils/index";
 import { EventsMessage } from "../index";
-import { button, theme } from "../../globalTheme/globalTheme.js";
-
-const styles = {
-  typography: theme.typography,
-  button: button,
-  root: {
-    width: "100%",
-    height: "100%",
-  },
-  header: {
-    display: "block",
-    height: "30%",
-    width: "100%",
-    backgroundColor: "white",
-  },
-  list: {
-    height: "98%",
-    width: "100%",
-  },
-  listItem: {
-    width: "100%",
-    height: 73,
-    paddingLeft: "0px",
-    paddingRight: "0px",
-    paddingTop: "0px",
-    paddingBottom: "0px",
-  },
-  mainTitle: {
-    fontSize: "20px",
-    fontStyle: "bold",
-    marginBottom: "auto",
-  },
-  subTitle: {
-    fontSize: "15px",
-    fontStyle: "italic",
-    marginBottom: "auto",
-  },
-  row: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: "auto",
-  },
-  defaultContent: {
-    width: "40%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
-  label: {
-    fontFamily: "Georgia",
-    width: "80%",
-    display: "flex",
-    flexDirection: "row",
-  },
-  checkboxContent: {
-    width: "20%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
-  detailsTitle: {
-    fontFamily: "Arial",
-  },
-};
+import { theme } from "../../styles/globalTheme.js";
 
 class TopicList extends React.Component {
   constructor(props) {
@@ -405,4 +343,4 @@ TopicList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TopicList);
+export default withStyles(topicStyles)(TopicList);

@@ -4,37 +4,15 @@ import Cookies from "universal-cookie";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
-import { green, grey } from "@material-ui/core/colors";
+import { green } from "@material-ui/core/colors";
 
-import { theme } from "../../globalTheme/globalTheme";
 import {
   DATA_BASE_URL,
   ACHIEVEMENTS_URL,
   POINTS_RECEIVED_URL,
+  CURRENT_USER_ID,
 } from "../../constants/index";
-
-const currentUserId = new Cookies().get("token");
-
-const styles = {
-  summary: theme.typography.subheading,
-  achiv: theme.typography.captionProfile,
-  achivNext: theme.typography.caption,
-  root: {
-    flexGrow: 1,
-  },
-  spacing: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  link: {
-    textDecoration: "none",
-    backgroundColor: grey[100],
-    "&:hover": {
-      backgroundColor: grey[500],
-    },
-  },
-};
+import { headerStyles } from "../../styles";
 
 const Header = (props) => {
   const { classes } = props;
@@ -67,7 +45,7 @@ const Header = (props) => {
 
   async function updatePoints(sumOfPoints) {
     const result = await axios(DATA_BASE_URL);
-    const userData = result.data.find((item) => item.id === currentUserId);
+    const userData = result.data.find((item) => item.id === CURRENT_USER_ID);
 
     if (userData) {
       const { firstname, lastname, email, password, id } = userData;
@@ -98,7 +76,7 @@ const Header = (props) => {
         {data.length !== 0 ? (
           <Fragment>
             <div style={{ marginTop: "10px" }}>
-              <Typography style={styles.achivNext} align="right">
+              <Typography style={headerStyles.achivNext} align="right">
                 Next Achievement: {`${points} points`}
               </Typography>
             </div>
@@ -107,7 +85,7 @@ const Header = (props) => {
             </Typography>
           </Fragment>
         ) : (
-          <Typography style={styles.achivNext} align="right">
+          <Typography style={headerStyles.achivNext} align="right">
             No next achievement
           </Typography>
         )}
@@ -133,12 +111,12 @@ const Header = (props) => {
               style={{ width: "100%", marginTop: "10px" }}
             >
               <Link className={classes.link} to={"/leaderboard"}>
-                <Typography style={styles.achiv} align="right">
+                <Typography style={headerStyles.achiv} align="right">
                   Leaderboard
                 </Typography>
               </Link>
               <Link className={classes.link} to={"/achievements"}>
-                <Typography style={styles.achiv} align="right">
+                <Typography style={headerStyles.achiv} align="right">
                   Achievements
                 </Typography>
               </Link>
@@ -156,4 +134,4 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Header);
+export default withStyles(headerStyles)(Header);

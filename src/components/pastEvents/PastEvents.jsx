@@ -2,46 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import moment from "moment";
-import Cookies from "universal-cookie";
 
 import PastEventItem from "./PastEventItem.jsx";
 import { MainLayout } from "../../layouts/index";
 import { withStyles, ListItem, List } from "@material-ui/core";
-import { EVENTS_URL, EVENT_TYPE } from "../../constants/index";
-import { EventsMessage, Feedback } from "../index.js";
-
-const styles = {
-  root: {
-    width: "100%",
-    height: "100%",
-  },
-  header: {
-    display: "block",
-    height: "30%",
-    width: "100%",
-  },
-  styleHeader: {
-    display: "block",
-    height: "15%",
-    width: "100%",
-    maxHeight: 90,
-  },
-  styleContent: { height: "85%", width: "100%" },
-  list: {
-    height: "98%",
-    width: "100%",
-  },
-  listItem: {
-    width: "100%",
-    height: 73,
-    paddingLeft: "0px",
-    paddingRight: "0px",
-    paddingTop: "0px",
-    paddingBottom: "0px",
-  },
-};
-
-const CURRENT_USER_ID = new Cookies().get("token");
+import { EVENTS_URL, EVENT_TYPE, CURRENT_USER_ID } from "../../constants/index";
+import { EventsMessage, Feedback } from "../";
+import { pastEventsStyles } from "../../styles";
 
 class PastEvents extends Component {
   state = {
@@ -229,4 +196,4 @@ PastEvents.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PastEvents);
+export default withStyles(pastEventsStyles)(PastEvents);

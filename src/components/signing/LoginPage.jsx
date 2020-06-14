@@ -10,69 +10,11 @@ import {
   FormControl,
   withStyles,
 } from "@material-ui/core";
-import green from "@material-ui/core/colors/green";
 import { LayoutLogin } from "../../layouts/index";
-import { theme, Background } from "../../globalTheme/globalTheme";
+import { theme, Background } from "../../styles/globalTheme";
+import { loginPageStyles } from '../../styles/';
 import { Alert } from "../../utils";
 import { EMAIL_REGEX, DATA_BASE_URL, IN_ONE_HOUR } from "../../constants/index";
-
-const styles = {
-  loginButton: {
-    color: "#fff",
-    fontStyle: "normal",
-    textTransform: "none",
-    fontWeight: "normal",
-    height: 50,
-    width: "100%",
-    margin: "12px 0px",
-    backgroundColor: green[500],
-    "&:hover": {
-      backgroundColor: green[900],
-    },
-  },
-  formStyle: {
-    display: "flex",
-    flexDirection: "column",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    height: 250,
-    width: "50%",
-    marginTop: "30%",
-  },
-  input: {
-    color: "white",
-    height: "50%",
-  },
-  emailInput: {
-    display: "flex",
-    flexWrap: "wrap",
-    color: "white",
-  },
-  cssLabel: {
-    color: "white",
-    "&$cssFocused": {
-      color: "white",
-    },
-  },
-  cssFocused: {
-    color: "white",
-  },
-  cssUnderline: {
-    "&:after": {
-      borderBottomColor: "white",
-    },
-  },
-  notchedOutline: {
-    borderWidth: "2px",
-    borderColor: "white !important",
-  },
-  signUp: {
-    color: "white",
-    "&:hover": {
-      backgroundColor: "gray",
-    },
-  },
-};
 
 const LoginPage = (props) => {
   const { classes } = props;
@@ -94,7 +36,6 @@ const LoginPage = (props) => {
   const [isLoggedIn, setLoggedIn] = useState(!!Cookies.get("token"));
 
   const invalidEmail = (email) => {
-    console.log();
     if (email === "" || !EMAIL_REGEX.test(email)) return true;
     return false;
   };
@@ -259,4 +200,4 @@ const LoginPage = (props) => {
     );
 };
 
-export default withStyles(styles)(LoginPage);
+export default withStyles(loginPageStyles)(LoginPage);

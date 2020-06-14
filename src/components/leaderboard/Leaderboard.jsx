@@ -7,51 +7,13 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
-import { theme } from "../../globalTheme/globalTheme";
-import ListComponent from "./ListComponent.jsx";
 
+import ListComponent from "./LeaderboardItem.jsx";
 import { leaderboardPic } from "../../images/index";
 import { MainLayout } from "../../layouts/index";
 import { DATA_BASE_URL } from "../../constants/index";
+import { leaderboardStyles } from "../../styles";
 
-const styles = {
-  root: {
-    height: "100%",
-    width: "100%",
-  },
-  header: {
-    height: "30%",
-    width: "100%",
-  },
-  content: {
-    height: "70%",
-    width: "100%",
-  },
-  image: {
-    height: "90%",
-    width: "50%",
-    marginLeft: "25%",
-  },
-  List: {
-    width: "100%",
-    height: "60%",
-    overflowY: "scroll",
-  },
-  ListItem: {
-    height: "20%",
-  },
-  typography: theme.typography.body1,
-  loadMore: {
-    height: "20%",
-    width: "100%",
-    marginTop: 40,
-  },
-  button: {
-    textTransform: "none",
-    width: "30%",
-    marginLeft: "35%",
-  },
-};
 
 const Leaderboard = (props) => {
   const { classes } = props;
@@ -109,4 +71,4 @@ const Leaderboard = (props) => {
   );
 };
 
-export default withStyles(styles)(Leaderboard);
+export default withStyles(leaderboardStyles)(Leaderboard);

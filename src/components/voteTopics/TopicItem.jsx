@@ -4,63 +4,7 @@ import { Avatar, Grid, Typography, withStyles  } from "@material-ui/core";
 import { useSpring, animated } from "react-spring";
 
 import { PROPOSED_TOPICS_URL } from "../../constants/index";
-
-const styles = {
-  container: {
-    width: "100%",
-    height: "100%",
-  },
-  itemOne: {
-    width: 65,
-  },
-  itemThree: {
-    width: 105,
-    alignItems: "center",
-  },
-  itemTop: {
-    height: "35%",
-  },
-  itemBottom: {
-    height: "65%",
-    marginBottom: "2px",
-  },
-  itemTopTypography: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: "black",
-    padding: "5px",
-  },
-  itemBottomTypography: {
-    fontSize: 12,
-    color: "gray",
-    padding: "5px",
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    marginLeft: "5%",
-    marginTop: 10,
-  },
-  typography: {
-    fontWeight: "bold",
-  },
-  arrowup: {
-    width: 0,
-    height: 0,
-    borderLeft: "20px solid transparent",
-    borderRight: "20px solid transparent",
-    borderBottom: "20px solid",
-    paddingBottom: "10px",
-  },
-  arrowdown: {
-    width: 0,
-    height: 0,
-    borderLeft: "20px solid transparent",
-    borderRight: "20px solid transparent",
-    borderTop: "20px solid",
-    margin: "5px",
-  },
-};
+import { topicItemStyles } from '../../styles';
 
 const TopicItem = (props) => {
   const { classes, userId, userVotes, id, title, content } = props;
@@ -216,4 +160,4 @@ const TopicItem = (props) => {
   );
 };
 
-export default withStyles(styles)(TopicItem);
+export default withStyles(topicItemStyles)(TopicItem);

@@ -2,18 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
 import { BottomNavigation, Paper, withStyles } from "@material-ui/core";
-
-const styles = {
-  paper: {
-    backgroundColor: "#22306F ",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    border: "3px double rgba(30,111,164,0.6)",
-    borderRadius: "5px 5px 0px 0px",
-  },
-};
+import { footerBarStyles } from "../../styles";
 
 const FooterBar = (props) => {
   const { classes } = props;
@@ -31,4 +20,4 @@ FooterBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FooterBar);
+export default withStyles(footerBarStyles)(FooterBar);

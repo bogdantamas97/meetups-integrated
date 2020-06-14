@@ -1,39 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { withStyles } from "@material-ui/core";
 
 import AchievementsItem from "./AchievementsItem";
 import { MainLayout } from "../../layouts/index";
-import { surpriseBox as AchievementsBoxImg} from "../../images/index";
-import { DATA_BASE_URL, ACHIEVEMENTS_URL } from "../../constants/index";
-
-const styles = {
-  achievementsContainer: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  achievementsBox: {
-    height: "20%",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  achievementsBoxImg: {
-    width: "60%",
-    maxHeight: "100%",
-  },
-  achievementsListContainer: {
-    height: "75%",
-    padding: "10px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-  },
-};
-
-const CURRENT_USER_ID = new Cookies().get("token");
+import { surpriseBox as AchievementsBoxImg } from "../../images/index";
+import {
+  DATA_BASE_URL,
+  ACHIEVEMENTS_URL,
+  CURRENT_USER_ID,
+} from "../../constants/index";
+import { achievementsStyles } from "../../styles";
 
 const Achievements = (props) => {
   const { classes } = props;
@@ -86,4 +63,4 @@ const Achievements = (props) => {
   );
 };
 
-export default withStyles(styles)(Achievements);
+export default withStyles(achievementsStyles)(Achievements);

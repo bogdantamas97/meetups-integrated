@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { withStyles } from "@material-ui/core";
 
-import { FooterBar, Content, BaseHeader } from "../components/index";
-import { DATA_BASE_URL } from "../constants/index";
+import { FooterBar, Content, BaseHeader } from "../components";
+import { DATA_BASE_URL, CURRENT_USER_ID } from "../constants";
+import { mainLayoutStyles } from "../styles";
 
-const styles = {
-  mainLayout: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    overflow: "hidden",
-  },
-};
-
-const CURRENT_USER_ID = Cookies.get("token");
 const MainLayout = (props) => {
   const { classes, avatarInitials, topBarTitle, children } = props;
   const [fullName, setFullName] = useState("");
@@ -59,4 +49,4 @@ const MainLayout = (props) => {
   );
 };
 
-export default withStyles(styles)(MainLayout);
+export default withStyles(mainLayoutStyles)(MainLayout);

@@ -6,7 +6,7 @@ import FooterBar from "./fullPage/FooterBar";
 import LoginPage from "./signing/LoginPage";
 import MyEvents from "./myEvents/MyEvents";
 import RegisterForm from "./signing/RegisterForm";
-import TemporaryDrawer from "./TemporaryDrawer";
+import TemporaryDrawer from "./infoAndNavigation/TemporaryDrawer";
 import Achievemnts from "./achievements/Achievements";
 import Feedback from "./feedback/Feedback"
 import FutureEvents from "./futureEvents/FutureEvents";

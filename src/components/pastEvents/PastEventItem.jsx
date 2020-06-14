@@ -9,77 +9,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-import { eventTitle, eventSubtitle } from "../../globalTheme/globalTheme";
-
-const styles = {
-  content: {
-    width: "100%",
-    height: "100%",
-    borderBottom: "1px solid #c0c3c6",
-  },
-  container: {
-    width: "100%",
-    height: "100%",
-  },
-  itemOne: {
-    width: 65,
-  },
-  itemThree: {
-    width: 105,
-  },
-  itemMiddle: {
-    height: 15,
-  },
-  itemBottom: {
-    height: 5,
-    fontSize: "8px",
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    marginLeft: "5%",
-    marginTop: 10,
-  },
-  typography: {
-    fontWeight: "bold",
-  },
-  timeFrame: {
-    width: 80,
-    height: 50,
-    borderStyle: "solid",
-    border: 1,
-    borderRadius: 20,
-    borderColor: "#10cfcf",
-    marginRight: "5%",
-    marginTop: "10%",
-  },
-  typographyThreeTop: {
-    marginLeft: 6,
-    marginTop: 10,
-  },
-  typographyThreeBottom: {
-    marginLeft: 20,
-    marginTop: -6,
-  },
-  buttonStyle: {
-    borderRadius: "20px",
-    height: "20px",
-    width: "175px",
-    fontSize: "11px",
-    marginTop: "3px",
-    marginBotton: "30px",
-    boxShadow: ["none"],
-    shadows: ["none"],
-    backgroundColor: "#7cff89",
-  },
-  typographyButton: {
-    marginTop: "-5px",
-    color: "#282828",
-    textTransform: ["none"],
-    fontSize: "12px",
-    fontWeight: 600,
-  },
-};
+import { eventTitle, eventSubtitle, pastEventsItemStyles } from "../../styles";
 
 const PastEventItem = (props) => {
   const {
@@ -222,4 +152,4 @@ PastEventItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PastEventItem);
+export default withStyles(pastEventsItemStyles)(PastEventItem);

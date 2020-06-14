@@ -2,46 +2,7 @@ import React from "react";
 import { useSpring, animated } from "react-spring";
 import { Typography, withStyles, Grid, Avatar } from "@material-ui/core";
 
-const styles = {
-  container: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
-  pointsItem: {
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    width: "1-%",
-  },
-  iconItems: {
-    width: "10%",
-  },
-  points: {
-    width: 48,
-    height: 48,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  typography: {
-    fontWeight: "bold",
-    fontSize: "20px",
-  },
-  iconImg: {
-    width: "100%",
-    height: "100%",
-  },
-  textContainer: {
-    display: "flex",
-    justifyContent: "flex-start",
-    padding: "6px",
-    width: "70%",
-  },
-};
+import { achievementsItemStyles } from "../../styles";
 
 const AchievementsItem = (props) => {
   const { classes, color, points, title, picturePath } = props;
@@ -90,4 +51,4 @@ const AchievementsItem = (props) => {
   );
 };
 
-export default withStyles(styles)(AchievementsItem);
+export default withStyles(achievementsItemStyles)(AchievementsItem);

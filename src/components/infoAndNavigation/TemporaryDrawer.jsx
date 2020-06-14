@@ -3,29 +3,16 @@ import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import {
   Divider,
+  List,
   ListItem,
   ListItemText,
+  IconButton,
   SwipeableDrawer,
   withStyles,
-} from "@material-ui/core/styles";
-import { MenuIcon } from "@material-ui/icons";
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
-const styles = {
-  fullList: {
-    width: "auto",
-  },
-  linkCss: {
-    textDecoration: "none",
-  },
-  menuButton: {
-    marginLeft: -10,
-    marginRight: 20,
-  },
-  menuIcon: {
-    width: "40px",
-    height: "40px",
-  },
-};
+import { temporaryDrawerStyles } from "../../styles";
 
 const TemporaryDrawer = (props) => {
   const { classes } = props;
@@ -133,4 +120,4 @@ const TemporaryDrawer = (props) => {
   );
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withStyles(temporaryDrawerStyles)(TemporaryDrawer);

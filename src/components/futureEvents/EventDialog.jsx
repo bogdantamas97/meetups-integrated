@@ -11,29 +11,8 @@ import {
   Slide,
   withStyles,
 } from "@material-ui/core";
-import { blue, grey } from "@material-ui/core/colors";
 
-const styles = (theme) => ({
-  typography: theme.typography,
-  dialogContent: {
-    padding: theme.spacing(2),
-  },
-  dialogButton: {
-    color: blue[300],
-    borderTop: `1px solid lightgray`,
-    margin: "auto",
-    backgroundColor: "white",
-    "&:hover": {
-      backgroundColor: grey[300],
-    },
-  },
-  highlightedWord: {
-    color: "blue",
-  },
-  title: {
-    margin: "auto",
-  },
-});
+import { eventDialogStyles } from "../../styles";
 
 const Transition = (props) => <Slide direction="down" {...props} />;
 
@@ -110,4 +89,4 @@ EventDialog.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(EventDialog);
+export default withStyles(eventDialogStyles)(EventDialog);

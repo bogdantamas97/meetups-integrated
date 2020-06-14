@@ -1,30 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import { theme } from "../../globalTheme/globalTheme";
 import { Grid, Paper, Typography, withStyles } from "@material-ui/core";
 
-const styles = {
-  paper: {
-    width: "100%",
-    height: "100%",
-    marginTop: "10px",
-  },
-  grid: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-  },
-  itemOne: {
-    width: "80%",
-    paddingLeft: "20px",
-  },
-  itemTwo: {
-    width: "20%",
-  },
-};
+import { theme } from "../../styles/globalTheme";
+import { leaderboardItemStyles } from "../../styles";
 
-const ListComponent = (props) => {
+const LeaderboardItem = (props) => {
   const { classes, name, points } = props;
 
   return (
@@ -52,16 +33,16 @@ const ListComponent = (props) => {
   );
 };
 
-ListComponent.propTypes = {
+LeaderboardItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   points: PropTypes.string.isRequired,
 };
 
-ListComponent.defaultProps = {
+LeaderboardItem.defaultProps = {
   id: "",
   name: "Username",
   points: "",
 };
 
-export default withStyles(styles)(ListComponent);
+export default withStyles(leaderboardItemStyles)(LeaderboardItem);

@@ -1,31 +1,21 @@
 import React from "react";
 import { Grid, ListItem, Typography } from "@material-ui/core";
 
-const styles = {
-  Message: {
-    fontSize: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    display: "flex",
-    width: "100%",
-  },
-  eventBox: { width: "90%" },
-  eventMessage: { fontSize: 12 },
-};
+import { eventsMessageStyles} from '../../styles';
 
 const EventsMessage = (props) => {
   const { eventTypeMessage, numberOfPastEventsWithoutFeedback } = props;
 
   return (
     <Grid>
-      <Grid style={styles.Message}>
+      <Grid style={eventsMessageStyles.Message}>
         <ListItem>
-          <div style={styles.eventBox}>
+          <div style={eventsMessageStyles.eventBox}>
             {(() => {
               switch (eventTypeMessage.toString()) {
                 case "future events":
                   return (
-                    <Typography style={styles.eventsMessage}>
+                    <Typography style={eventsMessageStyles.eventsMessage}>
                       This is a list of all future events. You can choose to
                       unsubscribe. Please do this as soon as you know that you
                       won't be able to participate, so we can notify the people
@@ -34,7 +24,7 @@ const EventsMessage = (props) => {
                   );
                 case "my events":
                   return (
-                    <Typography style={styles.eventsMessage}>
+                    <Typography style={eventsMessageStyles.eventsMessage}>
                       This is a list of all future events to which you've
                       subscribed. You can choose to unsubscribe. Please do this
                       as soon as you know that you won't be able to participate,
@@ -43,7 +33,7 @@ const EventsMessage = (props) => {
                   );
                 case "past events":
                   return (
-                    <Typography style={styles.eventsMessage}>
+                    <Typography style={eventsMessageStyles.eventsMessage}>
                       This is a list of all the past events where you
                       participated. Please don't forget to leave a quick
                       Feedback and you will be rewarded! There are{" "}
@@ -55,7 +45,7 @@ const EventsMessage = (props) => {
                   );
                 case "vote topics":
                   return (
-                    <Typography style={styles.eventsMessage}>
+                    <Typography style={eventsMessageStyles.eventsMessage}>
                       Vote UP the topics you find interesting and you would love
                       to see a presentation about them. Vote Down the topics
                       that you've seen them presented already or if you find
@@ -64,7 +54,7 @@ const EventsMessage = (props) => {
                   );
                 default:
                   return (
-                    <Typography style={styles.eventsMessage}>
+                    <Typography style={eventsMessageStyles.eventsMessage}>
                       Default message.
                     </Typography>
                   );

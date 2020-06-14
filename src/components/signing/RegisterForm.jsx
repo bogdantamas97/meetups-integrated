@@ -10,76 +10,16 @@ import {
   ThemeProvider as MuiThemeProvider,
   withStyles,
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
+
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import { Background, button, theme } from "../../globalTheme/globalTheme";
+import { Background, button, registerPageStyles } from "../../styles";
+import { theme } from "../../styles/globalTheme";
+
 import { Alert } from "../../utils";
 import { LayoutLogin } from "../../layouts/index";
 import { DATA_BASE_URL, EMAIL_REGEX } from "../../constants/index";
 
-const styles = {
-  formStyle: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    paddingBottom: "15vh",
-    paddingTop: "15vh",
-  },
-  inputField: {
-    color: "white",
-    height: "50%",
-    marginTop: 5,
-    marginBottom: 5,
-    width: "60%",
-    maxWidth: 400,
-    borderRadius: 5,
-    paddingLeft: 4,
-    paddingBottom: 5,
-  },
-  clearButton: {
-    color: "#fff",
-    fontStyle: "normal",
-    textTransform: "none",
-    fontWeight: "normal",
-    height: 35,
-    width: "100%",
-    maxWidth: 300,
-    margin: "12px 0px",
-    backgroundColor: red[500],
-    "&:hover": {
-      backgroundColor: red[900],
-    },
-  },
-  inputText: {
-    color: "white",
-    height: "50%",
-  },
-  cssLabel: {
-    color: "white",
-    "&$cssFocused": {
-      color: "white",
-    },
-  },
-  cssFocused: {
-    color: "white",
-  },
-  notchedOutline: {
-    borderWidth: "2px",
-    borderColor: "white !important",
-  },
-  arrowBackIcon: {
-    color: "white",
-    width: 80,
-    height: 50,
-    "&:hover": {
-      backgroundColor: "gray",
-    },
-  },
-};
 button.width = "100%";
 button.height = "70px";
 button.marginTop = 40;
@@ -409,4 +349,4 @@ const RegisterForm = (props) => {
   );
 };
 
-export default withStyles(styles)(RegisterForm);
+export default withStyles(registerPageStyles)(RegisterForm);

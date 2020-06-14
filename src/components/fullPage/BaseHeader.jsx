@@ -8,19 +8,8 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-import TemporaryDrawer from "../TemporaryDrawer.jsx";
-
-const styles = () => ({
-  topBar: {
-    flexGrow: 1,
-    border: "3px double rgba(30,111,164,0.6)",
-    borderRadius: "15px",
-  },
-  avatar: {
-    width: "50px",
-    height: "50px",
-  },
-});
+import { TemporaryDrawer } from "../index";
+import { baseHeaderStyles } from "../../styles";
 
 const getInitials = (fullName) => {
   if (fullName) {
@@ -55,4 +44,4 @@ const BaseHeader = (props) => {
   );
 };
 
-export default withStyles(styles)(BaseHeader);
+export default withStyles(baseHeaderStyles)(BaseHeader);

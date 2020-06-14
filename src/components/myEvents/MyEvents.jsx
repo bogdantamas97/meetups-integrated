@@ -1,11 +1,7 @@
 import React from "react";
-import Cookies from "universal-cookie";
 import PropTypes from "prop-types";
 import axios from "axios";
 import moment from "moment/moment";
-
-import { theme } from "../../globalTheme/globalTheme";
-import { MainLayout } from "../../layouts/index";
 import {
   withStyles,
   ListItem,
@@ -13,53 +9,24 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+
+import { theme } from "../../styles/globalTheme";
+import { myEventsStyles } from "../../styles";
+import { MainLayout } from "../../layouts/index";
+import { EventsMessage } from "../index";
 import FutureEventItem from "../futureEvents/FutureEventItem.jsx";
 import EventDialog from "../futureEvents/EventDialog.jsx";
-import { EventsMessage } from "../index";
-import { EVENTS_URL, EVENT_TYPE } from "../../constants/index";
+import { EVENTS_URL, EVENT_TYPE, CURRENT_USER_ID } from "../../constants";
 
-const styles = {
-  root: {
-    width: "100%",
-    height: "100%",
-  },
-  header: {
-    display: "block",
-    height: "30%",
-    width: "100%",
-  },
-  styleHeader: {
-    display: "block",
-    height: "15%",
-    width: "100%",
-    maxHeight: 90,
-  },
-  styleContent: { height: "85%", width: "100%" },
-  list: {
-    height: "98%",
-    width: "100%",
-  },
-  listItem: {
-    width: "100%",
-    height: 73,
-    paddingLeft: "0px",
-    paddingRight: "0px",
-    paddingTop: "0px",
-    paddingBottom: "0px",
-  },
-};
-
-const CURRENT_USER_ID = new Cookies().get("token");
 class MyEvents extends React.Component {
   state = {
-    isDisplayed: true,
+    list: [],
     event: [],
+    dialogType: "",
     isLoaded: false,
     isOpen: false,
-    dialogType: "",
-    cookies: new Cookies(),
-    list: [],
-    isLoading: true,
+    isLoading: false,
+    isDisplayed: true,
   };
 
   isUsersEvent = (event) =>
@@ -69,7 +36,6 @@ class MyEvents extends React.Component {
   componentDidMount() {
     axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
-        userId: CURRENT_USER_ID,
         event: result.data.filter(this.isUsersEvent),
         isLoaded: true,
       });
@@ -82,14 +48,14 @@ class MyEvents extends React.Component {
 
   checkUser = (item) => {
     const { userId, attendanceIds, waitingListIds } = item;
-    if (waitingListIds.includes(this.state.userId)) {
+    if (waitingListIds.includes(CURRENT_USER_ID)) {
       return "You are in the waiting list";
     }
 
-    if (userId === this.state.userId) {
+    if (userId === CURRENT_USER_ID) {
       return "You are the speaker";
     }
-    if (attendanceIds.includes(this.state.userId)) {
+    if (attendanceIds.includes(CURRENT_USER_ID)) {
       return "Unsubscribe";
     }
   };
@@ -98,7 +64,7 @@ class MyEvents extends React.Component {
     axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.attendanceIds.filter(
-          (item) => item !== this.state.userId
+          (item) => item !== CURRENT_USER_ID
         );
         this.setState({ list });
       })
@@ -108,10 +74,10 @@ class MyEvents extends React.Component {
           { attendanceIds: this.state.list },
           { headers: { "Content-Type": "application/json" } }
         );
-        this.setState({ isLoading: false });
+        this.setState({ isLoading: true });
       })
       .then(() => {
-        if (!this.state.isLoading) {
+        if (this.state.isLoading) {
           this.setState({
             isOpen: true,
             dialogType: "unsubscribe",
@@ -143,21 +109,7 @@ class MyEvents extends React.Component {
             <List className={classes.list}>
               {this.state.isLoaded ? (
                 !this.state.event.length ? (
-                  <Paper
-                    style={{
-                      display: "flex",
-                      marginTop: "10%",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                      width: "80%",
-                      height: "30%",
-                      marginLeft: "10%",
-                      textAlign: "center",
-                      borderRadius: 30,
-                      padding: 4,
-                    }}
-                  >
+                  <Paper className={classes.paperStyle}>
                     <Typography style={theme.typography.headline}>
                       You haven't subscribed to any event.
                     </Typography>
@@ -183,7 +135,9 @@ class MyEvents extends React.Component {
                       </ListItem>
                     ))
                 )
-              ) : undefined}
+              ) : (
+                undefined
+              )}
             </List>
           </div>
           {this.state.isOpen && (
@@ -203,4 +157,4 @@ MyEvents.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MyEvents);
+export default withStyles(myEventsStyles)(MyEvents);

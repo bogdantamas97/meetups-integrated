@@ -2,53 +2,22 @@ import React from "react";
 import moment from "moment";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Cookies from "universal-cookie";
 import { withStyles, ListItem, List } from "@material-ui/core";
 
 import FutureEventItem from "./FutureEventItem.jsx";
+import { futureEventsStyles } from "../../styles";
 import EventDialog from "./EventDialog";
 import {
   MAX_ATTENDANTS_ON_EVENT,
   EVENTS_URL,
   EVENT_TYPE,
+  CURRENT_USER_ID,
 } from "../../constants/index";
 import { MainLayout } from "../../layouts/index";
 import { EventsMessage } from "../index";
 
-const styles = {
-  root: {
-    width: "100%",
-    height: "100%",
-  },
-  header: {
-    display: "block",
-    height: "30%",
-    width: "100%",
-  },
-  styleHeader: {
-    display: "block",
-    height: "15%",
-    width: "100%",
-    maxHeight: 90,
-  },
-  styleContent: { height: "85%", width: "100%" },
-  list: {
-    height: "98%",
-    width: "100%",
-  },
-  listItem: {
-    width: "100%",
-    height: 73,
-    paddingLeft: "0px",
-    paddingRight: "0px",
-    paddingTop: "0px",
-    paddingBottom: "0px",
-  },
-};
-
 class FutureEvents extends React.Component {
   state = {
-    userId: "",
     list: [],
     event: [],
     dialogType: "",
@@ -58,10 +27,9 @@ class FutureEvents extends React.Component {
   };
 
   componentDidMount() {
-    const userId = new Cookies().get("token");
     axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
-        userId,
+        CURRENT_USER_ID,
         event: result.data,
         isLoaded: true,
       });
@@ -70,7 +38,7 @@ class FutureEvents extends React.Component {
 
   checkUser = (item) => {
     const { waitingListIds, userId, attendanceIds } = item;
-    if (waitingListIds.includes(this.state.userId)) {
+    if (waitingListIds.includes(CURRENT_USER_ID)) {
       return "You are in the waiting list";
     }
 
@@ -78,10 +46,10 @@ class FutureEvents extends React.Component {
       return "Waiting List";
     }
 
-    if (userId === this.state.userId) {
+    if (userId === CURRENT_USER_ID) {
       return "You are the speaker";
     }
-    if (!attendanceIds.includes(this.state.userId)) {
+    if (!attendanceIds.includes(CURRENT_USER_ID)) {
       return "Subscribe";
     } else {
       return "Unsubscribe";
@@ -92,7 +60,7 @@ class FutureEvents extends React.Component {
     axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.waitingListIds;
-        list.push(this.state.userId);
+        list.push(CURRENT_USER_ID);
         this.setState({ list });
       })
       .then(() => {
@@ -117,7 +85,7 @@ class FutureEvents extends React.Component {
     axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         const list = result.data.attendanceIds;
-        list.push(this.state.userId);
+        list.push(CURRENT_USER_ID);
         this.setState({ list });
       })
       .then(() => {
@@ -145,7 +113,7 @@ class FutureEvents extends React.Component {
     axios(`${EVENTS_URL}/${eventId}`)
       .then((result) => {
         let list = result.data.attendanceIds;
-        list.splice(list.indexOf(this.state.userId), 1);
+        list.splice(list.indexOf(CURRENT_USER_ID), 1);
         this.setState({ list });
       })
       .then(() => {
@@ -233,4 +201,4 @@ FutureEvents.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FutureEvents);
+export default withStyles(futureEventsStyles)(FutureEvents);

@@ -1,6 +1,6 @@
 import React from "react";
 import PastEvents from "../components/pastEvents/PastEvents.jsx";
-import { theme } from "../globalTheme/globalTheme";
+import { theme } from "../styles/globalTheme";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
 const PastEventsView = () => (

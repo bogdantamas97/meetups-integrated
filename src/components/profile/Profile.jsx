@@ -12,32 +12,10 @@ import {
   Paper,
 } from "@material-ui/core";
 import Header from "./Header";
-import ListComponent from "../leaderboard/ListComponent.jsx";
-import { theme } from "../../globalTheme/globalTheme";
+import { profileStyles } from "../../styles";
+import { theme } from "../../styles/globalTheme";
+import ListComponent from "../leaderboard/LeaderboardItem.jsx";
 import { POINTS_RECEIVED_URL } from "../../constants/index";
-
-const styles = (theme) => ({
-  typography: theme.typography.body1,
-  root: {
-    flexGrow: 1,
-    overflow: "hidden",
-  },
-  List: {
-    marginTop: "30px",
-    width: "100%",
-    height: "40%",
-    overflowY: "scroll",
-  },
-  loadmore: {
-    height: "20%",
-    marginTop: 40,
-  },
-  button: {
-    textTransform: "none",
-    margin: "auto",
-    width: "100%",
-  },
-});
 
 const Profile = (props) => {
   const [width, updateWidth] = useState(0);
@@ -158,4 +136,4 @@ const Profile = (props) => {
   );
 };
 
-export default withStyles(styles)(Profile);
+export default withStyles(profileStyles)(Profile);

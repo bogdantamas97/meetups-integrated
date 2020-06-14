@@ -6,61 +6,9 @@ import {
   eventTitle,
   eventSubtitle,
   eventBottom,
-} from "../../globalTheme/globalTheme";
+  futureEventItemStyles
+} from "../../styles";
 import { Avatar, Grid, Typography, withStyles } from "@material-ui/core";
-import { blue } from "@material-ui/core/colors";
-
-const styles = {
-  container: {
-    width: "100%",
-    height: "100%",
-  },
-  itemOne: {
-    width: 65,
-  },
-  itemThree: {
-    width: 105,
-  },
-  itemMiddle: {
-    height: 15,
-  },
-  itemBottom: {
-    height: 9,
-    marginTop: 5,
-  },
-  hoverButton: {
-    "&:hover": {
-      color: blue[100],
-    },
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    marginLeft: "5%",
-    marginTop: 10,
-  },
-  typography: {
-    fontWeight: "bold",
-  },
-  timeFrame: {
-    width: 80,
-    height: 50,
-    borderStyle: "solid",
-    border: 1,
-    borderRadius: 20,
-    borderColor: "#10cfcf",
-    marginRight: "5%",
-    marginTop: "10%",
-  },
-  typographyThreeTop: {
-    marginLeft: 6,
-    marginTop: 10,
-  },
-  typographyThreeBottom: {
-    marginLeft: 20,
-    marginTop: -6,
-  },
-};
 
 const FutureEventItem = (props) => {
   const {
@@ -228,4 +176,4 @@ FutureEventItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FutureEventItem);
+export default withStyles(futureEventItemStyles)(FutureEventItem);
