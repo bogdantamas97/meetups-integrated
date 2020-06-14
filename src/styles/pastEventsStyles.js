@@ -1,4 +1,4 @@
-export const pastEventsStyles = () => ({
+export const pastEventsStyles = {
   root: {
     width: "100%",
     height: "100%",
@@ -27,9 +27,9 @@ export const pastEventsStyles = () => ({
     paddingTop: "0px",
     paddingBottom: "0px",
   },
-});
+};
 
-export const pastEventsItemStyles = () => ({
+export const pastEventsItemStyles = {
   content: {
     width: "100%",
     height: "100%",
@@ -97,4 +97,4 @@ export const pastEventsItemStyles = () => ({
     fontSize: "12px",
     fontWeight: 600,
   },
-});
+};

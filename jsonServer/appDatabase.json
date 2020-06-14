@@ -224,11 +224,11 @@
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
       "timeStamp": 1593016200000,
-      "sumOfVotes": -1,
+      "sumOfVotes": 1,
       "userVotes": [
         {
           "userId": "_7h67hedvv",
-          "vote": -1
+          "vote": 1
         }
       ],
       "id": 1

@@ -1,6 +1,6 @@
 import { red, green } from "@material-ui/core/colors";
 
-export const registerPageStyles = () => ({
+export const registerPageStyles = {
   formStyle: {
     flexDirection: "column",
     alignItems: "center",
@@ -61,9 +61,9 @@ export const registerPageStyles = () => ({
       backgroundColor: "gray",
     },
   },
-});
+};
 
-export const loginPageStyles = () => ({
+export const loginPageStyles = {
   loginButton: {
     color: "#fff",
     fontStyle: "normal",
@@ -119,4 +119,4 @@ export const loginPageStyles = () => ({
       backgroundColor: "gray",
     },
   },
-});
+};

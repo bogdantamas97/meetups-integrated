@@ -29,9 +29,12 @@ const Achievements = (props) => {
 
   const getCurrentPoints = async () => {
     const result = await axios(DATA_BASE_URL);
-    setCurrentPoints(
-      result.data.find((item) => item.id === CURRENT_USER_ID).points
+    const getCurrentUser = result.data.find(
+      (item) => item.id === CURRENT_USER_ID
     );
+
+    if (getCurrentUser.points);
+    setCurrentPoints(getCurrentUser.points);
   };
 
   return (

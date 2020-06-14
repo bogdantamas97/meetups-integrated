@@ -9,13 +9,6 @@
     "@material-ui/lab": "^4.0.0-alpha.51",
     "axios": "^0.18.0",
     "cloc": "^2.5.0",
-    "eslint": "5.16.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-strongloop": "^2.1.0",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.19.0",
-    "eslint-plugin-react-hooks": "2.5.0",
     "js-cookie": "^2.2.1",
     "json-server": "^0.16.1",
     "lint": "^0.7.0",
@@ -47,9 +40,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "refreshVSToken": "vsts-npm-auth -config .npmrc"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

@@ -1,7 +1,7 @@
 import { blue, grey } from "@material-ui/core/colors";
 import { theme } from "./globalTheme";
 
-export const eventDialogStyles = () => ({
+export const eventDialogStyles = {
   typography: theme.typography,
   dialogContent: {
     padding: theme.spacing(2),
@@ -21,9 +21,9 @@ export const eventDialogStyles = () => ({
   title: {
     margin: "auto",
   },
-});
+};
 
-export const futureEventItemStyles = () => ({
+export const futureEventItemStyles = {
   container: {
     width: "100%",
     height: "100%",
@@ -73,9 +73,9 @@ export const futureEventItemStyles = () => ({
     marginLeft: 20,
     marginTop: -6,
   },
-});
+};
 
-export const futureEventsStyles = () => ({
+export const futureEventsStyles = {
   root: {
     width: "100%",
     height: "100%",
@@ -104,4 +104,4 @@ export const futureEventsStyles = () => ({
     paddingTop: "0px",
     paddingBottom: "0px",
   },
-});
+};

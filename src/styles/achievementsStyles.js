@@ -1,4 +1,4 @@
-export const achievementsStyles = () => ({
+export const achievementsStyles = {
   achievementsContainer: {
     display: "flex",
     flexDirection: "column",
@@ -21,9 +21,9 @@ export const achievementsStyles = () => ({
     flexDirection: "column",
     justifyContent: "space-evenly",
   },
-});
+};
 
-export const achievementsItemStyles = () => ({
+export const achievementsItemStyles = {
   container: {
     flexDirection: "row",
     justifyContent: "center",
@@ -62,4 +62,4 @@ export const achievementsItemStyles = () => ({
     padding: "6px",
     width: "70%",
   },
-});
+};

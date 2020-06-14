@@ -10,25 +10,17 @@ import {
 
 import { TemporaryDrawer } from "../index";
 import { baseHeaderStyles } from "../../styles";
-
-const getInitials = (fullName) => {
-  if (fullName) {
-    return fullName
-      .toUpperCase()
-      .match(/(\b[A-Z](?!\s))/g)
-      .join("");
-  }
-};
+import { getInitials } from "../../helpers";
 
 const BaseHeader = (props) => {
-  const { classes, fullName } = props;
+  const { classes, fullName, inputText } = props;
 
   return (
     <div className={classes.topBar}>
       <Toolbar>
         <TemporaryDrawer />
         <Typography variant="h6" color="inherit" style={{ flexGrow: 1 }}>
-          {props.inputText}
+          {inputText}
         </Typography>
         <Link to="/profile" style={{ textDecoration: "none" }}>
           <Tooltip title="Go to profile">

@@ -1,7 +1,7 @@
 import { theme } from "./globalTheme";
 import { button } from "./index";
 
-export const topicItemStyles = () => ({
+export const topicItemStyles = {
   container: {
     width: "100%",
     height: "100%",
@@ -56,9 +56,9 @@ export const topicItemStyles = () => ({
     borderTop: "20px solid",
     margin: "5px",
   },
-});
+};
 
-export const topicStyles = () => ({
+export const topicStyles = {
   typography: theme.typography,
   button: button,
   root: {
@@ -119,4 +119,4 @@ export const topicStyles = () => ({
   detailsTitle: {
     fontFamily: "Arial",
   },
-});
+};

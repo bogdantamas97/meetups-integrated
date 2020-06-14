@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
+import { Avatar, Grid, Typography, withStyles } from "@material-ui/core";
 
 import {
   eventTitle,
   eventSubtitle,
   eventBottom,
-  futureEventItemStyles
+  futureEventItemStyles,
 } from "../../styles";
-import { Avatar, Grid, Typography, withStyles } from "@material-ui/core";
+import {
+  fontTitle,
+  fontSubtitle,
+  fontBottom,
+  checkSubscribe,
+  checkWaitingList,
+  checkUnsubscribe,
+} from "../../helpers";
 
 const FutureEventItem = (props) => {
   const {
@@ -26,37 +34,8 @@ const FutureEventItem = (props) => {
 
   const [width, updateWidth] = useState(0);
 
-  const fontTitle = () => {
-    while (width < 1024) return 10 + width / 140;
-    return 17;
-  };
-
-  const fontSubtitle = () => {
-    while (width < 1024) return 8 + width / 140;
-    return 15;
-  };
-
-  const fontBottom = () => {
-    while (width < 1024) return 6 + width / 140;
-    return 13;
-  };
-
   const updateWidthFunction = () => {
     updateWidth(window.innerWidth);
-  };
-
-  const checkSubscribe = () => {
-    if (action === "Subscribe") return true;
-    return false;
-  };
-
-  const checkWaitingList = () => {
-    if (action === "Waiting List") return true;
-    return false;
-  };
-  const checkUnsubscribe = () => {
-    if (action === "Unsubscribe") return true;
-    return false;
   };
 
   const animation = useSpring({
@@ -108,7 +87,7 @@ const FutureEventItem = (props) => {
             >
               <Typography
                 style={{
-                  fontSize: fontTitle(),
+                  fontSize: fontTitle(width),
                   fontFamily: eventTitle.fontFamily,
                   color: eventTitle.color,
                   fontWeight: eventTitle.fontWeight,
@@ -120,7 +99,7 @@ const FutureEventItem = (props) => {
             <Grid item className={classes.itemMiddle}>
               <Typography
                 style={{
-                  fontSize: fontSubtitle(),
+                  fontSize: fontSubtitle(width),
                   fontFamily: eventSubtitle.fontFamily,
                   color: eventSubtitle.color,
                   fontWeight: eventSubtitle.fontWeight,
@@ -132,7 +111,7 @@ const FutureEventItem = (props) => {
             <Grid item className={classes.itemBottom}>
               <Typography
                 style={{
-                  fontSize: fontBottom(),
+                  fontSize: fontBottom(width),
                   fontFamily: eventBottom.fontFamily,
                   color: eventBottom.color,
                   fontWeight: eventBottom.fontWeight,
@@ -147,7 +126,7 @@ const FutureEventItem = (props) => {
                     : () => {}
                 }
               >
-                <div className={classes.hoverButton}>{action}</div>
+                <p className={classes.hoverButton}>{action}</p>
               </Typography>
             </Grid>
           </Grid>

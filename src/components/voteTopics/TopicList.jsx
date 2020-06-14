@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Cookies from "universal-cookie";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { topicStyles } from "../../styles";
 
@@ -29,16 +28,13 @@ import {
   TOPIC_DESCRIPTION_LIMIT,
   PROPOSED_TOPICS_URL,
   EVENTS_URL,
+  CURRENT_USER_ID,
 } from "../../constants/index";
 import TopicItem from "./TopicItem.jsx";
-import {
-  NewEvent,
-  getDateFormat,
-  TopicDatePicker,
-  Selector,
-} from "../../utils/index";
+import { NewEvent, TopicDatePicker, Selector } from "../../utils";
+import { getDateFormat } from "../../helpers";
 import { EventsMessage } from "../index";
-import { theme } from "../../styles/globalTheme.js";
+import { theme } from "../../styles/globalTheme";
 
 class TopicList extends React.Component {
   constructor(props) {
@@ -70,10 +66,7 @@ class TopicList extends React.Component {
     return true;
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
+  handleOpen = () => this.setState({ open: true });
   handleClose = () => this.setState({ open: false });
 
   handleChange = (name) => (event) => {
@@ -101,7 +94,7 @@ class TopicList extends React.Component {
 
     if (isTheFormValid) {
       const newTopic = {
-        userId: new Cookies().get("token"),
+        userId: CURRENT_USER_ID,
         isUserPresenter: this.state.isChecked,
         topicType: this.state.topicType,
         topicTitle: this.state.topicTitle,
@@ -321,7 +314,7 @@ class TopicList extends React.Component {
                         className={classes.listItem}
                       >
                         <TopicItem
-                          userId={new Cookies().get("token")}
+                          userId={CURRENT_USER_ID}
                           id={item.id}
                           title={item.topicTitle}
                           content={item.topicContent}

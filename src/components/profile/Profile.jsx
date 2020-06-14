@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
-import { MainLayout } from "../../layouts/index";
 import {
   Button,
   CircularProgress,
   List,
-  ListItem,
   Typography,
   withStyles,
-  Paper,
 } from "@material-ui/core";
+
 import Header from "./Header";
 import { profileStyles } from "../../styles";
-import { theme } from "../../styles/globalTheme";
-import ListComponent from "../leaderboard/LeaderboardItem.jsx";
-import { POINTS_RECEIVED_URL } from "../../constants/index";
+import { Pagination } from "../../utils";
+import { MainLayout } from "../../layouts/index";
+import { POINTS_RECEIVED_URL, CURRENT_USER_ID } from "../../constants/index";
 
 const Profile = (props) => {
   const [width, updateWidth] = useState(0);
@@ -40,7 +37,7 @@ const Profile = (props) => {
     async function fetchData() {
       const result = await axios(POINTS_RECEIVED_URL);
       const hasPoints = result.data.filter(
-        (item) => item.userId === new Cookies().get("token")
+        (item) => item.userId === CURRENT_USER_ID
       )[0];
 
       setLoaded(true);
@@ -57,47 +54,14 @@ const Profile = (props) => {
     setElementsToShow(numberOfElements);
   };
 
-  const Pagination = () => {
-    return points !== undefined ? (
-      points
-        .filter((item) => points.indexOf(item) < elementsToShow)
-        .map((item) => (
-          <ListItem key={item.id}>
-            <ListComponent
-              name={`+${item.value} ${item.type}`}
-              points={item.date}
-            />
-          </ListItem>
-        ))
-    ) : (
-      <Paper
-        style={{
-          display: "flex",
-          marginTop: "10%",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          width: "80%",
-          height: "30%",
-          marginLeft: "10%",
-          textAlign: "center",
-        }}
-      >
-        <Typography style={theme.typography.title}>
-          You have no recent history.
-        </Typography>
-      </Paper>
-    );
-  };
-
   const { classes } = props;
 
   return (
     <MainLayout topBarTitle="My Profile">
       <div className={classes.root}>
-        <Header userId={props.userId} />
+        <Header userId={CURRENT_USER_ID} />
         {isLoaded ? (
-          <List className={classes.List}>{Pagination()}</List>
+          <List className={classes.List}>{Pagination(points)}</List>
         ) : (
           <div>
             <CircularProgress

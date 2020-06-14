@@ -8,6 +8,7 @@ import { mainLayoutStyles } from "../styles";
 
 const MainLayout = (props) => {
   const { classes, avatarInitials, topBarTitle, children } = props;
+
   const [fullName, setFullName] = useState("");
 
   useEffect(() => {

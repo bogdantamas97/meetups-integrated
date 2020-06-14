@@ -10,12 +10,10 @@ import {
   ThemeProvider as MuiThemeProvider,
   withStyles,
 } from "@material-ui/core";
-
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { Background, button, registerPageStyles } from "../../styles";
 import { theme } from "../../styles/globalTheme";
-
 import { Alert } from "../../utils";
 import { LayoutLogin } from "../../layouts/index";
 import { DATA_BASE_URL, EMAIL_REGEX } from "../../constants/index";
@@ -28,19 +26,16 @@ button.maxWidth = 400;
 const RegisterForm = (props) => {
   const { classes } = props;
 
-  // fields
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  // handle form reaction
   const [snackbarTitle, setSnackbarTitle] = useState("");
   const [snackbarType, setSnackbarType] = useState("error");
   const [isOpen, setOpen] = useState(false);
 
-  // handling errors
   const [emailError, setEmailError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
@@ -55,10 +50,6 @@ const RegisterForm = (props) => {
       document.removeEventListener("keyup", onKeyEnterPressed);
     };
   }, []);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleClearFields = () => {
     setEmail("");
@@ -149,7 +140,6 @@ const RegisterForm = (props) => {
       invalidPassword(password) ||
       invalidPasswordConfirmation(passwordConfirmation);
 
-    // register an user
     if (!isFormInvalid) {
       setSnackbarTitle("You have registered succesfully!");
       setSnackbarType("success");
@@ -179,6 +169,10 @@ const RegisterForm = (props) => {
     if (event.keyCode === 13 && !!email) {
       handleSubmit();
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (

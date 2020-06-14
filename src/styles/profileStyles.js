@@ -1,7 +1,7 @@
 import { theme } from "./globalTheme";
 import { grey } from "@material-ui/core/colors";
 
-export const headerStyles = () => ({
+export const headerStyles = {
   summary: theme.typography.subheading,
   achiv: theme.typography.captionProfile,
   achivNext: theme.typography.caption,
@@ -20,10 +20,10 @@ export const headerStyles = () => ({
       backgroundColor: grey[500],
     },
   },
-});
+};
 
 
-export const profileStyles = () => ({
+export const profileStyles = {
   typography: theme.typography.body1,
   root: {
     flexGrow: 1,
@@ -44,4 +44,4 @@ export const profileStyles = () => ({
     margin: "auto",
     width: "100%",
   },
-});
+};

@@ -1,4 +1,4 @@
-export const myEventsStyles = () => ({
+export const myEventsStyles = {
   root: {
     width: "100%",
     height: "100%",
@@ -40,4 +40,4 @@ export const myEventsStyles = () => ({
     borderRadius: 30,
     padding: 4,
   },
-});
+};

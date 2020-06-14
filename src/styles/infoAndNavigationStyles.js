@@ -1,4 +1,4 @@
-export const aboutStyles = () => ({
+export const aboutStyles = {
   AppRuleList: {
     height: "60vh",
     maxHeight: "70%",
@@ -24,9 +24,9 @@ export const aboutStyles = () => ({
   secondaryGrid: {
     marginLeft: "5%",
   },
-});
+};
 
-export const eventsMessageStyles = () => ({
+export const eventsMessageStyles = {
   Message: {
     fontSize: 12,
     justifyContent: "center",
@@ -36,9 +36,9 @@ export const eventsMessageStyles = () => ({
   },
   eventBox: { width: "90%" },
   eventMessage: { fontSize: 12 },
-});
+};
 
-export const temporaryDrawerStyles = () => ({
+export const temporaryDrawerStyles = {
   fullList: {
     width: "auto",
   },
@@ -53,4 +53,4 @@ export const temporaryDrawerStyles = () => ({
     width: "40px",
     height: "40px",
   },
-});
+};

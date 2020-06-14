@@ -10,6 +10,10 @@ import {
 } from "@material-ui/core";
 
 import { eventTitle, eventSubtitle, pastEventsItemStyles } from "../../styles";
+import {
+  fontTitle,
+  fontSubtitle,
+} from "../../helpers";
 
 const PastEventItem = (props) => {
   const {
@@ -29,16 +33,6 @@ const PastEventItem = (props) => {
   } = props;
   const [width, updateWidth] = useState(0);
 
-  const fontTitle = () => {
-    if (width < 1024) return 7 + width / 100;
-    return 17;
-  };
-
-  const fontSubtitle = () => {
-    if (width < 1024) return 5 + width / 100;
-    return 15;
-  };
-
   const updateWidthFunction = () => updateWidth(window.innerWidth);
 
   useEffect(() => {
@@ -49,7 +43,6 @@ const PastEventItem = (props) => {
     };
   }, []);
 
-  // Click event for FeedbackButton
   const handleOnClick = () => {
     changeButtonStateById(itemId, true);
     handleFeedbackClick(userId, eventId, name);
@@ -93,7 +86,7 @@ const PastEventItem = (props) => {
             >
               <Typography
                 style={{
-                  fontSize: fontTitle(),
+                  fontSize: fontTitle(width),
                   fontFamily: eventTitle.fontFamily,
                   color: eventTitle.color,
                   fontWeight: eventTitle.fontWeight,
@@ -105,7 +98,7 @@ const PastEventItem = (props) => {
             <Grid item className={classes.itemMiddle}>
               <Typography
                 style={{
-                  fontSize: fontSubtitle(),
+                  fontSize: fontSubtitle(width),
                   fontFamily: eventSubtitle.fontFamily,
                   color: eventSubtitle.color,
                   fontWeight: eventSubtitle.fontWeight,

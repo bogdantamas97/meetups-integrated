@@ -21,7 +21,7 @@ import { EVENTS_URL } from "../../constants/index";
 import { feedbackStyles } from '../../styles';
 
 const Feedback = (props) => {
-  const { classes, eventName, eventId, userId, closeFeedbackDialog } = props;
+  const { classes, eventName, eventId, userId, isOpen, closeFeedbackDialog, handleClickCancel } = props;
 
   const [clarity, setClarity] = useState("3");
   const [originality, setOriginality] = useState("3");
@@ -50,14 +50,14 @@ const Feedback = (props) => {
 
   const handleSendFeedback = (feedbackList) => {
     axios.patch(
-      `${EVENTS_URL}/${props.eventId}`,
+      `${EVENTS_URL}/${eventId}`,
       { feedback: feedbackList },
       { headers: { "Content-Type": "application/json" } }
     );
   };
 
   return (
-    <Dialog maxWidth="xs" fullWidth={true} open={props.isOpen}>
+    <Dialog maxWidth="xs" fullWidth={true} open={isOpen}>
       <DialogTitle className={classes.title}>{eventName}</DialogTitle>
       <DialogContent>
         <Grid container justify="space-evenly" className={classes.logos}>
@@ -98,7 +98,7 @@ const Feedback = (props) => {
           <Button
             variant="contained"
             color="primary"
-            onClick={props.handleClickCancel}
+            onClick={handleClickCancel}
             style={feedbackStyles.button}
           >
             Cancel

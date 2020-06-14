@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { withStyles, ListItem, List } from "@material-ui/core";
 
 import PastEventItem from "./PastEventItem.jsx";
 import { MainLayout } from "../../layouts/index";
-import { withStyles, ListItem, List } from "@material-ui/core";
 import { EVENTS_URL, EVENT_TYPE, CURRENT_USER_ID } from "../../constants/index";
 import { EventsMessage, Feedback } from "../";
 import { pastEventsStyles } from "../../styles";
 
 class PastEvents extends Component {
+  constructor(props) {
+    super(props);
+    this.findButtonStateById = this.findButtonStateById.bind(this);
+  }
+
   state = {
     isOpen: false,
     eventId: 0,
@@ -20,11 +25,6 @@ class PastEvents extends Component {
     buttonList: [],
     noPastEventsWithoutFeedback: 0,
   };
-
-  constructor(props) {
-    super(props);
-    this.findButtonStateById = this.findButtonStateById.bind(this);
-  }
 
   componentDidMount() {
     axios.get(`${EVENTS_URL}?_expand=users`).then((res) => {

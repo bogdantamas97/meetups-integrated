@@ -10,29 +10,26 @@ import {
   FormControl,
   withStyles,
 } from "@material-ui/core";
+
+import { theme } from "../../styles/globalTheme";
+import { Background, loginPageStyles } from "../../styles/";
 import { LayoutLogin } from "../../layouts/index";
-import { theme, Background } from "../../styles/globalTheme";
-import { loginPageStyles } from '../../styles/';
 import { Alert } from "../../utils";
 import { EMAIL_REGEX, DATA_BASE_URL, IN_ONE_HOUR } from "../../constants/index";
 
 const LoginPage = (props) => {
   const { classes } = props;
 
-  // fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // form reaction
   const [snackbarTitle, setSnackbarTitle] = useState("");
   const [snackbarType, setSnackbarType] = useState("error");
   const [isOpen, setOpen] = useState(false);
 
-  // handling errors
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  // check if its logged in
   const [isLoggedIn, setLoggedIn] = useState(!!Cookies.get("token"));
 
   const invalidEmail = (email) => {
@@ -49,8 +46,6 @@ const LoginPage = (props) => {
     setSnackbarTitle(title);
     setSnackbarType(type);
   };
-
-  const handleClose = () => setOpen(false);
 
   const onKeyEnterPressed = (event) => {
     if (event.keyCode === 13) {
@@ -98,6 +93,8 @@ const LoginPage = (props) => {
       setSnackbar("All fields are required!", "error");
     }
   };
+
+  const handleClose = () => setOpen(false);
 
   if (isLoggedIn) {
     return <Redirect to="/profile" />;

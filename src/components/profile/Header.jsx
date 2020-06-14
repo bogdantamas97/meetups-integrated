@@ -1,6 +1,5 @@
 import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
@@ -25,7 +24,7 @@ const Header = (props) => {
     async function fetchData() {
       const result = await axios(POINTS_RECEIVED_URL);
       const hasPoints = result.data.filter(
-        (item) => item.userId === new Cookies().get("token")
+        (item) => item.userId === CURRENT_USER_ID
       )[0];
 
       if (hasPoints) {

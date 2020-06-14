@@ -1,6 +1,6 @@
 import { theme } from "./globalTheme";
 
-export const leaderboardItemStyles = () => ({
+export const leaderboardItemStyles = {
   paper: {
     width: "100%",
     height: "100%",
@@ -18,9 +18,9 @@ export const leaderboardItemStyles = () => ({
   itemTwo: {
     width: "20%",
   },
-});
+};
 
-export const leaderboardStyles = () => ({
+export const leaderboardStyles = {
   root: {
     height: "100%",
     width: "100%",
@@ -57,4 +57,4 @@ export const leaderboardStyles = () => ({
     width: "30%",
     marginLeft: "35%",
   },
-});
+};

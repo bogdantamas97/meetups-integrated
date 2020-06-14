@@ -25,6 +25,7 @@ import {
 } from "./achievementsStyles";
 import { topicStyles, topicItemStyles } from "./topicStyles";
 import { mainLayoutStyles } from "./mainLayoutStyles";
+import { selectorStyles } from "./selectorStyles";
 
 import {
   Background,
@@ -60,6 +61,7 @@ export {
   topicStyles,
   topicItemStyles,
   mainLayoutStyles,
+  selectorStyles,
   Background,
   button,
   eventTitle,

@@ -1,4 +1,4 @@
-export const feedbackStyles = () => ({
+export const feedbackStyles = {
   title: {
     margin: "auto",
   },
@@ -11,4 +11,4 @@ export const feedbackStyles = () => ({
     marginTop: "100px",
     marginBottom: "10px",
   },
-});
+};

@@ -8,13 +8,11 @@ import {
   DialogContent,
   DialogActions,
   Typography,
-  Slide,
   withStyles,
 } from "@material-ui/core";
 
 import { eventDialogStyles } from "../../styles";
-
-const Transition = (props) => <Slide direction="down" {...props} />;
+import { Transition } from "../../utils";
 
 const EventDialog = (props) => {
   const { classes, dialogType, handleClose, isOpen } = props;

@@ -1,17 +1,29 @@
 const NewEvent = (props) => {
   const event = {};
-  event.name = props.topicTitle;
-  event.type = props.topicType;
-  event.date = props.topicDate;
-  event.lang = props.programmingLanguage;
-  event.duration = props.topicDuration;
-  event.difficulty = props.difficultyType;
-  event.timestamp = props.timeStamp;
+  const {
+    topicTitle,
+    topicType,
+    topicDate,
+    programmingLanguage,
+    topicDuration,
+    difficultyType,
+    timeStamp,
+    userId,
+    isUserPresenter,
+  } = props;
+
+  event.name = topicTitle;
+  event.type = topicType;
+  event.date = topicDate;
+  event.lang = programmingLanguage;
+  event.duration = topicDuration;
+  event.difficulty = difficultyType;
+  event.timestamp = timeStamp;
   event.attendanceIds = [];
   event.waitingListIds = [];
   event.feedback = [];
 
-  if (props.isUserPresenter) event.userId = props.userId;
+  if (isUserPresenter) event.userId = userId;
 
   return event;
 };
