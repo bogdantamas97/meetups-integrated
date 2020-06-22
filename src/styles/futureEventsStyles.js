@@ -38,8 +38,7 @@ export const futureEventItemStyles = {
     height: 15,
   },
   itemBottom: {
-    height: 9,
-    marginTop: 5,
+    height: 9
   },
   hoverButton: {
     "&:hover": {

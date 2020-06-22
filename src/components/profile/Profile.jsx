@@ -61,7 +61,7 @@ const Profile = (props) => {
       <div className={classes.root}>
         <Header userId={CURRENT_USER_ID} />
         {isLoaded ? (
-          <List className={classes.List}>{Pagination(points)}</List>
+          <List className={classes.List}>{Pagination(points,elementsToShow)}</List>
         ) : (
           <div>
             <CircularProgress

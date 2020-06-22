@@ -75,8 +75,6 @@ const RegisterForm = (props) => {
       const result = await axios(DATA_BASE_URL);
 
       if (result.data.find((item) => item.email === email)) {
-        setSnackbarTitle("Email already exists!");
-        setSnackbarType("error");
         setEmailError(true);
         setOpen(true);
         return true;
@@ -89,7 +87,7 @@ const RegisterForm = (props) => {
   };
 
   const invalidFirstName = (firstName) => {
-    if (firstName === "" || firstName.length < 5) {
+    if (firstName === "") {
       setFirstNameError(true);
 
       return true;
@@ -97,7 +95,7 @@ const RegisterForm = (props) => {
     return false;
   };
   const invalidLastName = (lastName) => {
-    if (lastName === "" || lastName.length < 5) {
+    if (lastName === "") {
       setLastNameError(true);
       return true;
     }
@@ -140,6 +138,8 @@ const RegisterForm = (props) => {
       invalidPassword(password) ||
       invalidPasswordConfirmation(passwordConfirmation);
 
+    console.log(email, firstName, lastName, password, isFormInvalid);
+
     if (!isFormInvalid) {
       setSnackbarTitle("You have registered succesfully!");
       setSnackbarType("success");
@@ -149,7 +149,7 @@ const RegisterForm = (props) => {
       axios
         .post(
           DATA_BASE_URL +
-            "insert?firstname=" +
+            "/insert?firstname=" +
             firstName +
             "&lastname=" +
             lastName +

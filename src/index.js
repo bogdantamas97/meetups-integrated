@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { PrivateRoute } from "./utils/index";
 import {

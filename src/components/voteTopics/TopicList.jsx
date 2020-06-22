@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import PropTypes from "prop-types";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { topicStyles } from "../../styles";
+import { button, topicStyles } from "../../styles";
 
 import { MainLayout } from "../../layouts/index";
 import {
@@ -290,7 +290,7 @@ class TopicList extends React.Component {
           <div style={styleContent}>
             <Button
               variant="contained"
-              className={classes.button}
+              style={button}
               onClick={this.handleOpen}
             >
               <Typography

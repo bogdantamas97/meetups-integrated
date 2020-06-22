@@ -12,10 +12,7 @@ import {
 import {
   fontTitle,
   fontSubtitle,
-  fontBottom,
-  checkSubscribe,
-  checkWaitingList,
-  checkUnsubscribe,
+  fontBottom
 } from "../../helpers";
 
 const FutureEventItem = (props) => {
@@ -36,6 +33,20 @@ const FutureEventItem = (props) => {
 
   const updateWidthFunction = () => {
     updateWidth(window.innerWidth);
+  };
+
+  const checkSubscribe = () => {
+    if (action === "Subscribe") return true;
+    return false;
+  };
+
+  const checkWaitingList = () => {
+    if (action === "Waiting List") return true;
+    return false;
+  };
+  const checkUnsubscribe = () => {
+    if (action === "Unsubscribe") return true;
+    return false;
   };
 
   const animation = useSpring({

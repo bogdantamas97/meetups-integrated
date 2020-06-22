@@ -34,7 +34,9 @@
       "duration": "1h",
       "difficulty": "Expert",
       "timestamp": 1591275600000,
-      "attendanceIds": [],
+      "attendanceIds": [
+        "_7h67hedvv"
+      ],
       "waitingListIds": [],
       "feedback": [],
       "userId": "_6kl0m1c34",
@@ -48,10 +50,10 @@
       "duration": "1h",
       "difficulty": "Expert",
       "timestamp": 1591623000000,
-      "attendanceIds": [
+      "attendanceIds": [],
+      "waitingListIds": [
         "_7h67hedvv"
       ],
-      "waitingListIds": [],
       "feedback": [],
       "id": 4
     },
@@ -80,6 +82,19 @@
       "waitingListIds": [],
       "feedback": [],
       "id": 6
+    },
+    {
+      "name": "HTML5, CSS3 & JavaScript Workshop",
+      "type": "Presentation",
+      "date": "June 24, 2020 19:30 ",
+      "lang": "C",
+      "duration": "1h 30min",
+      "difficulty": "Begginner",
+      "timestamp": 1593016200000,
+      "attendanceIds": [],
+      "waitingListIds": [],
+      "feedback": [],
+      "id": 7
     }
   ],
   "achievements": [
@@ -217,9 +232,9 @@
       "userId": "_7h67hedvv",
       "isUserPresenter": false,
       "topicType": "Presentation",
-      "topicTitle": "C basic info",
-      "topicDate": "June 24, 2020 19:30 ",
-      "topicContent": "Come if you want to know more",
+      "topicTitle": "Basic C",
+      "topicDate": "June 24, 2020 19:30",
+      "topicContent": "C for noobies",
       "topicDuration": "1h 30min",
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
@@ -228,10 +243,154 @@
       "userVotes": [
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         }
       ],
       "id": 1
+    },
+    {
+      "userId": "_9rnl7hdc7",
+      "isUserPresenter": false,
+      "topicType": "Workshop",
+      "topicTitle": "Beginning C++ Programming ",
+      "topicDate": "June 28, 2020 15:30",
+      "topicContent": "From Beginner to Beyond",
+      "topicDuration": "2h",
+      "difficultyType": "Begginner",
+      "programmingLanguage": "C",
+      "timeStamp": 1593016200000,
+      "sumOfVotes": 3,
+      "userVotes": [
+        {
+          "userId": "_9rnl7hdc7",
+          "vote": -1
+        },
+        {
+          "userId": "_j5eukonav",
+          "vote": 1
+        },
+        {
+          "userId": "_mvalr76sy",
+          "vote": 1
+        },
+        {
+          "userId": "_ylsvv7str",
+          "vote": 1
+        },
+        {
+          "userId": "_9rnl7hdc7",
+          "vote": 1
+        },
+        {
+          "userId": "_9rnl7hdc7",
+          "vote": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": "_7h67hedvv",
+      "isUserPresenter": false,
+      "topicType": "Workshop",
+      "topicTitle": "The Python",
+      "topicDate": "July 27, 2020 10:00 ",
+      "topicContent": "A New, Interactive Approach to Learning Python",
+      "topicDuration": "1h",
+      "difficultyType": "Begginner",
+      "programmingLanguage": "C",
+      "timeStamp": 1593016200000,
+      "sumOfVotes": 7,
+      "userVotes": [
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": "_7h67hedvv",
+      "isUserPresenter": false,
+      "topicType": "Workshop",
+      "topicTitle": "HTML, CSS & JavaScript",
+      "topicDate": "July 27, 2020 10:00 ",
+      "topicContent": "Build Creative Projects",
+      "topicDuration": "1h",
+      "difficultyType": "Begginner",
+      "programmingLanguage": "C",
+      "timeStamp": 1593016200000,
+      "sumOfVotes": 9,
+      "userVotes": [
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        },
+        {
+          "userId": "_7h67hedvv",
+          "vote": 1
+        }
+      ],
+      "id": 4
     }
   ]
 }
