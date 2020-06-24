@@ -18,10 +18,18 @@ import { ReactComponent as Logo5 } from "../../images/fifth.svg";
 import Category from "./Category.jsx";
 import { EVENTS_URL } from "../../constants/index";
 
-import { feedbackStyles } from '../../styles';
+import { feedbackStyles } from "../../styles";
 
 const Feedback = (props) => {
-  const { classes, eventName, eventId, userId, isOpen, closeFeedbackDialog, handleClickCancel } = props;
+  const {
+    classes,
+    eventName,
+    eventId,
+    userId,
+    isOpen,
+    closeFeedbackDialog,
+    handleClickCancel,
+  } = props;
 
   const [clarity, setClarity] = useState("3");
   const [originality, setOriginality] = useState("3");
