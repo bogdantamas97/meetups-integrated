@@ -13,9 +13,9 @@ import {
 
 import { theme } from "../../styles/globalTheme";
 import { Background, loginPageStyles } from "../../styles/";
-import { LayoutLogin } from "../../layouts/index";
+import { LayoutLogin } from "../../layouts";
 import { Alert } from "../../utils";
-import { EMAIL_REGEX, DATA_BASE_URL, IN_ONE_HOUR } from "../../constants/index";
+import { EMAIL_REGEX, DATA_BASE_URL, IN_ONE_HOUR } from "../../constants";
 
 const LoginPage = (props) => {
   const { classes } = props;
@@ -72,11 +72,11 @@ const LoginPage = (props) => {
 
           if (isTheEmailRegistered) {
             if (isThePasswordCorrect) {
-              Cookies.set(
-                "token",
-                response.data.filter((user) => user.email === email)[0].id,
-                { expires: IN_ONE_HOUR }
-              );
+              const currentToken = response.data.filter(
+                (user) => user.email === email
+              )[0].id;
+
+              Cookies.set("token", currentToken, { expires: IN_ONE_HOUR });
               setLoggedIn(true);
               setSnackbar("Login succesfully!", "success");
             } else {

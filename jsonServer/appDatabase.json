@@ -6,10 +6,10 @@
       "lang": "HTML",
       "duration": "1.5h",
       "difficulty": "Advanced",
-      "date": "12 Jun '19 10:30",
+      "date": "June 11, 2019 10:30",
       "attendanceIds": [],
       "waitingListIds": [],
-      "timestamp": 1560355200,
+      "timestamp": 1560249000,
       "feedback": [],
       "id": 1
     },
@@ -19,10 +19,10 @@
       "lang": "JS",
       "duration": "1.5h",
       "difficulty": "Advanced",
-      "date": "12 Jun '20 12:30",
+      "date": "June 12, 2020 12:30",
       "attendanceIds": [],
       "waitingListIds": [],
-      "timestamp": 1591977600,
+      "timestamp": 1591957800,
       "feedback": [],
       "id": 2
     },
@@ -33,7 +33,7 @@
       "lang": "JS",
       "duration": "1h",
       "difficulty": "Expert",
-      "timestamp": 1591275600000,
+      "timestamp": 1591288200,
       "attendanceIds": [
         "_7h67hedvv"
       ],
@@ -45,11 +45,11 @@
     {
       "name": "Python basics",
       "type": "Presentation",
-      "date": "June 8, 2020 16:30 ",
+      "date": "July 27, 2020 10:00 ",
       "lang": "PY",
       "duration": "1h",
       "difficulty": "Expert",
-      "timestamp": 1591623000000,
+      "timestamp": 1595844000,
       "attendanceIds": [],
       "waitingListIds": [
         "_7h67hedvv"
@@ -64,7 +64,7 @@
       "lang": "JEST",
       "duration": "1.5h",
       "difficulty": "Expert",
-      "timestamp": 1591781400000,
+      "timestamp": 1591792200,
       "attendanceIds": [],
       "waitingListIds": [],
       "feedback": [],
@@ -77,7 +77,7 @@
       "lang": "PY",
       "duration": "1.5h",
       "difficulty": "Expert",
-      "timestamp": 1592472600000,
+      "timestamp": 1592483400,
       "attendanceIds": [],
       "waitingListIds": [],
       "feedback": [],
@@ -87,10 +87,10 @@
       "name": "HTML5, CSS3 & JavaScript Workshop",
       "type": "Presentation",
       "date": "June 24, 2020 19:30 ",
-      "lang": "C",
+      "lang": "JS",
       "duration": "1h 30min",
       "difficulty": "Begginner",
-      "timestamp": 1593016200000,
+      "timestamp": 1593016200,
       "attendanceIds": [],
       "waitingListIds": [],
       "feedback": [],
@@ -233,13 +233,13 @@
       "isUserPresenter": false,
       "topicType": "Presentation",
       "topicTitle": "Basic C",
-      "topicDate": "June 24, 2020 19:30",
+      "topicDate": "July 17, 2020 19:30",
       "topicContent": "C for noobies",
       "topicDuration": "1h 30min",
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
-      "timeStamp": 1593016200000,
-      "sumOfVotes": 1,
+      "timestamp": 1595014200,
+      "sumOfVotes": -1,
       "userVotes": [
         {
           "userId": "_7h67hedvv",
@@ -253,12 +253,12 @@
       "isUserPresenter": false,
       "topicType": "Workshop",
       "topicTitle": "Beginning C++ Programming ",
-      "topicDate": "June 28, 2020 15:30",
+      "topicDate": "July 30, 2020 15:30",
       "topicContent": "From Beginner to Beyond",
       "topicDuration": "2h",
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
-      "timeStamp": 1593016200000,
+      "timestamp": 1596123000,
       "sumOfVotes": 3,
       "userVotes": [
         {
@@ -298,36 +298,36 @@
       "topicDuration": "1h",
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
-      "timeStamp": 1593016200000,
-      "sumOfVotes": 7,
+      "timestamp": 1595844000,
+      "sumOfVotes": -7,
       "userVotes": [
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         },
         {
           "userId": "_7h67hedvv",
-          "vote": 1
+          "vote": -1
         }
       ],
       "id": 3
@@ -337,22 +337,14 @@
       "isUserPresenter": false,
       "topicType": "Workshop",
       "topicTitle": "HTML, CSS & JavaScript",
-      "topicDate": "July 27, 2020 10:00 ",
+      "topicDate": "July 27, 2020 18:00 ",
       "topicContent": "Build Creative Projects",
       "topicDuration": "1h",
       "difficultyType": "Begginner",
       "programmingLanguage": "C",
-      "timeStamp": 1593016200000,
+      "timestamp": 1595872800,
       "sumOfVotes": 9,
       "userVotes": [
-        {
-          "userId": "_7h67hedvv",
-          "vote": 1
-        },
-        {
-          "userId": "_7h67hedvv",
-          "vote": 1
-        },
         {
           "userId": "_7h67hedvv",
           "vote": 1

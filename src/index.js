@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import { PrivateRoute } from "./utils/index";
+import { PrivateRoute } from "./utils";
 import {
   NotFoundPageView,
   LeaderboardView,
@@ -15,7 +15,7 @@ import {
   LoginView,
   MyEventsView,
   TopicListView,
-} from "./views/index";
+} from "./views";
 
 const routing = (
   <Router>

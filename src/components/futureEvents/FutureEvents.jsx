@@ -1,22 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
 import moment from "moment";
 import axios from "axios";
+import Cookies from "universal-cookie";
 import PropTypes from "prop-types";
 import { withStyles, ListItem, List } from "@material-ui/core";
 
 import FutureEventItem from "./FutureEventItem.jsx";
 import { futureEventsStyles } from "../../styles";
+import { getTimeFromStamp } from '../../helpers';
 import EventDialog from "./EventDialog";
 import {
   MAX_ATTENDANTS_ON_EVENT,
   EVENTS_URL,
   EVENT_TYPE,
-  CURRENT_USER_ID,
-} from "../../constants/index";
-import { MainLayout } from "../../layouts/index";
-import { EventsMessage } from "../index";
+} from "../../constants";
+import { MainLayout } from "../../layouts";
+import { EventsMessage } from "..";
 
-class FutureEvents extends React.Component {
+const CURRENT_USER_ID = new Cookies().get("token");
+
+class FutureEvents extends Component {
   state = {
     list: [],
     event: [],
@@ -27,6 +30,7 @@ class FutureEvents extends React.Component {
   };
 
   componentDidMount() {
+    console.log(moment().unix());
     axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
         CURRENT_USER_ID,
@@ -166,7 +170,7 @@ class FutureEvents extends React.Component {
                           date={moment
                             .unix(item.timestamp)
                             .format(`DD MMM 'YY`)}
-                          time={moment.unix(item.timestamp).format(`hh:mm`)}
+                          time={getTimeFromStamp(item.timestamp)}
                           secondLine={`${item.type} (${item.difficulty}) ~ ${item.duration}`}
                           action={this.checkUser(item)}
                           handleWaitingListClick={() =>

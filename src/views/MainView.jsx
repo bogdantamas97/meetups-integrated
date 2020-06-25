@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, withStyles } from "@material-ui/core";
 
-import { LayoutLogin } from "../layouts/index";
+import { LayoutLogin } from "../layouts";
 
 const styles = {
   buttonStyle: {

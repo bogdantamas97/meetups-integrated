@@ -16,7 +16,7 @@ import { ReactComponent as Logo4 } from "../../images/fourth.svg";
 import { ReactComponent as Logo5 } from "../../images/fifth.svg";
 
 import Category from "./Category.jsx";
-import { EVENTS_URL } from "../../constants/index";
+import { EVENTS_URL } from "../../constants";
 
 import { feedbackStyles } from "../../styles";
 
@@ -37,7 +37,7 @@ const Feedback = (props) => {
   const [engagement, setEngagement] = useState("3");
   const [cursive, setCursive] = useState("3");
 
-  const handleClickSend = () => {
+  const handleClickSend = async () => {
     const feedback = {};
 
     feedback.clarity = clarity;
@@ -47,11 +47,10 @@ const Feedback = (props) => {
     feedback.cursive = cursive;
     feedback.userId = userId;
 
-    axios.get(`${EVENTS_URL}/${eventId}`).then((result) => {
-      const feedbackList = result.data.feedback;
-      feedbackList.push(feedback);
-      handleSendFeedback(feedbackList);
-    });
+    const result = await axios(`${EVENTS_URL}/${eventId}`);
+    const feedbackList = result.data.feedback;
+    feedbackList.push(feedback);
+    handleSendFeedback(feedbackList);
 
     closeFeedbackDialog();
   };

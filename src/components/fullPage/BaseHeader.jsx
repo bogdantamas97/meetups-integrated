@@ -8,7 +8,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-import { TemporaryDrawer } from "../index";
+import { TemporaryDrawer } from "..";
 import { baseHeaderStyles } from "../../styles";
 import { getInitials } from "../../helpers";
 

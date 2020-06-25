@@ -1,6 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import Cookies from "universal-cookie";
 import moment from "moment/moment";
 import {
   withStyles,
@@ -12,13 +13,16 @@ import {
 
 import { theme } from "../../styles/globalTheme";
 import { myEventsStyles } from "../../styles";
-import { MainLayout } from "../../layouts/index";
-import { EventsMessage } from "../index";
+import { MainLayout } from "../../layouts";
+import { getTimeFromStamp } from "../../helpers";
+import { EventsMessage } from "..";
 import FutureEventItem from "../futureEvents/FutureEventItem.jsx";
 import EventDialog from "../futureEvents/EventDialog.jsx";
-import { EVENTS_URL, EVENT_TYPE, CURRENT_USER_ID } from "../../constants";
+import { EVENTS_URL, EVENT_TYPE } from "../../constants";
 
-class MyEvents extends React.Component {
+const CURRENT_USER_ID = new Cookies().get("token");
+
+class MyEvents extends Component {
   state = {
     list: [],
     event: [],
@@ -125,7 +129,7 @@ class MyEvents extends React.Component {
                           date={moment
                             .unix(item.timestamp)
                             .format(`DD MMM 'YY`)}
-                          time={moment.unix(item.timestamp).format(`hh:mm`)}
+                          time={getTimeFromStamp(item.timestamp)}
                           secondLine={`${item.type} (${item.difficulty}) ~ ${item.duration}`}
                           action={this.checkUser(item)}
                           handleUnsubscribeClick={() =>

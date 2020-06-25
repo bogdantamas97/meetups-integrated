@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import Cookies from "universal-cookie";
 import axios from "axios";
 import { Grid, Typography, Paper, withStyles } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
@@ -9,9 +10,10 @@ import {
   DATA_BASE_URL,
   ACHIEVEMENTS_URL,
   POINTS_RECEIVED_URL,
-  CURRENT_USER_ID,
-} from "../../constants/index";
+} from "../../constants";
 import { headerStyles } from "../../styles";
+
+const CURRENT_USER_ID = new Cookies().get("token");;
 
 const Header = (props) => {
   const { classes } = props;

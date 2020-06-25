@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import Cookies from "universal-cookie";
 import moment from "moment";
 import { withStyles, ListItem, List } from "@material-ui/core";
 
 import PastEventItem from "./PastEventItem.jsx";
-import { MainLayout } from "../../layouts/index";
-import { EVENTS_URL, EVENT_TYPE, CURRENT_USER_ID } from "../../constants/index";
+import { MainLayout } from "../../layouts";
+import { getTimeFromStamp } from "../../helpers";
+import { EVENTS_URL, EVENT_TYPE } from "../../constants";
 import { EventsMessage, Feedback } from "../";
 import { pastEventsStyles } from "../../styles";
+
+const CURRENT_USER_ID = new Cookies().get("token");
 
 class PastEvents extends Component {
   constructor(props) {
@@ -167,7 +171,7 @@ class PastEvents extends Component {
                           )
                         }
                         date={moment.unix(item.timestamp).format(`DD MMM 'YY`)}
-                        time={moment.unix(item.timestamp).format(`hh:mm`)}
+                        time={getTimeFromStamp(item.timestamp)}
                         secondLine={`${item.type} (${item.difficulty}) ~ ${item.duration}`}
                       />
                     </ListItem>

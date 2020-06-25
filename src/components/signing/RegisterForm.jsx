@@ -15,8 +15,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Background, button, registerPageStyles } from "../../styles";
 import { theme } from "../../styles/globalTheme";
 import { Alert } from "../../utils";
-import { LayoutLogin } from "../../layouts/index";
-import { DATA_BASE_URL, EMAIL_REGEX } from "../../constants/index";
+import { LayoutLogin } from "../../layouts";
+import { DATA_BASE_URL, EMAIL_REGEX } from "../../constants";
 
 button.width = "100%";
 button.height = "70px";

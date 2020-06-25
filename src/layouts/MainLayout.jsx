@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
 import { withStyles } from "@material-ui/core";
 
 import { FooterBar, Content, BaseHeader } from "../components";
-import { DATA_BASE_URL, CURRENT_USER_ID } from "../constants";
+import { DATA_BASE_URL } from "../constants";
 import { mainLayoutStyles } from "../styles";
 
 const MainLayout = (props) => {
@@ -13,20 +14,16 @@ const MainLayout = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      axios
-        .get(DATA_BASE_URL)
-        .then((result) =>
-          setFullName(
-            result.data.filter((element) => element.id === CURRENT_USER_ID)[0]
-              .firstname +
-              " " +
-              result.data.filter((element) => element.id === CURRENT_USER_ID)[0]
-                .lastname
-          )
-        )
-        .catch(() => {
-          console.log("error");
-        });
+      const result = await axios(DATA_BASE_URL);
+      const CURRENT_USER_ID = new Cookies().get("token");
+
+      const currentUser = await result.data.filter(
+        (element) => element.id === CURRENT_USER_ID
+      )[0];
+
+      if (currentUser) {
+        setFullName(currentUser.firstname + " " + currentUser.lastname);
+      }
     }
     fetchData();
   }, []);

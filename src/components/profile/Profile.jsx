@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 import axios from "axios";
 import {
   Button,
@@ -11,8 +12,10 @@ import {
 import Header from "./Header";
 import { profileStyles } from "../../styles";
 import { Pagination } from "../../utils";
-import { MainLayout } from "../../layouts/index";
-import { POINTS_RECEIVED_URL, CURRENT_USER_ID } from "../../constants/index";
+import { MainLayout } from "../../layouts";
+import { POINTS_RECEIVED_URL } from "../../constants";
+
+const CURRENT_USER_ID = new Cookies().get("token");;
 
 const Profile = (props) => {
   const [width, updateWidth] = useState(0);
@@ -36,6 +39,7 @@ const Profile = (props) => {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(POINTS_RECEIVED_URL);
+      const CURRENT_USER_ID = new Cookies().get("token");
       const hasPoints = result.data.filter(
         (item) => item.userId === CURRENT_USER_ID
       )[0];

@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "universal-cookie";
 import { withStyles } from "@material-ui/core";
 
 import AchievementsItem from "./AchievementsItem";
-import { MainLayout } from "../../layouts/index";
-import { surpriseBox as AchievementsBoxImg } from "../../images/index";
+import { MainLayout } from "../../layouts";
+import { surpriseBox as AchievementsBoxImg } from "../../images";
 import {
   DATA_BASE_URL,
   ACHIEVEMENTS_URL,
-  CURRENT_USER_ID,
-} from "../../constants/index";
+} from "../../constants";
 import { achievementsStyles } from "../../styles";
+
+const CURRENT_USER_ID = new Cookies().get("token");
 
 const Achievements = (props) => {
   const { classes } = props;

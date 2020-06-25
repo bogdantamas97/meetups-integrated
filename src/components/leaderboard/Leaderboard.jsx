@@ -9,9 +9,9 @@ import {
 } from "@material-ui/core";
 
 import ListComponent from "./LeaderboardItem.jsx";
-import { leaderboardPic } from "../../images/index";
-import { MainLayout } from "../../layouts/index";
-import { DATA_BASE_URL } from "../../constants/index";
+import { leaderboardPic } from "../../images";
+import { MainLayout } from "../../layouts";
+import { DATA_BASE_URL } from "../../constants";
 import { leaderboardStyles } from "../../styles";
 
 
@@ -36,7 +36,7 @@ const Leaderboard = (props) => {
   const loadMore = () => setNumberOfItems(numberOfItems + 5);
 
   return (
-    <MainLayout>
+    <MainLayout topBarTitle="Leaderboard">
       <div className={classes.root}>
         <div className={classes.header}>
           <img

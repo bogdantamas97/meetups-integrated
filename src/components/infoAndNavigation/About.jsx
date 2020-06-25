@@ -3,7 +3,7 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 
 import { theme } from "../../styles/globalTheme";
 import { aboutStyles } from '../../styles';
-import { MainLayout } from "../../layouts/index";
+import { MainLayout } from "../../layouts";
 
 const About = () => (
   <MainLayout topBarTitle=" About">

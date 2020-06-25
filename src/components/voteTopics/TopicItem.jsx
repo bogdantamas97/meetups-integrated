@@ -3,7 +3,7 @@ import axios from "axios";
 import { Avatar, Grid, Typography, withStyles  } from "@material-ui/core";
 import { useSpring, animated } from "react-spring";
 
-import { PROPOSED_TOPICS_URL } from "../../constants/index";
+import { PROPOSED_TOPICS_URL } from "../../constants";
 import { topicItemStyles } from '../../styles';
 
 const TopicItem = (props) => {

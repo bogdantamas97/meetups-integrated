@@ -7,7 +7,7 @@ const NewEvent = (props) => {
     programmingLanguage,
     topicDuration,
     difficultyType,
-    timeStamp,
+    timestamp,
     userId,
     isUserPresenter,
   } = props;
@@ -18,7 +18,7 @@ const NewEvent = (props) => {
   event.lang = programmingLanguage;
   event.duration = topicDuration;
   event.difficulty = difficultyType;
-  event.timestamp = timeStamp;
+  event.timestamp = timestamp;
   event.attendanceIds = [];
   event.waitingListIds = [];
   event.feedback = [];

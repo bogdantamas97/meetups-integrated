@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-animated-modal";
+import Cookies from "universal-cookie";
 import {
   Button,
   Typography,
@@ -16,7 +17,7 @@ import PropTypes from "prop-types";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { button, topicStyles } from "../../styles";
 
-import { MainLayout } from "../../layouts/index";
+import { MainLayout } from "../../layouts";
 import {
   EVENT_TYPE,
   CONTENT_PLACEHOLDER,
@@ -28,13 +29,14 @@ import {
   TOPIC_DESCRIPTION_LIMIT,
   PROPOSED_TOPICS_URL,
   EVENTS_URL,
-  CURRENT_USER_ID,
-} from "../../constants/index";
+} from "../../constants";
 import TopicItem from "./TopicItem.jsx";
 import { NewEvent, TopicDatePicker, Selector } from "../../utils";
 import { getDateFormat } from "../../helpers";
-import { EventsMessage } from "../index";
+import { EventsMessage } from "..";
 import { theme } from "../../styles/globalTheme";
+
+const CURRENT_USER_ID = new Cookies().get("token");
 
 class TopicList extends React.Component {
   constructor(props) {
@@ -92,6 +94,8 @@ class TopicList extends React.Component {
   handleSend = (event) => {
     const isTheFormValid = this.check();
 
+    console.log(this.state.topicDate, getDateFormat(this.state.topicDate));
+
     if (isTheFormValid) {
       const newTopic = {
         userId: CURRENT_USER_ID,
@@ -103,7 +107,7 @@ class TopicList extends React.Component {
         topicDuration: this.state.topicDuration,
         difficultyType: this.state.difficultyType,
         programmingLanguage: this.state.programmingLanguage,
-        timeStamp: this.state.topicDate.getTime(),
+        timestamp: this.state.topicDate.getTime() / 100,
         sumOfVotes: 0,
         userVotes: [],
       };
@@ -140,10 +144,11 @@ class TopicList extends React.Component {
   componentDidMount() {
     axios.get(PROPOSED_TOPICS_URL).then((res) => {
       const validTopics = res.data.filter((item) => {
-        if (item.timeStamp < new Date().getTime()) {
+        if (item.timestamp < new Date().getTime() / 1000) {
           axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
         } else {
           if (item.sumOfVotes >= 10) {
+            console.log(item.sumOfVotes);
             axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
             const newEvent = new NewEvent(item);
             axios.get(EVENTS_URL).then((result) => {
