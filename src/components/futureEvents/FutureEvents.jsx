@@ -30,7 +30,6 @@ class FutureEvents extends Component {
   };
 
   componentDidMount() {
-    console.log(moment().unix());
     axios(`${EVENTS_URL}?_expand=users`).then((result) => {
       this.setState({
         CURRENT_USER_ID,

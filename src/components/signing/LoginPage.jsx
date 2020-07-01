@@ -67,7 +67,7 @@ const LoginPage = (props) => {
           )[0];
           const isThePasswordCorrect = response.data.filter(
             (user) =>
-              Buffer.from(user.password, "base64").toString() === password
+              user.password && (Buffer.from(user.password, "base64").toString() === password)
           )[0];
 
           if (isTheEmailRegistered) {

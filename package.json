@@ -15,6 +15,7 @@
     "lodash": "^4.17.15",
     "material-ui": "^0.20.2",
     "material-ui-pickers": "^2.2.4",
+    "mocha": "^8.0.1",
     "moment": "^2.24.0",
     "postcss-flexbugs-fixes": "^4.2.1",
     "react": "^16.13.1",
@@ -37,7 +38,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },

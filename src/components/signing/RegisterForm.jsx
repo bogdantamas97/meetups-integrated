@@ -65,24 +65,23 @@ const RegisterForm = (props) => {
     setPasswordConfirmationError(false);
   };
 
+
+  async function fetchData() {
+    const result = await axios(DATA_BASE_URL);
+
+    if (result.data.find((item) => item.email === email)) {
+      setEmailError(true);
+      setOpen(true);
+      return true;
+    }
+  }
+
+
   const invalidEmail = (email) => {
     if (email === "" || !EMAIL_REGEX.test(email)) {
       setEmailError(true);
       return true;
     }
-
-    async function fetchData() {
-      const result = await axios(DATA_BASE_URL);
-
-      if (result.data.find((item) => item.email === email)) {
-        setEmailError(true);
-        setOpen(true);
-        return true;
-      }
-    }
-
-    fetchData();
-
     return false;
   };
 
@@ -131,14 +130,14 @@ const RegisterForm = (props) => {
       invalidPasswordConfirmation(passwordConfirmation)
     );
 
+    fetchData();
+    
     const isFormInvalid =
       invalidEmail(email) ||
       invalidFirstName(firstName) ||
       invalidLastName(lastName) ||
       invalidPassword(password) ||
       invalidPasswordConfirmation(passwordConfirmation);
-
-    console.log(email, firstName, lastName, password, isFormInvalid);
 
     if (!isFormInvalid) {
       setSnackbarTitle("You have registered succesfully!");

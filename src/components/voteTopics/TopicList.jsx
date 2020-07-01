@@ -94,8 +94,6 @@ class TopicList extends React.Component {
   handleSend = (event) => {
     const isTheFormValid = this.check();
 
-    console.log(this.state.topicDate, getDateFormat(this.state.topicDate));
-
     if (isTheFormValid) {
       const newTopic = {
         userId: CURRENT_USER_ID,
@@ -148,7 +146,6 @@ class TopicList extends React.Component {
           axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
         } else {
           if (item.sumOfVotes >= 10) {
-            console.log(item.sumOfVotes);
             axios.delete(`${PROPOSED_TOPICS_URL}/${item.id}`);
             const newEvent = new NewEvent(item);
             axios.get(EVENTS_URL).then((result) => {

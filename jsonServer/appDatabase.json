@@ -23,7 +23,16 @@
       "attendanceIds": [],
       "waitingListIds": [],
       "timestamp": 1591957800,
-      "feedback": [],
+      "feedback": [
+        {
+          "clarity": "3",
+          "originality": "3",
+          "complexity": "3",
+          "engagement": "3",
+          "cursive": "3",
+          "userId": "_7h67hedvv"
+        }
+      ],
       "id": 2
     },
     {
@@ -383,6 +392,21 @@
         }
       ],
       "id": 4
+    },
+    {
+      "userId": "_7h67hedvv",
+      "isUserPresenter": false,
+      "topicType": "Presentation",
+      "topicTitle": "ECMA6",
+      "topicDate": "July 1, 2020 16:00",
+      "topicContent": "A new technology for a brighter future.",
+      "topicDuration": "1h",
+      "difficultyType": "Begginner",
+      "programmingLanguage": "JS",
+      "timestamp": 15936084006.41,
+      "sumOfVotes": 0,
+      "userVotes": [],
+      "id": 5
     }
   ]
 }
