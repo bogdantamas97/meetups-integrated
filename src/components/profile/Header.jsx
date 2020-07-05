@@ -13,7 +13,6 @@ import {
 } from "../../constants";
 import { headerStyles } from "../../styles";
 
-const CURRENT_USER_ID = new Cookies().get("token");;
 
 const Header = (props) => {
   const { classes } = props;
@@ -25,9 +24,12 @@ const Header = (props) => {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(POINTS_RECEIVED_URL);
+      const CURRENT_USER_ID = await new Cookies().get("token")
       const hasPoints = result.data.filter(
         (item) => item.userId === CURRENT_USER_ID
       )[0];
+
+      console.log("hasPoints", result, hasPoints, CURRENT_USER_ID);
 
       if (hasPoints) {
         const sumOfPoints = hasPoints.points
@@ -46,6 +48,7 @@ const Header = (props) => {
 
   async function updatePoints(sumOfPoints) {
     const result = await axios(DATA_BASE_URL);
+    const CURRENT_USER_ID = await new Cookies().get("token")
     const userData = result.data.find((item) => item.id === CURRENT_USER_ID);
 
     if (userData) {

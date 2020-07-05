@@ -35,7 +35,7 @@ const Achievements = (props) => {
       (item) => item.id === CURRENT_USER_ID
     );
 
-    if (getCurrentUser.points) {
+    if (getCurrentUser) {
       setCurrentPoints(getCurrentUser.points);
     }
   };

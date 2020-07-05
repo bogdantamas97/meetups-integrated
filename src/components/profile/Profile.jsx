@@ -15,7 +15,7 @@ import { Pagination } from "../../utils";
 import { MainLayout } from "../../layouts";
 import { POINTS_RECEIVED_URL } from "../../constants";
 
-const CURRENT_USER_ID = new Cookies().get("token");;
+const CURRENT_USER_ID = new Cookies().get("token");
 
 const Profile = (props) => {
   const [width, updateWidth] = useState(0);
@@ -65,7 +65,9 @@ const Profile = (props) => {
       <div className={classes.root}>
         <Header userId={CURRENT_USER_ID} />
         {isLoaded ? (
-          <List className={classes.List}>{Pagination(points,elementsToShow)}</List>
+          <List className={classes.List}>
+            {Pagination(points, elementsToShow)}
+          </List>
         ) : (
           <div>
             <CircularProgress
